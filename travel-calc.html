@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Outside the US</title>
+<style>
+  
+  body {
+    background-color: #f5f5f5; /* Light grey background color */
+    font-family: Arial, sans-serif; /* Example font family */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+  }
+   h1 {
+    font-size: 20px; /* Adjust the font size as needed */
+  }
+  #tripTable tr {
+    margin-bottom: 30px; /* Adjust the value as needed */
+    font-size: 14px;
+  }
+
+  #tripTable th {
+    padding: 1px; /* Adjust the padding as needed */
+    border: 1px solid black;
+  }
+</style>
+
+</head>
+<body>
+  <h1>Time Outside the US</h1>
+
+  <table id="tripTable">
+    <thead>
+      <tr>
+        <th style="width: 100px;">Left the US</th>
+        <th style="width: 100px;">Returned to US</th>
+        <th style="width: 60px;">Days</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Example row for the first trip -->
+      <tr>
+        <td><input type="date" class="startDate"></td>
+        <td><input type="date" class="endDate"></td>
+        <td><span class="daysDiff">0</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <button onclick="calculateTotalDays()">Calculate Total Days</button>
+  <br>
+  <br>
+  <button onclick="addRow()">Add Row</button>
+  <button onclick="printContent()">Print</button>
+
+  <p id="totalDays"></p>
+  <p id="totalTrips"></p>
+
+  <script>
+    function addRow() {
+      const tableBody = document.querySelector('#tripTable tbody');
+      const newRow = document.createElement('tr');
+
+      newRow.innerHTML = `
+        <td><input type="date" class="startDate"></td>
+        <td><input type="date" class="endDate"></td>
+        <td><span class="daysDiff">0</span></td>
+      `;
+
+      tableBody.appendChild(newRow);
+    }
+
+    function calculateDays(startDate, endDate) {
+      const timeDiff = endDate.getTime() - startDate.getTime();
+      return Math.ceil(timeDiff / (1000 * 3600 * 24));
+    }
+
+    function calculateTotalDays() {
+      const allStartDates = document.querySelectorAll('.startDate');
+      const allEndDates = document.querySelectorAll('.endDate');
+      let totalDays = 0;
+      let totalTrips = allStartDates.length;
+
+      for (let i = 0; i < allStartDates.length; i++) {
+        const startDate = new Date(allStartDates[i].value);
+        const endDate = new Date(allEndDates[i].value);
+
+        const daysDiff = calculateDays(startDate, endDate);
+        totalDays += daysDiff;
+
+        const daysDiffElement = document.querySelectorAll('.daysDiff')[i];
+        daysDiffElement.innerText = daysDiff;
+      }
+
+      document.getElementById('totalDays').innerText = `Total Days Outside US: ${totalDays}`;
+      document.getElementById('totalTrips').innerText = `Total Trips: ${totalTrips}`;
+    }
+
+    function printContent() {
+      window.print();
+    }	
+
+    // Add event listener for beforeunload event to show warning message
+    window.addEventListener('beforeunload', function(event) {
+      event.preventDefault();
+      event.returnValue = ''; // This line is required for some browsers
+    });
+  </script>
+</body>
+</html>
