@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Open Two Links</title>
+</head>
+<body onload="openTwoLinks()">
+<script>
+function openTwoLinks() {
+    // Open the two links in separate tabs
+    	var tab1 = window.open('https://masterlinks.isgtulsa.com/ac-ps.html', '_blank');
+	var tab2 = window.open('https://myaccount.uscis.gov/users/sign_up', '_blank');
+
+    // Close the initial tab after a short delay
+    setTimeout(function() {
+        window.close();
+    }, 50); // 1000 milliseconds (1 second) delay before closing
+}
+</script>
+</body>
+</html>
