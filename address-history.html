@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Address History</title>
+<style>
+  body {
+    background-color: #f5f5f5; /* Light grey background color */
+    font-family: Arial, sans-serif; /* Example font family */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+  }
+
+  /* Style for h1 heading */
+  h1 {
+    font-size: 20px; /* Adjust the font size as needed */
+  }
+  h1 {
+    text-align: center;
+  }
+
+  #nameForm {
+    width: 40%;
+    margin: 20px auto;
+  }
+
+  /* Style for form labels and inputs */
+  #nameForm label {
+    display: block;
+    margin-bottom: 1px;
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  #nameForm input {
+    width: calc(100% - 20px); /* Adjust input width */
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+
+  /* Style for form */
+  #addressForm {
+    width: 40%;
+    margin: 20px auto;
+  }
+
+  /* Style for form labels and inputs */
+  #addressForm label {
+    display: block;
+    margin-bottom: 1px;
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  #addressForm input {
+    width: calc(100% - 20px); /* Adjust input width */
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 20px;
+  }
+
+  /* Style for results table */
+  #addressTable {
+    width: 70%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    font-size: 20px;
+  }
+
+  #addressTable th,
+  #addressTable td {
+    padding: 4px;
+    border: 1px solid #ccc;
+  }
+
+  /* Style for edit button */
+  .editButton {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* Style for older addresses */
+  .olderAddress {
+    background-color: #ffe6e6; /* Light red background color */
+  }
+</style>
+</head>
+<body>
+  <h1>Address History</h1>
+
+  <form id="nameForm">
+    <label for="name">Name</label>
+    <input type="text" id="name" required>
+  </form>
+
+  <form id="addressForm" onsubmit="addAddress(event)">
+    <label for="address">Address</label>
+    <input type="text" id="address" required>
+    <label for="moveInDate">Move-in Date</label>
+    <input type="date" id="moveInDate" required>
+
+    <label for="moveOutDate">Move-out Date</label>
+    <input type="date" id="moveOutDate" required>
+
+    <button type="submit">List Address</button>
+    <br>
+    <br>
+    <button type="button" onclick="saveToFile()">Save Text File</button>
+    <button onclick="printContent()">Print/PDF</button>
+  </form>
+
+  <h2></h2>
+  <table id="addressTable">
+    <thead>
+      <tr>
+        <th>Address</th>
+        <th>Move-in Date</th>
+        <th>Move-out Date</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="addressList"></tbody>
+  </table>
+
+  <script>
+    function addAddress(event) {
+      event.preventDefault();
+
+      const address = document.getElementById('address').value;
+      const moveInDate = formatDate(document.getElementById('moveInDate').value);
+      const moveOutDate = formatDate(document.getElementById('moveOutDate').value);
+
+      const addressList = document.getElementById('addressList');
+
+      // Create a new row
+      const newRow = addressList.insertRow();
+
+      // Insert cells with data
+      const cell1 = newRow.insertCell(0);
+      cell1.textContent = address;
+
+      const cell2 = newRow.insertCell(1);
+      cell2.textContent = moveInDate;
+
+      const cell3 = newRow.insertCell(2);
+      cell3.textContent = moveOutDate;
+
+      // Create an "Edit" button in the last cell
+      const cell4 = newRow.insertCell(3);
+      const editButton = document.createElement('button');
+      editButton.textContent = 'Edit';
+      editButton.classList.add('editButton');
+      editButton.onclick = function() {
+        editAddress(newRow);
+      };
+      cell4.appendChild(editButton);
+
+      // Sort the rows by move-in date in descending order
+      sortRowsByDate();
+
+      document.getElementById('addressForm').reset();
+    }
+
+    function formatDate(dateString) {
+      const date = new Date(dateString + 'T00:00:00'); // Add timezone offset
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const day = date.getDate().toString().padStart(2, '0');
+      const year = date.getFullYear();
+      return `${month}/${day}/${year}`;
+    }
+
+    function editAddress(row) {
+      const cells = row.cells;
+      const address = cells[0].textContent;
+      const moveInDate = cells[1].textContent;
+      const moveOutDate = cells[2].textContent;
+
+      document.getElementById('address').value = address;
+      document.getElementById('moveInDate').valueAsDate = new Date(moveInDate);
+      document.getElementById('moveOutDate').valueAsDate = new Date(moveOutDate);
+
+      row.remove(); // Remove the row being edited
+    }
+
+    function printContent() {
+      window.print();
+    }	
+
+    function sortRowsByDate() {
+      const addressList = document.getElementById('addressList');
+      const rows = Array.from(addressList.querySelectorAll('tr'));
+
+      rows.sort((a, b) => {
+        const dateA = new Date(a.cells[1].textContent);
+        const dateB = new Date(b.cells[1].textContent);
+        return dateB - dateA;
+      });
+
+      // Remove all rows from the table
+      addressList.innerHTML = '';
+
+      // Insert sorted rows back into the table
+      rows.forEach(row => {
+        addressList.appendChild(row);
+        const moveInDate = new Date(row.cells[1].textContent);
+        const currentDate = new Date();
+        const fiveYearsAgo = new Date();
+        fiveYearsAgo.setFullYear(currentDate.getFullYear() - 5);
+        if (moveInDate < fiveYearsAgo) {
+          row.classList.add('olderAddress');
+        }
+      });
+    }
+
+    function saveToFile() {
+      const addressList = document.getElementById('addressList');
+      const rows = Array.from(addressList.querySelectorAll('tr'));
+      let textContent = '';
+
+      rows.forEach(row => {
+        const cells = row.cells;
+        const address = cells[0].textContent;
+        const moveInDate = cells[1].textContent;
+        const moveOutDate = cells[2].textContent;
+        textContent += `Address: ${address}, Move-in Date: ${moveInDate}, Move-out Date: ${moveOutDate}\n`;
+      });
+
+      const blob = new Blob([textContent], { type: 'text/plain' });
+      const downloadLink = document.createElement('a');
+      downloadLink.href = URL.createObjectURL(blob);
+      downloadLink.download = 'address_history.txt';
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    }
+
+    // Call sortRowsByDate initially to sort the rows on page load
+    sortRowsByDate();
+
+    // Add event listener for beforeunload event to show warning message
+    window.addEventListener('beforeunload', function(event) {
+      event.preventDefault();
+      event.returnValue = ''; // This line is required for some browsers
+    });
+  </script>
+</body>
+</html>
