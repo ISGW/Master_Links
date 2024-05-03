@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employment History</title>
+<style>
+  body {
+    background-color: #f5f5f5; /* Light grey background color */
+    font-family: Arial, sans-serif; /* Example font family */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+  }
+
+  /* Style for h1 heading */
+  h1 {
+    font-size: 18px; /* Adjust the font size as needed */
+  }
+  h1 {
+    text-align: center;
+  }
+
+  #nameForm {
+    width: 40%;
+    margin: 20px auto;
+  }
+
+  /* Style for form labels and inputs */
+  #nameForm label {
+    display: block;
+    margin-bottom: 1px;
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  #nameForm input {
+    width: calc(100% - 20px); /* Adjust input width */
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+
+
+  /* Style for form */
+  #employmentForm {
+    width: 40%;
+    margin: 20px auto;
+  }
+
+  /* Style for form labels and inputs */
+  #employmentForm label {
+    display: block;
+    margin-bottom: 1px;
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  #employmentForm input {
+    width: calc(100% - 20px); /* Adjust input width */
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 18px;
+  }
+
+  /* Style for results table */
+  #employmentTable {
+    width: 70%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    font-size: 15px;
+  }
+
+  #employmentTable th,
+  #employmentTable td {
+    padding: 4px;
+    border: 1px solid #ccc;
+  }
+
+  /* Style for edit button */
+  .editButton {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* Style for older employment entries */
+  .olderEmployment {
+    background-color: #ffe6e6; /* Light red background color */
+  }
+</style>
+</head>
+<body>
+  <h1>Employment History</h1>
+
+  <form id="nameForm">
+    <label for="name">Name</label>
+    <input type="text" id="name" required>
+  </form>
+
+  <form id="employmentForm" onsubmit="addEmployment(event)">
+    <label for="employer">Employer Name</label>
+    <input type="text" id="employer" required>
+
+    <label for="employerAddress">Employer Address</label>
+    <input type="text" id="employerAddress" required>
+
+    <label for="position">Position</label>
+    <input type="text" id="position" required>
+
+    <label for="dateEntry">Date of Entry</label>
+    <input type="date" id="dateEntry" required>
+
+    <label for="dateLeft">Date Left</label>
+    <input type="date" id="dateLeft" required>
+
+    <button type="submit">List Employment</button>
+    <br>
+    <br>
+    <button onclick="saveToFile()">Save Text File</button>
+    <button onclick="printContent()">Print/PDF</button>
+  </form>
+
+  <h2></h2>
+  <table id="employmentTable">
+    <thead>
+      <tr>
+        <th>Employer</th>
+        <th>Employer Address</th>
+        <th>Position</th>
+        <th>Date of Entry</th>
+        <th>Date Left</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="employmentList"></tbody>
+  </table>
+
+  <script>
+    function addEmployment(event) {
+      event.preventDefault();
+
+      const employer = document.getElementById('employer').value;
+      const employerAddress = document.getElementById('employerAddress').value;
+      const position = document.getElementById('position').value;
+      const dateEntry = formatDate(document.getElementById('dateEntry').value);
+      const dateLeft = formatDate(document.getElementById('dateLeft').value);
+
+      const employmentList = document.getElementById('employmentList');
+
+      // Create a new row
+      const newRow = employmentList.insertRow();
+
+      // Insert cells with data
+      const cell1 = newRow.insertCell(0);
+      cell1.textContent = employer;
+
+      const cell2 = newRow.insertCell(1);
+      cell2.textContent = employerAddress;
+
+      const cell3 = newRow.insertCell(2);
+      cell3.textContent = position;
+
+      const cell4 = newRow.insertCell(3);
+      cell4.textContent = dateEntry;
+
+      const cell5 = newRow.insertCell(4);
+      cell5.textContent = dateLeft;
+
+      // Create an "Edit" button in the last cell
+      const cell6 = newRow.insertCell(5);
+      const editButton = document.createElement('button');
+      editButton.textContent = 'Edit';
+      editButton.classList.add('editButton');
+      editButton.onclick = function() {
+        editEmployment(newRow);
+      };
+      cell6.appendChild(editButton);
+
+      // Sort the rows by date of entry in descending order
+      sortRowsByDate();
+
+      document.getElementById('employmentForm').reset();
+    }
+
+    function formatDate(dateString) {
+      const date = new Date(dateString + 'T00:00:00'); // Add timezone offset
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const day = date.getDate().toString().padStart(2, '0');
+      const year = date.getFullYear();
+      return `${month}/${day}/${year}`;
+    }
+
+    function editEmployment(row) {
+      const cells = row.cells;
+      const employer = cells[0].textContent;
+      const employerAddress = cells[1].textContent;
+      const position = cells[2].textContent;
+      const dateEntry = cells[3].textContent;
+      const dateLeft = cells[4].textContent;
+
+      document.getElementById('employer').value = employer;
+      document.getElementById('employerAddress').value = employerAddress;
+      document.getElementById('position').value = position;
+      document.getElementById('dateEntry').valueAsDate = new Date(dateEntry);
+      document.getElementById('dateLeft').valueAsDate = new Date(dateLeft);
+
+      row.remove(); // Remove the row being edited
+    }
+
+    function saveToFile() {
+      const employmentList = document.getElementById('employmentList');
+      const rows = Array.from(employmentList.querySelectorAll('tr'));
+      let textContent = '';
+
+      rows.forEach(row => {
+        const cells = row.cells;
+        const employer = cells[0].textContent;
+        const employerAddress = cells[1].textContent;
+        const position = cells[2].textContent;
+        const dateEntry = cells[3].textContent;
+        const dateLeft = cells[4].textContent;
+        textContent += `Employer: ${employer}, Employer Address: ${employerAddress}, Position: ${position}, Date of Entry: ${dateEntry}, Date Left: ${dateLeft}\n`;
+      });
+
+      const blob = new Blob([textContent], { type: 'text/plain' });
+      const downloadLink = document.createElement('a');
+      downloadLink.href = URL.createObjectURL(blob);
+      downloadLink.download = 'employment_history.txt';
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    }
+
+    function printContent() {
+      window.print();
+    }
+
+    function sortRowsByDate() {
+      const employmentList = document.getElementById('employmentList');
+      const rows = Array.from(employmentList.querySelectorAll('tr'));
+
+      rows.sort((a, b) => {
+        const dateA = new Date(a.cells[3].textContent);
+        const dateB = new Date(b.cells[3].textContent);
+        return dateB - dateA;
+      });
+
+      // Remove all rows from the table
+      employmentList.innerHTML = '';
+
+      // Insert sorted rows back into the table
+      rows.forEach(row => {
+        employmentList.appendChild(row);
+        const dateEntry = new Date(row.cells[3].textContent);
+        const currentDate = new Date();
+        const fiveYearsAgo = new Date();
+        fiveYearsAgo.setFullYear(currentDate.getFullYear() - 5);
+        if (dateEntry < fiveYearsAgo) {
+          row.classList.add('olderEmployment');
+        }
+      });
+    }
+
+    // Call sortRowsByDate initially to sort the rows on page load
+    sortRowsByDate();
+
+    // Add event listener for beforeunload event to show warning message
+    window.addEventListener('beforeunload', function(event) {
+      event.preventDefault();
+      event.returnValue = ''; // This line is required for some browsers
+    });
+  </script>
+</body>
+</html>
