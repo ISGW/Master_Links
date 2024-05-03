@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>60/40 Ratio Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            background-color: #222; /* Dark background color */
+            color: #38e42f; /* Light text color */
+            font-family: Arial, sans-serif; /* Font family */
+            padding: 20px; /* Add some padding for spacing */
+        }
+        
+        h2 {
+            margin-bottom: 50px; /* Add margin below the heading */
+        }
+
+        input[type="number"],
+        button {
+            background-color: #0e0e10; /* Dark background color for input and button */
+            color: #2fe4db; /* Light text color for input and button */
+            border: none; /* Remove borders */
+            padding: 8px; /* Add padding */
+            margin-bottom: 10px; /* Add margin below input and button */
+            cursor: pointer; /* Change cursor to pointer on hover */
+        }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none; /* Hide spin buttons */
+            margin: 0; /* Remove default margin */
+        }
+
+        span {
+            font-weight: bold; /* Make result text bold */
+        }
+    </style>
+</head>
+<body>
+    <h2>60/40 Ratio Calculator</h2>
+    <label for="input60">Enter 60 portion:</label>
+    <input type="number" id="input60">
+    <button onclick="calculate6040()">Calculate</button>
+    <p>The 40 portion is: <span id="output40"></span></p>
+
+<!-- Use empty <div> elements for spacing -->
+<div style="height: 60px;"></div>
+
+
+    <label for="input40">Enter 40 portion:</label>
+    <input type="number" id="input40">
+    <button onclick="calculate4060()">Calculate</button>
+    <p>The 60 portion is: <span id="output60"></span></p>
+
+    <script>
+        function calculate6040() {
+            // Get the value entered for the 60 portion
+            var amount60 = parseFloat(document.getElementById("input60").value);
+            
+            // Calculate the corresponding amount for the 40 portion
+            var amount40 = amount60 * (40 / 60);
+            
+            // Display the result in the output span
+            document.getElementById("output40").textContent = amount40.toFixed(2);
+        }
+
+        function calculate4060() {
+            // Get the value entered for the 40 portion
+            var amount40 = parseFloat(document.getElementById("input40").value);
+            
+            // Calculate the corresponding amount for the 60 portion
+            var amount60 = amount40 * (60 / 40);
+            
+            // Display the result in the output span
+            document.getElementById("output60").textContent = amount60.toFixed(2);
+        }
+    </script>
+</body>
+</html>
