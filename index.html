@@ -1,1433 +1,504 @@
-<html xmlns:o="urn:schemas-microsoft-com:office:office"
-xmlns:x="urn:schemas-microsoft-com:office:excel"
-xmlns="http://www.w3.org/TR/REC-html40">
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <title>MasterLinks</title>
 <link rel="icon" type="image/x-icon" href="favicon.ico">
-<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
-<meta name=ProgId content=Excel.Sheet>
-<meta name=Generator content="Microsoft Excel 15">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="user-scalable=yes, width=device-width, initial-scale=1.25, maximum-scale=1.5" />
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="viewport" content="user-scalable=yes, width=device-width, initial-scale=0.8, maximum-scale=1.0" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-status-bar-style" content="transparent">
 <link rel="apple-touch-icon" href="favicon.png">
-<link rel=File-List href="3DARK%20V3%20B%20MASTER%20LINKS%20-%20Copy%20-%20Copy_files/filelist.xml">
 <base target="_blank">
 
 <style>
-       a {
-	color: transparent; /* Default color for links */
-	text-decoration: none; /* Remove underline */ 
-        }
+	@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+</style>
 
-	span:hover {
+<style>
+    body {
+        font-family: "Open Sans", sans-serif;
+        font-weight: 400;
+        background-color: #262626;
+    }
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        margin-left: 40PX;
+    }
+
+    .table-container {
+        width: calc(220% - 10px); /* Adjust width to distribute evenly with space between */
+        margin-right: 15px; /* Space between tables */
+
+    }
+
+    table {
+        border-collapse: collapse;
+        min-width: 260px;
+        margin-right: 15px; /* Space between tables */
+    }
+
+    th, td {
+        padding: 1.5px;
+        padding-top: 0px;
+        text-align: left;
+        border-bottom: 1px solid #8f8f8f38;
+    }
+
+    th {
+        background-color: #194587;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 600;
+        font-style: italic;
+        text-align: center;
+    }
+
+    th.special-header {
+        background-color: #004833; /* Change the background color for special headers */
+    }
+
+    tr:hover {
+        background-color: #1d1d1d;
+    }
+
+    a {
+        color: #ffffff;
+        font-size: 16px;
+        text-decoration: none;
+    }
+
+    a:hover {
         color: #00FF00 !important;
 	transition: color 0.2s;
         }
-</style>
+    
 
-<style>
-html { background-color: #262626; } 
-body {
-    background-color: #262626; 
-    margin: 0 auto;
-}
-</style>
-	
-<style>
-	@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
-</style>
-<style id="V12 DARK MASTER LINKS_14385_Styles">
-<!--table
-	{mso-displayed-decimal-separator:"\.";
-	mso-displayed-thousand-separator:"\,";}
-.xl6514385
-	{color:white;
-	font-size:11.0pt;
-	font-weight:400;
-	font-style:normal;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:left;
-	vertical-align:middle;
-	background:#404040;
-	mso-pattern:#F8F8F8 none;
-	white-space:nowrap;
-	padding-left:12px;
-	mso-char-indent-count:1;}
-.xl6614385
-	{color:white;
-	font-size:11.0pt;
-	font-weight:400;
-	font-style:normal;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:left;
-	vertical-align:middle;
-	background:#4B4B4B;
-	mso-pattern:white none;
-	white-space:nowrap;
-	padding-left:12px;
-	mso-char-indent-count:1;}
-.xl6714385
-	{padding-top:1px;
-	padding-right:1px;
-	padding-left:1px;
-	mso-ignore:padding;
-	color:white;
-	font-size:10.0pt;
-	font-weight:400;
-	font-style:normal;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:center;
-	vertical-align:middle;
-	border-top:none;
-	border-right:none;
-	border-bottom:none;
-	border-left:1.5pt solid #4B4B4B;
-	background:#4B4B4B;
-	mso-pattern:white none;
-	white-space:nowrap;}
-.xl6814385
-	{padding-top:1px;
-	padding-right:1px;
-	padding-left:1px;
-	mso-ignore:padding;
-	color:white;
-	font-size:11.0pt;
-	font-weight:400;
-	font-style:normal;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:center;
-	vertical-align:middle;
-	border-top:1.5pt solid #262626;
-	border-right:none;
-	border-bottom:none;
-	border-left:none;
-	background:#404040;
-	mso-pattern:#F8F8F8 none;
-	white-space:nowrap;}
-.xl6914385
-	{color:white;
-	font-size:11.0pt;
-	font-weight:400;
-	font-style:normal;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:left;
-	vertical-align:middle;
-	border-top:1.5pt solid #262626;
-	border-right:none;
-	border-bottom:.5pt solid #262626;
-	border-left:none;
-	background:#404040;
-	mso-pattern:#F8F8F8 none;
-	white-space:nowrap;
-	padding-left:12px;
-	mso-char-indent-count:1;}
-.xl7014385
-	{color:white;
-	font-size:11.0pt;
-	font-weight:400;
-	font-style:normal;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:left;
-	vertical-align:middle;
-	border-top:1.5pt solid #262626;
-	border-right:none;
-	border-bottom:.5pt solid #262626;
-	border-left:.5pt solid #262626;
-	background:#404040;
-	mso-pattern:#F8F8F8 none;
-	white-space:nowrap;
-	padding-left:12px;
-	mso-char-indent-count:1;}
-.xl7114385
-	{color:white;
-	font-size:11.0pt;
-	font-weight:400;
-	font-style:normal;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:left;
-	vertical-align:middle;
-	border-top:.5pt solid #262626;
-	border-right:none;
-	border-bottom:.5pt solid #262626;
-	border-left:none;
-	background:#404040;
-	mso-pattern:#F8F8F8 none;
-	white-space:nowrap;
-	padding-left:12px;
-	mso-char-indent-count:1;}
-.xl7214385
-	{color:white;
-	font-size:11.0pt;
-	font-weight:400;
-	font-style:normal;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:left;
-	vertical-align:middle;
-	border-top:.5pt solid #262626;
-	border-right:none;
-	border-bottom:.5pt solid #262626;
-	border-left:.5pt solid #262626;
-	background:#404040;
-	mso-pattern:#F8F8F8 none;
-	white-space:nowrap;
-	padding-left:12px;
-	mso-char-indent-count:1;}
-.xl7314385
-	{padding-top:1px;
-	padding-right:1px;
-	padding-left:1px;
-	mso-ignore:padding;
-	color:white;
-	font-size:10.0pt;
-	font-weight:400;
-	font-style:normal;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:center;
-	vertical-align:middle;
-	border-top:none;
-	border-right:none;
-	border-bottom:none;
-	border-left:1.5pt solid #4B4B4B;
-	background:#404040;
-	mso-pattern:#F8F8F8 none;
-	white-space:nowrap;}
-.xl7414385
-	{padding-top:1px;
-	padding-right:1px;
-	padding-left:1px;
-	mso-ignore:padding;
-	color:white;
-	font-size:10.0pt;
-	font-weight:400;
-	font-style:normal;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:center;
-	vertical-align:middle;
-	border-top:none;
-	border-right:none;
-	border-bottom:none;
-	border-left:1.5pt solid #4B4B4B;
-	background:#4B4B4B;
-	mso-pattern:white none;
-	white-space:nowrap;}
-.xl7514385
-	{padding-top:1px;
-	padding-right:1px;
-	padding-left:1px;
-	mso-ignore:padding;
-	color:white;
-	font-size:11.0pt;
-	font-weight:400;
-	font-style:normal;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:general;
-	vertical-align:middle;
-	background:#262626;
-	mso-pattern:black none;
-	white-space:nowrap;}
-.xl7614385
-	{padding-top:1px;
-	padding-right:1px;
-	padding-left:1px;
-	mso-ignore:padding;
-	color:white;
-	font-size:11.0pt;
-	font-weight:400;
-	font-style:normal;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:center;
-	vertical-align:middle;
-	background:#262626;
-	mso-pattern:black none;
-	white-space:nowrap;}
-.xl7714385
-	{padding-top:1px;
-	padding-right:1px;
-	padding-left:1px;
-	mso-ignore:padding;
-	color:white;
-	font-size:11.0pt;
-	font-weight:700;
-	font-style:normal;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:general;
-	vertical-align:middle;
-	background:#262626;
-	mso-pattern:black none;
-	white-space:nowrap;}
-.xl7814385
-	{padding-top:1px;
-	padding-right:1px;
-	padding-left:1px;
-	mso-ignore:padding;
-	color:white;
-	font-size:11.0pt;
-	font-weight:400;
-	font-style:normal;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:right;
-	vertical-align:middle;
-	background:#262626;
-	mso-pattern:black none;
-	white-space:nowrap;}
-.xl7914385
-	{padding-top:1px;
-	padding-right:1px;
-	padding-left:1px;
-	mso-ignore:padding;
-	color:white;
-	font-size:12.0pt;
-	font-weight:400;
-	font-style:normal;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:general;
-	vertical-align:middle;
-	background:#262626;
-	mso-pattern:black none;
-	white-space:nowrap;}
-.xl8014385
-	{padding-top:1px;
-	padding-right:1px;
-	padding-left:1px;
-	mso-ignore:padding;
-	color:white;
-	font-size:11.0pt;
-	font-weight:400;
-	font-style:normal;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:general;
-	vertical-align:middle;
-	background:#404040;
-	mso-pattern:#F8F8F8 none;
-	white-space:nowrap;}
-.xl8114385
-	{padding-top:1px;
-	padding-right:1px;
-	padding-left:1px;
-	mso-ignore:padding;
-	color:white;
-	font-size:11.0pt;
-	font-weight:700;
-	font-style:italic;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:center;
-	vertical-align:middle;
-	border-top:none;
-	border-right:none;
-	border-bottom:1.5pt solid #262626;
-	border-left:none;
-	background:#194587;
-	mso-pattern:#F8F8F8 none;
-	white-space:nowrap;}
-.xl8214385
-	{padding-top:1px;
-	padding-right:1px;
-	padding-left:1px;
-	mso-ignore:padding;
-	color:white;
-	font-size:11.0pt;
-	font-weight:700;
-	font-style:italic;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:center;
-	vertical-align:middle;
-	background:#194587;
-	mso-pattern:#F8F8F8 none;
-	white-space:nowrap;}
-.xl8314385
-	{padding-top:1px;
-	padding-right:1px;
-	padding-left:1px;
-	mso-ignore:padding;
-	color:white;
-	font-size:11.0pt;
-	font-weight:700;
-	font-style:italic;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:general;
-	vertical-align:middle;
-	background:#262626;
-	mso-pattern:black none;
-	white-space:nowrap;}
-.xl8414385
-	{padding-top:1px;
-	padding-right:1px;
-	padding-left:1px;
-	mso-ignore:padding;
-	color:white;
-	font-size:12.0pt;
-	font-weight:700;
-	font-style:normal;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:center;
-	vertical-align:middle;
-	border-top:1.5pt solid #262626;
-	border-right:none;
-	border-bottom:none;
-	border-left:none;
-	background:#4B4B4B;
-	mso-pattern:#F3F3F3 none;
-	white-space:nowrap;}
-.xl8514385
-	{padding-top:1px;
-	padding-right:1px;
-	padding-left:1px;
-	mso-ignore:padding;
-	color:white;
-	font-size:12.0pt;
-	font-weight:700;
-	font-style:normal;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:center;
-	vertical-align:middle;
-	border-top:none;
-	border-right:none;
-	border-bottom:1.5pt solid #262626;
-	border-left:none;
-	background:#4B4B4B;
-	mso-pattern:#F3F3F3 none;
-	white-space:nowrap;}
-.xl8614385
-	{color:white;
-	font-size:11.0pt;
-	font-weight:700;
-	font-style:normal;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:left;
-	vertical-align:middle;
-	border-top:1.5pt solid #262626;
-	border-right:none;
-	border-bottom:none;
-	border-left:none;
-	background:#404040;
-	mso-pattern:#F3F3F3 none;
-	white-space:nowrap;
-	padding-left:12px;
-	mso-char-indent-count:1;}
-.xl8714385
-	{color:white;
-	font-size:11.0pt;
-	font-weight:700;
-	font-style:normal;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:left;
-	vertical-align:middle;
-	border-top:none;
-	border-right:none;
-	border-bottom:1.5pt solid #262626;
-	border-left:none;
-	background:#404040;
-	mso-pattern:#F3F3F3 none;
-	white-space:nowrap;
-	padding-left:12px;
-	mso-char-indent-count:1;}
-.xl8814385
-	{color:white;
-	font-size:11.0pt;
-	font-weight:700;
-	font-style:normal;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:left;
-	vertical-align:middle;
-	border-top:none;
-	border-right:none;
-	border-bottom:1.5pt solid #262626;
-	border-left:none;
-	background:#404040;
-	mso-pattern:#F3F3F3 none;
-	white-space:nowrap;
-	padding-left:12px;
-	mso-char-indent-count:1;}
-.xl8914385
-	{color:#1155CC;
-	font-size:11.0pt;
-	font-weight:400;
-	font-style:normal;
-	text-decoration:underline;
-	text-underline-style:single;
-	font-family:Arial, sans-serif;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:left;
-	vertical-align:middle;
-	border-top:none;
-	border-right:none;
-	border-bottom:1.5pt solid #262626;
-	border-left:none;
-	background:#404040;
-	mso-pattern:#F3F3F3 none;
-	white-space:nowrap;
-	padding-left:12px;
-	mso-char-indent-count:1;}
-.xl9014385
-	{padding-top:1px;
-	padding-right:1px;
-	padding-left:1px;
-	mso-ignore:padding;
-	color:white;
-	font-size:11.0pt;
-	font-weight:700;
-	font-style:italic;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:center;
-	vertical-align:middle;
-	border-top:none;
-	border-right:none;
-	border-bottom:1.5pt solid #262626;
-	border-left:none;
-	background:#004833;
-	mso-pattern:#F8F8F8 none;
-	white-space:nowrap;}
-.xl9114385
-	{color:white;
-	font-size:11.0pt;
-	font-weight:700;
-	font-style:normal;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:left;
-	vertical-align:middle;
-	border-top:none;
-	border-right:none;
-	border-bottom:1.5pt solid #262626;
-	border-left:none;
-	background:#4B4B4B;
-	mso-pattern:#F3F3F3 none;
-	white-space:nowrap;
-	padding-left:12px;
-	mso-char-indent-count:1;}
-.xl9214385
-	{padding-top:1px;
-	padding-right:1px;
-	padding-left:1px;
-	mso-ignore:padding;
-	color:white;
-	font-size:11.0pt;
-	font-weight:700;
-	font-style:italic;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:center;
-	vertical-align:middle;
-	border-top:none;
-	border-right:none;
-	border-bottom:1.5pt solid #262626;
-	border-left:none;
-	background:#004833;
-	mso-pattern:#134F5C none;
-	white-space:nowrap;}
-.xl9314385
-	{color:white;
-	font-size:11.0pt;
-	font-weight:400;
-	font-style:normal;
-	text-decoration:none;
-	font-family:"Open Sans";
-	mso-generic-font-family:auto;
-	mso-font-charset:0;
-	mso-number-format:General;
-	text-align:left;
-	vertical-align:middle;
-	background:#404040;
-	mso-pattern:#F3F3F3 none;
-	white-space:nowrap;
-	padding-left:12px;
-	mso-char-indent-count:1;}
--->
+        .bold-link {
+    font-weight: bold;
+    }
+
+
+    /* Style for dropdown menu */
+    .dropdown {
+        position: relative;
+        
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 700;
+        padding: 4px;
+        cursor: pointer;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #424242;
+        min-width: 256px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .dropdown.active .dropdown-content {
+        display: block;
+    }
+
+    .dropdown-content a {
+        color: rgb(255, 255, 255);
+        padding: 3px 16px;
+        text-decoration: none;
+        display: block;
+        font-weight: 400;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #1d1d1d;
+    }
+
+
 </style>
 </head>
-
 <body>
-<!--[if !excel]>&nbsp;&nbsp;<![endif]-->
-<!--The following information was generated by Microsoft Excel's Publish as Web
-Page wizard.-->
-<!--If the same item is republished from Excel, all information between the DIV
-tags will be replaced.-->
-<!----------------------------->
-<!--START OF OUTPUT FROM EXCEL PUBLISH AS WEB PAGE WIZARD -->
-<!----------------------------->
 
-<div id="V12 DARK MASTER LINKS_14385" align=center x:publishsource="Excel">
+<h1></h1>
 
-<table border=0 cellpadding=0 cellspacing=0 width=1457 class=xl7514385
- style='border-collapse:collapse;table-layout:fixed;width:1096pt'>
- <col class=xl7514385 width=22 style='mso-width-source:userset;mso-width-alt:
- 804;width:17pt'>
- <col class=xl7514385 width=255 style='mso-width-source:userset;mso-width-alt:
- 9325;width:191pt'>
- <col class=xl7514385 width=22 style='mso-width-source:userset;mso-width-alt:
- 804;width:17pt'>
- <col class=xl7514385 width=255 style='mso-width-source:userset;mso-width-alt:
- 9325;width:191pt'>
- <col class=xl7514385 width=22 style='mso-width-source:userset;mso-width-alt:
- 804;width:17pt'>
- <col class=xl7514385 width=255 style='mso-width-source:userset;mso-width-alt:
- 9325;width:191pt'>
- <col class=xl7514385 width=22 style='mso-width-source:userset;mso-width-alt:
- 804;width:17pt'>
- <col class=xl7514385 width=202 style='mso-width-source:userset;mso-width-alt:
- 7387;width:152pt'>
- <col class=xl7514385 width=92 style='mso-width-source:userset;mso-width-alt:
- 3364;width:69pt'>
- <col class=xl7514385 width=22 style='mso-width-source:userset;mso-width-alt:
- 804;width:17pt'>
- <col class=xl7514385 width=133 style='mso-width-source:userset;mso-width-alt:
- 4864;width:100pt'>
- <col class=xl7614385 width=133 style='mso-width-source:userset;mso-width-alt:
- 4864;width:100pt'>
- <col class=xl7814385 width=22 style='mso-width-source:userset;mso-width-alt:
- 804;width:17pt'>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 width=22 style='height:18.0pt;width:17pt'>&nbsp;</td>
-  <td class=xl7514385 width=255 style='width:191pt'>&nbsp;</td>
-  <td class=xl7514385 width=22 style='width:17pt'>&nbsp;</td>
-  <td class=xl7514385 width=255 style='width:191pt'>&nbsp;</td>
-  <td class=xl7514385 width=22 style='width:17pt'>&nbsp;</td>
-  <td class=xl7514385 width=255 style='width:191pt'>&nbsp;</td>
-  <td class=xl7514385 width=22 style='width:17pt'>&nbsp;</td>
-  <td class=xl7514385 width=202 style='width:152pt'>&nbsp;</td>
-  <td class=xl7514385 width=92 style='width:69pt'>&nbsp;</td>
-  <td class=xl7514385 width=22 style='width:17pt'>&nbsp;</td>
-  <td class=xl7514385 width=133 style='width:100pt'>&nbsp;</td>
-  <td class=xl7614385 width=133 style='width:100pt'>&nbsp;</td>
-  <td class=xl7514385 width=22 style='width:17pt'>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl8114385><a href="https://www.uscis.gov/"><span style='color:white;
-  font-size:11.0pt;font-weight:700;font-style:italic;text-decoration:none;
-  font-family:"Open Sans";mso-generic-font-family:auto;mso-font-charset:0'>USCIS</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl8114385>U.S. Dept. of State</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl8114385>CBP, ICE, Immigration Court</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 class=xl9214385>Case Management</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 class=xl9014385>Tools / Reference</td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl6514385><a href="https://myaccount.uscis.gov/"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Log In</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a href="https://ceac.state.gov/IV/Login.aspx"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>DS-260 Login</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a href="https://www.cbp.gov/"><span style='color:white;
-  font-size:11.0pt;text-decoration:none;font-family:"Open Sans";mso-generic-font-family:
-  auto;mso-font-charset:0'>CBP Home</span></a></td>
-  <td class=xl7714385>&nbsp;</td>
-  <td colspan=2 rowspan=2 class=xl8414385 style='border-bottom:1.5pt solid #262626'><a
-  href="https://raw.githubusercontent.com/ISGW/Master_Links/833b8016342c533a4f141c43d7894d99c132cb6a/CDD/CASE_DATA_DOC.pdf"><span
-  style='color:white;font-size:12.0pt;font-weight:700;text-decoration:none;
-  font-family:"Open Sans";mso-generic-font-family:auto;mso-font-charset:0'>CASE
-  DATA DOC</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 rowspan=2 class=xl8414385 style='border-bottom:1.5pt solid #262626'><a
-  href="https://masterlinks.isgtulsa.com/contact-info-copy.html"><span
-  style='color:white;font-size:12.0pt;font-weight:700;text-decoration:none;
-  font-family:"Open Sans";mso-generic-font-family:auto;mso-font-charset:0'>OFFICE
-  INFO</span></a></td>
-  <td class=xl7814385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://masterlinks.isgtulsa.com/create-pass-acc-links.html"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Create Account</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a href="https://ceac.state.gov/genniv/"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>DS-160 Login</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a href="https://portal.ice.gov/"><span style='color:
-  white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>ICE Portal</span></a></td>
-  <td class=xl7714385>&nbsp;</td>
-  <td class=xl7914385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl6514385><a href="https://egov.uscis.gov/"><span style='color:
-  white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Check Case Status</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://travel.state.gov/content/travel/en/legal/visa-law0/visa-bulletin.html"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Visa Bulletin</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://checkin.ice.gov/fos?id=fos_identity_confirmation&amp;lan=en"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>ICE Schedule Appointment</span></a></td>
-  <td class=xl7714385>&nbsp;</td>
-  <td colspan=2 class=xl8614385><a
-  href="https://masterlinks.isgtulsa.com/google-recent-filter.html"><span
-  style='color:white;font-size:11.0pt;font-weight:700;text-decoration:none;
-  font-family:"Open Sans";mso-generic-font-family:auto;mso-font-charset:0'>Google
-  Drive Search / Recent PDFs</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 class=xl6514385><a
-  href="https://masterlinks.isgtulsa.com/ac-ps.html"><span style='color:white;
-  font-size:11.0pt;text-decoration:none;font-family:"Open Sans";mso-generic-font-family:
-  auto;mso-font-charset:0'>Generate/Copy Acc Passwd</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl6514385><a href="https://egov.uscis.gov/processing-times/"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Processing Times USCIS</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://ceac.state.gov/CEACStatTracker/Status.aspx"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Check Visa Status</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a href="https://www.securerelease.us/"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>FOIA CBP SecureRelease</span></a></td>
-  <td class=xl7714385>&nbsp;</td>
-  <td colspan=2 class=xl8614385><a
-  href="https://docs.google.com/forms/d/e/1FAIpQLScU76k6db1bmts1StqNAm0nWIwhow25NV4vwsao2NkzpCfq4w/viewform?usp=sf_link"><span
-  style='color:white;font-size:11.0pt;font-weight:700;text-decoration:none;
-  font-family:"Open Sans";mso-generic-font-family:auto;mso-font-charset:0'>Prospect
-  Client INPUT FORM</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 class=xl6514385><a
-  href="https://cse.google.com/cse?cx=5268b33b856f3461b#gsc.tab=0"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Google Custom Search</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl6514385><a href="https://www.uscis.gov/i-864p"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Poverty Guidelines</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/ask-nvc.html"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>NVC Case Inquiry</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a href="https://i94.cbp.dhs.gov/I94/#/home"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>GET I-94 Online</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 class=xl8814385><a
-  href="https://docs.google.com/spreadsheets/d/1OJGjKwo0qMZAoRHUDo4pe7sS2AW_0KXAwrx2ZDlWTWo/preview"><span
-  style='color:white;font-size:11.0pt;font-weight:700;text-decoration:none;
-  font-family:"Open Sans";mso-generic-font-family:auto;mso-font-charset:0'>Prospect
-  Client LIST</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 class=xl6514385><a href="https://translate.google.com/"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Translate</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl6514385><a href="https://www.uscis.gov/tools/find-a-civil-surgeon"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Find a Doctor USCIS</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/fees/fees-visa-services.html"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Visa Fees</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a href="https://acis.eoir.justice.gov/en/"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>EOIR Court Case Information</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 class=xl8714385><a
-  href="https://calendar.google.com/calendar/u/0/r/month"><span
-  style='color:white;font-size:11.0pt;font-weight:700;text-decoration:none;
-  font-family:"Open Sans";mso-generic-font-family:auto;mso-font-charset:0'>Calendar
-  ISG Appointments</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 class=xl6514385><a href="https://account.proton.me/login"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Proton Mail</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl6514385><a href="https://www.uscis.gov/g-1055"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Fee Schedule Online</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://docs.google.com/forms/d/e/1FAIpQLSdsX1VeUvjYXrFpk0bT1h-6pm4LcUmlQ444MBlNSpEjoVDczw/viewform"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Cd. Juarez Info Navigator</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://respondentaccess.eoir.justice.gov/en/forms/eoir33ic/"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>EOIR Court Address Change</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 class=xl6514385><a
-  href="https://www.timeanddate.com/date/dateadd.html"><span style='color:white;
-  font-size:11.0pt;text-decoration:none;font-family:"Open Sans";mso-generic-font-family:
-  auto;mso-font-charset:0'>Date/Time Calculator</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://my.uscis.gov/uscis-immigrant-fee/enter-data"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Pay Visa Fee - Green Card</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://forms.office.com/pages/responsepage.aspx?id=dFDPZv5a0UimkaErISH0Swa7UTqs5q1OtLpFdZgB5VxUNFRUREFDM1Q0TzdMWjkzN1oxUVBLQkVQRS4u"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Cd. Juarez Inquiry Form</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://help.asylumadvocacy.org/sample-documents/"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Sample Documents DHS/ICE/CBP</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 class=xl9014385>Requirements Lists</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 class=xl6514385><a
-  href="https://masterlinks.isgtulsa.com/address-history.html"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Quick Entry Address History</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl6514385><a href="https://first.uscis.gov/"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>FOIA USCIS online</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://travel.state.gov/content/travel/en/passports.html"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>U.S. Passports</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 class=xl9114385><a
-  href="https://docs.google.com/spreadsheets/u/0/d/1LYF3it9sUxfP8wCdM_1tGUC4A1SUKsT597ffTgBH9Ls/preview"><span
-  style='color:white;font-size:11.0pt;font-weight:700;text-decoration:none;
-  font-family:"Open Sans";mso-generic-font-family:auto;mso-font-charset:0'>ISG
-  Services Full Price List</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 class=xl6514385><a
-  href="https://masterlinks.isgtulsa.com/employment-history.html"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Quick Entry Employment
-  History</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://my.uscis.gov/accounts/appointment_request/overview"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>USCIS Appointment</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a href="https://common.usembassy.gov/en/crba/"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Birth Abroad CRBA</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://docs.google.com/document/d/1ch9dCiCORcmYPfsd0KExkq1tuwgg7wBIquS96ZK7mIE/preview"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>I-485 Ajuste de estatus</span></a></td>
-  <td class=xl7314385><a
-  href="https://docs.google.com/document/d/1BNjOH2OH-6I7lA88QHdn9lwL874lLdCxiwVIuLlnX1I/preview"><span
-  style='color:white;text-decoration:none;font-family:"Open Sans";mso-generic-font-family:
-  auto;mso-font-charset:0'>ENGLISH</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 class=xl6514385><a
-  href="https://masterlinks.isgtulsa.com/travel-calc.html"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Quick Entry Time Outside
-  U.S. Calc</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://www.uscis.gov/green-card/green-card-processes-and-procedures/visa-availability-priority-dates/adjustment-of-status-filing-charts-from-the-visa-bulletin"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Priority Dates Adjustment</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a href="https://www.fmjfee.com/i901fee/index.html"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Student Visa Fee</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6614385><a
-  href="https://docs.google.com/document/d/1f9XylD-nufDhqZEpbbPMI_i26xXyPi2w7SnXVEsMsDU/preview"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>I-130 Peticion para esposo</span></a></td>
-  <td class=xl7414385><a
-  href="https://docs.google.com/document/d/1fJ6gl7v9J8iRCJxqv90q0rWf2LjDDBSxo1b_3hSldqA/preview"><span
-  style='color:white;text-decoration:none;font-family:"Open Sans";mso-generic-font-family:
-  auto;mso-font-charset:0'>ENGLISH</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 class=xl6514385><a href="https://www.unitconverters.net/"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Unit Converter-Height,
-  Weight</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl6514385><a href="https://www.uscis.gov/employment-authorization"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>EAD I-765 Categories</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://studyinthestates.dhs.gov/students/prepare/student-forms"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Student Visa Forms</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://docs.google.com/document/d/1oiwQYbpUMOlXjQ3FPF-9nRHYiYGmD4XsfPhgrNzMizM/preview"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>I-130 Peticion para padres</span></a></td>
-  <td class=xl7314385><a
-  href="https://docs.google.com/document/d/1KHOf6lUGxKb7g-YmovLQaWGMTXEox422CORvo4HgtNY/preview"><span
-  style='color:white;text-decoration:none;font-family:"Open Sans";mso-generic-font-family:
-  auto;mso-font-charset:0'>ENGLISH</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 class=xl6514385><a
-  href="https://masterlinks.isgtulsa.com/60-40-ratio.html"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>60/40 Calculator</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://drive.google.com/file/d/1d5NbKjJUIiLCTlHe0P9y61VtR9qSOpzf/view?usp=sharing"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>USCIS Office Codes</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://travel.state.gov/content/travel/en/us-visas/immigrate/family-immigration/nonimmigrant-visa-for-a-spouse-k-3.html"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>K3 Spouse Visa Info</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6614385><a
-  href="https://docs.google.com/document/d/1LkvtZPxfpwv_WZE0hCBE_LvKwClIqnHBb0Ztg0wIXIo/preview"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>N-400 Naturalizacion</span></a></td>
-  <td class=xl7414385><a
-  href="https://docs.google.com/document/d/1e2IvsklIyEdngDPK6JzX24XI5fAAYxxsBpwQj8URVKE/preview"><span
-  style='color:white;text-decoration:none;font-family:"Open Sans";mso-generic-font-family:
-  auto;mso-font-charset:0'>ENGLISH</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 class=xl6514385><a
-  href="https://drive.google.com/file/d/1IFAD1xgjhlZeK-xArN3VVqAZqncur81M/view?usp=sharing"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Contact Hospedaje Cd. Juarez</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl6514385><a href="https://www.uscis.gov/addresschange"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Address Change</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a href="https://www.smf.com.mx/"><span style='color:
-  white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Mexico CDJ Medical Exam SMF</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://docs.google.com/document/d/1Yr-1E8U-x9hDlafxcZ9YPYUXg6jOxE4F0-nlknQBHbs/preview"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>N-600 Cert. de ciudadania</span></a></td>
-  <td class=xl7314385><a
-  href="https://docs.google.com/document/d/165r6snJmS1aNn5mADmk0QXDmQo1tmUdDKzjDr4CC_A8/preview"><span
-  style='color:white;text-decoration:none;font-family:"Open Sans";mso-generic-font-family:
-  auto;mso-font-charset:0'>ENGLISH</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 class=xl6514385><a
-  href="https://drive.google.com/file/d/1ZhIe-lOSgCvsn2FpN4XNUoeyqrUNLUp2/view?usp=sharing"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Contact Lawyers</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://www.uscis.gov/military/discretionary-options-for-military-members-enlistees-and-their-families"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Military Parole in Place</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6614385><a
-  href="https://docs.google.com/document/d/1Mq_o7HVSRGFB1Hqvuiae6JZM59Dkp_9w6IItGyxpyG4/preview#heading=h.m6ajx3nnt6wf"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>NVC Proceso</span></a></td>
-  <td class=xl7414385><a
-  href="https://docs.google.com/document/d/1rRtNNarGL5gOXDsYBJmn2foA98rB5cQ0WyBwMyjhqWs/preview#heading=h.m6ajx3nnt6wf"><span
-  style='color:white;text-decoration:none;font-family:"Open Sans";mso-generic-font-family:
-  auto;mso-font-charset:0'>ENGLISH</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 class=xl6514385><a
-  href="https://drive.google.com/file/d/18mpMkHBD-J9F3l1PBcCUoWDg_shD0cz-/view"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Contact Austin's Accounting</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl6514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://docs.google.com/document/d/1MvS-ZcvS_wWTwt_YeM9Ss3M743xkrWTqEgKXfiGRydU/preview"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>NVC Proceso con Perdon</span></a></td>
-  <td class=xl7314385><a
-  href="https://docs.google.com/document/d/1uLOMfjnJVsdTBPnK20EmOasEdSu-aAEoFR00RX4IpOE/preview#heading=h.m6ajx3nnt6wf"><span
-  style='color:white;text-decoration:none;font-family:"Open Sans";mso-generic-font-family:
-  auto;mso-font-charset:0'>ENGLISH</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 class=xl6514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6614385><a
-  href="https://drive.google.com/file/d/1yaqe1ZgFvXPBbt0jkcqZ63fxY6KYdivW/view"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Blocks Proceso consular</span></a></td>
-  <td class=xl7414385><a
-  href="https://drive.google.com/file/d/15AkasTY0D5ohnqegbafSDX8k2OcEBxc4/view"><span
-  style='color:white;text-decoration:none;font-family:"Open Sans";mso-generic-font-family:
-  auto;mso-font-charset:0'>ENGLISH</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl8214385>Immigrant Visas / Green Card</td>
-  <td class=xl8314385>&nbsp;</td>
-  <td class=xl8114385>Visitor / Non-Immigrant Visas</td>
-  <td class=xl8314385>&nbsp;</td>
-  <td class=xl8114385>IRS, SS, OK State, Other Agencies</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://docs.google.com/document/d/1RTM_fxUJ0cGe0t2ufxiAoreVIdr82JQvzdz5jMai15k/preview"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>I-751 Remover condiciones</span></a></td>
-  <td class=xl7314385><a
-  href="https://docs.google.com/document/d/1d0v4qSNLa3Gc8nN8KWIspDEHd_qg-K2v0S3MXOiw1jE/preview"><span
-  style='color:white;text-decoration:none;font-family:"Open Sans";mso-generic-font-family:
-  auto;mso-font-charset:0'>ENGLISH</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 class=xl9014385>Mail</td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl6814385><a
-  href="https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/list-of-posts.html"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>INSTRUCTIONS Immigrant Visa</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6814385 style='border-top:none'><a
-  href="https://travel.state.gov/content/travel/en/us-visas/tourism-visit/visitor.html"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>INSTRUCTIONS Visitor Visa</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a href="https://www.irs.gov/individuals/get-transcript"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>IRS Tax Record</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6614385><a
-  href="https://docs.google.com/document/d/1Yo0STIcQZxLGwiQa2fa2a2FgBPuJ7CPY0MIy_keKh3o/preview"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Visa de visitante</span></a></td>
-  <td class=xl7414385><a
-  href="https://docs.google.com/document/d/1ViyVfQGiIlMCt8rJzKgepxjuo-gW6x9ERe-E2lRG0EM/preview"><span
-  style='color:white;text-decoration:none;font-family:"Open Sans";mso-generic-font-family:
-  auto;mso-font-charset:0'>ENGLISH</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6914385 style='border-top:none'><a href="https://www.usps.com/"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>USPS Home</span></a></td>
-  <td class=xl7014385 style='border-top:none'><a
-  href="https://www.ups.com/track"><span style='color:white;font-size:11.0pt;
-  text-decoration:none;font-family:"Open Sans";mso-generic-font-family:auto;
-  mso-font-charset:0'>UPS Track</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl6514385><a href="https://ais.usvisa-info.com/en-mx/iv"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Mexico Embassy Acc IV</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a href="https://ais.usvisa-info.com/en-mx/niv"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Mexico Embassy Acc Visitor</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a href="https://www.ssa.gov/"><span style='color:white;
-  font-size:11.0pt;text-decoration:none;font-family:"Open Sans";mso-generic-font-family:
-  auto;mso-font-charset:0'>Social Security Home</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://docs.google.com/document/d/1No7HSLXeECmbmFf4ou5XC9IoX8jNRN49pNX4BC4KrUQ/preview#heading=h.m6ajx3nnt6wf"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Visa K de prometido</span></a></td>
-  <td class=xl7314385><a
-  href="https://docs.google.com/document/d/1BSu1gs6XwgzV8wGW6ZO0guwjB7Ry80j10zQ4Ao2KMdw/preview"><span
-  style='color:white;text-decoration:none;font-family:"Open Sans";mso-generic-font-family:
-  auto;mso-font-charset:0'>ENGLISH</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7114385 style='border-top:none'><a
-  href="https://www.fedex.com/en-us/tracking.html"><span style='color:white;
-  font-size:11.0pt;text-decoration:none;font-family:"Open Sans";mso-generic-font-family:
-  auto;mso-font-charset:0'>FexEx Track</span></a></td>
-  <td class=xl7214385 style='border-top:none'><a
-  href="https://www.dhl.com/us-en/home/tracking.html"><span style='color:white;
-  font-size:11.0pt;text-decoration:none;font-family:"Open Sans";mso-generic-font-family:
-  auto;mso-font-charset:0'>DHL Track</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://portal.ustraveldocs.com/SiteRegister?country=El%20Salvador&amp;language=en_US"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>El Salvador Embassy Acc IV</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://portal.ustraveldocs.com/SiteRegister?country=El%20Salvador&amp;language=en_US"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>El Salvador Embassy Acc
-  Visitor</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a href="https://www.sss.gov/verify/"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Selective Service Check</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6614385><a
-  href="https://docs.google.com/document/d/1PTJIzHcGIwqo4aWEgzh2tmcDSuXPh6bbSr6J9D3C6ZM/preview"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>TSP Venezuela 2023</span></a></td>
-  <td class=xl7414385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 class=xl6514385><a
-  href="https://documentcloud.adobe.com/gsuiteintegration/index.html?state=%7B%22ids%22%3A%5B%221YT3fEpwaWNW8dIHCfvbFoR8QCpTVmpEs%22%5D%2C%22action%22%3A%22open%22%2C%22userId%22%3A%22112782062852831939796%22%2C%22resourceKeys%22%3A%7B%7D%7D"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Label Input Print Form</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://portal.ustraveldocs.com/SiteRegister?country=Honduras&amp;language=en"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Honduras Embassy Acc IV</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://portal.ustraveldocs.com/SiteRegister?country=Honduras&amp;language=en"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Honduras Embassy Acc Visitor</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a href="https://oktap.tax.ok.gov/OkTAP/Web"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Oklahoma Tax</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://docs.google.com/document/d/1ug2az6N3BEGC8SauWCB3EWqY_RfPAUk2Epaq9KHxejU/preview"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Asilo</span></a></td>
-  <td class=xl7314385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 class=xl6514385><a
-  href="https://tools.usps.com/zip-code-lookup.htm?byaddress"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Address Verification USPS</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://portal.ustraveldocs.com/SiteRegister?country=Guatemala&amp;language=en_US"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Guatemala Embassy Acc IV</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a
-  href="https://portal.ustraveldocs.com/SiteRegister?country=Guatemala&amp;language=en_US"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Guatemala Embassy Acc
-  Visitor</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a href="https://www2.tulsacounty.org/treasurer/"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Tulsa County</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6614385>&nbsp;</td>
-  <td class=xl6714385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 class=xl9314385><a
-  href="https://developers.google.com/maps/documentation/address-validation/demo"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Address Verification Google</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl6514385><a href="https://ais.usvisa-info.com/en-pe/iv"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Peru Embassy Acc IV</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a href="https://ais.usvisa-info.com/en-pe/niv"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>Peru Embassy Acc Visitor</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385><a href="https://www.sos.ok.gov/"><span style='color:
-  white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>OK Secretary of State</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385>&nbsp;</td>
-  <td class=xl7314385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 class=xl6514385><a
-  href="https://ais.usvisa-info.com/en-mx/niv/information/courier_dropboxes"><span
-  style='color:white;font-size:11.0pt;text-decoration:none;font-family:"Open Sans";
-  mso-generic-font-family:auto;mso-font-charset:0'>DHL Mexico Locations
-  -Embassy</span></a></td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl8014385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl8014385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6614385>&nbsp;</td>
-  <td class=xl6714385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 class=xl6514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl8014385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl8014385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl6514385>&nbsp;</td>
-  <td class=xl7314385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td colspan=2 class=xl6514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7614385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <tr height=24 style='mso-height-source:userset;height:18.0pt'>
-  <td height=24 class=xl7514385 style='height:18.0pt'>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
-  <td class=xl7614385>&nbsp;</td>
-  <td class=xl7514385>&nbsp;</td>
- </tr>
- <![if supportMisalignedColumns]>
- <tr height=0 style='display:none'>
-  <td width=22 style='width:17pt'></td>
-  <td width=255 style='width:191pt'></td>
-  <td width=22 style='width:17pt'></td>
-  <td width=255 style='width:191pt'></td>
-  <td width=22 style='width:17pt'></td>
-  <td width=255 style='width:191pt'></td>
-  <td width=22 style='width:17pt'></td>
-  <td width=202 style='width:152pt'></td>
-  <td width=92 style='width:69pt'></td>
-  <td width=22 style='width:17pt'></td>
-  <td width=133 style='width:100pt'></td>
-  <td width=133 style='width:100pt'></td>
-  <td width=22 style='width:17pt'></td>
- </tr>
- <![endif]>
-</table>
-
+<div class="container">
+    <div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th><a href="https://www.uscis.gov/">USCIS</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="https://myaccount.uscis.gov/">Log In</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://masterlinks.isgtulsa.com/create-pass-acc-links.html">Create Account</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://egov.uscis.gov/">Check Case Status</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://egov.uscis.gov/processing-times/">Processsing Times</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://www.uscis.gov/i-864p">Poverty Guidelines</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://www.uscis.gov/tools/find-a-civil-surgeon">Find a Doctor</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://www.uscis.gov/g-1055">Fee Schedule Online</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://my.uscis.gov/uscis-immigrant-fee/enter-data">Pay Visa Fee Green Card</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://first.uscis.gov/">FOIA USCIS Request Online</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://my.uscis.gov/accounts/appointment_request/overview">USCIS Appointment</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://www.uscis.gov/green-card/green-card-processes-and-procedures/visa-availability-priority-dates/adjustment-of-status-filing-charts-from-the-visa-bulletin">Priority Dates Adjustment</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://www.uscis.gov/employment-authorization">EAD I-765 Categories</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://drive.google.com/file/d/1d5NbKjJUIiLCTlHe0P9y61VtR9qSOpzf/view?usp=sharing">USCIS Office Codes</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://www.uscis.gov/addresschange">Address Change Online</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://www.uscis.gov/military/discretionary-options-for-military-members-enlistees-and-their-families">Military Parole in Place</a></td>
+            </tr>
+            <!-- Add more rows as needed -->
+        </tbody>
+    </table>
 </div>
 
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>US Dept of State</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="dropdown">
+                    <span onclick="toggleDropdown(this)">▼ Immigrant Visa Embassy</span>
+                    <div class="dropdown-content">
+                        <a href="https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/list-of-posts.html">GENERAL INSTRUCTIONS IV</a>
+                        <a href="https://ais.usvisa-info.com/en-mx/iv">Mexico Embassy Account</a>
+                        <a href="https://www.smf.com.mx/">Mexico Medical Exam SMF</a>
+                        <a href="https://portal.ustraveldocs.com/SiteRegister?country=El%20Salvador&language=en_US">El Salvador Embassy Account</a>
+                        <a href="https://portal.ustraveldocs.com/SiteRegister?country=Guatemala&language=en_US">Guatemala Embassy Account</a>
+                        <a href="https://portal.ustraveldocs.com/SiteRegister?country=Honduras&language=en">Honduras Embassy Account</a>
+                        <a href="https://ais.usvisa-info.com/en-pe/iv">Peru Embassy Account</a>
+                    </div>
+                </td>
+            </tr>
 
-<!----------------------------->
-<!--END OF OUTPUT FROM EXCEL PUBLISH AS WEB PAGE WIZARD-->
-<!----------------------------->
+            <tr>
+                <td class="dropdown">
+                    <span onclick="toggleDropdown(this)">▼ Visitor Visa Embassy</span>
+                    <div class="dropdown-content">
+                        <a href="https://travel.state.gov/content/travel/en/us-visas/tourism-visit/visitor.html">GENERAL INSTRUCTIONS NIV</a>
+                        <a href="https://ais.usvisa-info.com/en-mx/niv">Mexico Embassy Account Visitor</a>
+                        <a href="https://portal.ustraveldocs.com/SiteRegister?country=El%20Salvador&language=en_US">El Salvador Embassy Account Visitor</a>
+                        <a href="https://portal.ustraveldocs.com/SiteRegister?country=Guatemala&language=en_US">Guatemala Embassy Account Visitor</a>
+                        <a href="https://portal.ustraveldocs.com/SiteRegister?country=Honduras&language=en">Honduras Embassy Account Visitor</a>
+                        <a href="https://ais.usvisa-info.com/en-pe/niv">Peru Embassy Account Visitor</a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="dropdown">
+                    <span onclick="toggleDropdown(this)">▼ Other Visas</span>
+                    <div class="dropdown-content">
+                        <a href="https://studyinthestates.dhs.gov/students/prepare/student-forms">Student Visa Forms</a>
+                        <a href="https://www.fmjfee.com/i901fee/index.html">Student Visa Fees</a>
+                        <a href="https://travel.state.gov/content/travel/en/us-visas/immigrate/family-immigration/nonimmigrant-visa-for-a-spouse-k-3.html">K3 Spouse Visa Info</a>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td><a href="https://ceac.state.gov/IV/Login.aspx">DS-260 Login</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://ceac.state.gov/genniv/">DS-160 Login</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://travel.state.gov/content/travel/en/legal/visa-law0/visa-bulletin.html">Visa Bulletin</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://ceac.state.gov/CEACStatTracker/Status.aspx">Check Visa Status</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/ask-nvc.html">NVC Case Inquiry</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/fees/fees-visa-services.html">Visa Fees</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://forms.office.com/pages/responsepage.aspx?id=dFDPZv5a0UimkaErISH0Swa7UTqs5q1OtLpFdZgB5VxUNFRUREFDM1Q0TzdMWjkzN1oxUVBLQkVQRS4u">Cd Juarez Inquiry Form</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://travel.state.gov/content/travel/en/passports.html">US Passports</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://common.usembassy.gov/en/crba/">Birth Abroad CRBA</a></td>
+            </tr>
+            <!-- Add more rows as needed -->
+        </tbody>
+    </table>
+</div>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>CBP, ICE, Immigration Court</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="https://www.cbp.gov/">CBP Home</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://portal.ice.gov/">ICE Portal</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://checkin.ice.gov/fos?id=fos_identity_confirmation&lan=en">ICE Schedule Appointment</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://www.securerelease.us/">FOIA CBP SecureRelease</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://i94.cbp.dhs.gov/I94/#/home">Get I-94 Online</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://acis.eoir.justice.gov/en/">EOIR Court Cse Information</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://respondentaccess.eoir.justice.gov/en/forms/eoir33ic/">EOIR Court Address Change</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://help.asylumadvocacy.org/sample-documents/">Sample Documents CBP/ICE</a></td>
+            </tr>
+            <tr>
+                <td><a href="#">‎ </a></td>
+            </tr>
+            <tr>
+                <td><a href="#">‎ </a></td>
+            </tr>
+            <tr>
+                <td class="dropdown">
+                    <span onclick="toggleDropdown(this)">▼ IRS, SS, Other Agencies</span>
+                    <div class="dropdown-content">
+                        <a href="https://www.irs.gov/individuals/get-transcript">IRS Tax Record</a>
+                        <a href="https://www.ssa.gov/">Social Security Home</a>
+                        <a href="https://www.sss.gov/verify/">Selective Service Check</a>
+                        <a href="https://oktap.tax.ok.gov/OkTAP/Web">Oklahoma Tax</a>
+                        <a href="https://www2.tulsacounty.org/treasurer/">Tulsa County</a>
+                        <a href="https://www.sos.ok.gov/">OK Secretary of State</a>
+                    </div>
+                </td>
+            </tr>
+            <!-- Add more rows as needed -->
+        </tbody>
+    </table>
+</div>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th class="special-header">Case Management</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td class="dropdown">
+                    <span onclick="toggleDropdown(this)">▼ Requirements Lists English</span>
+                    <div class="dropdown-content">
+                        <a href="https://docs.google.com/document/d/1BNjOH2OH-6I7lA88QHdn9lwL874lLdCxiwVIuLlnX1I/preview">I-485 Adjustment of Status</a>
+                        <a href="https://docs.google.com/document/d/1fJ6gl7v9J8iRCJxqv90q0rWf2LjDDBSxo1b_3hSldqA/preview">I-130 Petition for Spouse</a>
+                        <a href="https://docs.google.com/document/d/1KHOf6lUGxKb7g-YmovLQaWGMTXEox422CORvo4HgtNY/preview">I-130 Petition for Parent</a>
+                        <a href="https://docs.google.com/document/d/1e2IvsklIyEdngDPK6JzX24XI5fAAYxxsBpwQj8URVKE/preview">N-400 Naturalization</a>
+                        <a href="https://docs.google.com/document/d/165r6snJmS1aNn5mADmk0QXDmQo1tmUdDKzjDr4CC_A8/preview">N-600 Citizenship Cert</a>
+                        <a href="https://docs.google.com/document/d/1rRtNNarGL5gOXDsYBJmn2foA98rB5cQ0WyBwMyjhqWs/preview">NVC Process</a>
+                        <a href="https://docs.google.com/document/d/1uLOMfjnJVsdTBPnK20EmOasEdSu-aAEoFR00RX4IpOE/preview">NVC Process with Waiver</a>
+                        <a href="https://drive.google.com/file/d/15AkasTY0D5ohnqegbafSDX8k2OcEBxc4/view">Blocks Consular Process</a>
+                        <a href="https://docs.google.com/document/d/1d0v4qSNLa3Gc8nN8KWIspDEHd_qg-K2v0S3MXOiw1jE/preview">I-751 Remove Conditions</a>
+                        <a href="https://docs.google.com/document/d/1ViyVfQGiIlMCt8rJzKgepxjuo-gW6x9ERe-E2lRG0EM/preview">Visitor Visa</a>
+                        <a href="https://docs.google.com/document/d/1BSu1gs6XwgzV8wGW6ZO0guwjB7Ry80j10zQ4Ao2KMdw/preview">K Visa Fiance</a>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="dropdown">
+                    <span onclick="toggleDropdown(this)">▼ Requirements Lists Spanish</span>
+                    <div class="dropdown-content">
+                        <a href="https://docs.google.com/document/d/1ch9dCiCORcmYPfsd0KExkq1tuwgg7wBIquS96ZK7mIE/preview">I-485 Ajuste de estatus</a>
+                        <a href="https://docs.google.com/document/d/1f9XylD-nufDhqZEpbbPMI_i26xXyPi2w7SnXVEsMsDU/preview">I-130 Peticion para esposo</a>
+                        <a href="https://docs.google.com/document/d/1oiwQYbpUMOlXjQ3FPF-9nRHYiYGmD4XsfPhgrNzMizM/preview">I-130 Peticion para padres</a>
+                        <a href="https://docs.google.com/document/d/1LkvtZPxfpwv_WZE0hCBE_LvKwClIqnHBb0Ztg0wIXIo/preview">N-400 Naturalizacion</a>
+                        <a href="https://docs.google.com/document/d/1Yr-1E8U-x9hDlafxcZ9YPYUXg6jOxE4F0-nlknQBHbs/preview">N-600 Cert de Ciudadania</a>
+                        <a href="https://docs.google.com/document/d/1Mq_o7HVSRGFB1Hqvuiae6JZM59Dkp_9w6IItGyxpyG4/preview">NVC Proceso</a>
+                        <a href="https://docs.google.com/document/d/1MvS-ZcvS_wWTwt_YeM9Ss3M743xkrWTqEgKXfiGRydU/preview">NVC Proceso con perdon</a>
+                        <a href="https://drive.google.com/file/d/1yaqe1ZgFvXPBbt0jkcqZ63fxY6KYdivW/view">Blocks Proceso Consular</a>
+                        <a href="https://docs.google.com/document/d/1RTM_fxUJ0cGe0t2ufxiAoreVIdr82JQvzdz5jMai15k/preview">I-751 Remover condiciones</a>
+                        <a href="https://docs.google.com/document/d/1Yo0STIcQZxLGwiQa2fa2a2FgBPuJ7CPY0MIy_keKh3o/preview">Visa de visitante</a>
+                        <a href="https://docs.google.com/document/d/1No7HSLXeECmbmFf4ou5XC9IoX8jNRN49pNX4BC4KrUQ/preview#heading=h.m6ajx3nnt6wf">Visa K de prometido</a>
+                        <a href="https://docs.google.com/document/d/1PTJIzHcGIwqo4aWEgzh2tmcDSuXPh6bbSr6J9D3C6ZM/preview">TPS Venezuela</a>
+                        <a href="https://docs.google.com/document/d/1ug2az6N3BEGC8SauWCB3EWqY_RfPAUk2Epaq9KHxejU/preview">Asilo</a>
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td><a href="https://docs.google.com/spreadsheets/u/0/d/1LYF3it9sUxfP8wCdM_1tGUC4A1SUKsT597ffTgBH9Ls/preview" class="bold-link">ISG Full Service Price List</a></td>
+            </tr>
+            <tr>
+                <td><a href="#">‎ </a></td>
+            </tr>
+            <tr>
+                <td><a href="https://raw.githubusercontent.com/ISGW/Master_Links/833b8016342c533a4f141c43d7894d99c132cb6a/CDD/CASE_DATA_DOC.pdf" class="bold-link">CASE DATA DOC Download</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://masterlinks.isgtulsa.com/google-recent-filter.html">G Drive Search / Recent PDFs</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://docs.google.com/forms/d/e/1FAIpQLScU76k6db1bmts1StqNAm0nWIwhow25NV4vwsao2NkzpCfq4w/viewform?usp=sf_link" class="bold-link">Prospect Client INPUT FORM</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://docs.google.com/spreadsheets/d/1OJGjKwo0qMZAoRHUDo4pe7sS2AW_0KXAwrx2ZDlWTWo/preview">Prospect Client LIST</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://calendar.google.com/calendar/u/0/r/month" class="bold-link">Calendar ISG Appointments</a></td>
+            </tr>
+            <!-- Add more rows as needed -->
+        </tbody>
+    </table>
+</div>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th class="special-header">Tools / Reference</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="https://masterlinks.isgtulsa.com/contact-info-copy.html" class="bold-link">OFFICE INFO</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://masterlinks.isgtulsa.com/ac-ps.html">Generate/Copy Acc Passwd</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://cse.google.com/cse?cx=5268b33b856f3461b#gsc.tab=0">Google Custom Search</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://translate.google.com/">Translate</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://account.proton.me/login">Proton Mail</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://www.timeanddate.com/date/dateadd.html">Date/Time Calculator</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://masterlinks.isgtulsa.com/address-history.html">Quick Entry Address Histroy</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://masterlinks.isgtulsa.com/employment-history.html">Quick Entry Employment History</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://masterlinks.isgtulsa.com/travel-calc.html">Quick Entry Time Outside the US</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://www.unitconverters.net/">Unit Converter Height Weight</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://masterlinks.isgtulsa.com/60-40-ratio.html">60/40 Calculator</a></td>
+            </tr>
+            <tr>
+                <td><a href="#">‎</a></td>
+            </tr>
+
+            <tr>
+                <td class="dropdown">
+                    <span onclick="toggleDropdown(this)">▼ Contacts</span>
+                    <div class="dropdown-content">
+                        <a href="https://drive.google.com/file/d/18mpMkHBD-J9F3l1PBcCUoWDg_shD0cz-/view">Austin's Accounting</a>
+                        <a href="https://drive.google.com/file/d/1ZhIe-lOSgCvsn2FpN4XNUoeyqrUNLUp2/view?usp=sharing">Lawyers</a>
+                        <a href="https://drive.google.com/file/d/1IFAD1xgjhlZeK-xArN3VVqAZqncur81M/view?usp=sharing">Hospedaje Cd Juarez</a>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td><a href="#">‎ </a></td>
+            </tr>
+            <tr>
+                <td class="dropdown">
+                    <span onclick="toggleDropdown(this)">▼ Mail</span>
+                    <div class="dropdown-content">
+                        <a href="https://www.usps.com/">USPS Home</a>
+                        <a href="https://www.fedex.com/en-us/tracking.html">FedEx Track</a>
+                        <a href="https://www.ups.com/track">UPS Track</a>
+                        <a href="https://www.dhl.com/us-en/home/tracking.html">DHL Track</a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><a href="https://documentcloud.adobe.com/gsuiteintegration/index.html?state=%7B%22ids%22%3A%5B%221YT3fEpwaWNW8dIHCfvbFoR8QCpTVmpEs%22%5D%2C%22action%22%3A%22open%22%2C%22userId%22%3A%22112782062852831939796%22%2C%22resourceKeys%22%3A%7B%7D%7D">Label Input Form</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://tools.usps.com/zip-code-lookup.htm?byaddress">Address Verification USPS</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://developers.google.com/maps/documentation/address-validation/demo">Address Verification Google</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://ais.usvisa-info.com/en-mx/niv/information/courier_dropboxes">DHL Mexico Locations Embassy</a></td>
+            </tr>
+            <!-- Add more rows as needed -->
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+
+<script>
+    function toggleDropdown(element) {
+        var dropdown = element.parentElement;
+        dropdown.classList.toggle('active');
+    }
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(event) {
+        var dropdowns = document.querySelectorAll('.dropdown');
+        dropdowns.forEach(function(dropdown) {
+            if (!dropdown.contains(event.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+    });
+</script>
+
 </body>
-
 </html>
