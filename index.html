@@ -5,9 +5,9 @@
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="viewport" content="user-scalable=yes, width=device-width, initial-scale=1.25" />
+<meta name="viewport" content="user-scalable=yes, width=device-width, initial-scale=1.3" />
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="transparent">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <link rel="apple-touch-icon" href="favicon.png">
 <base target="_blank">
 
@@ -28,27 +28,32 @@
 
     .container {
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
         margin-bottom: 20px;
         margin-left: 40PX;
+        margin-right: 9px;
     }
 
     .table-container {
-        width: calc(220% - 10px); /* Adjust width to distribute evenly with space between */
-        margin-right: 15px; /* Space between tables */
+        margin-right: 20px; /* Space between tables */
         margin-top: 25px;
     }
 
     table {
         border-collapse: collapse;
+        width: calc(20% - 10px); /* Adjust width to distribute evenly with space between */
         min-width: 260px;
-        margin-right: 15px; /* Space between tables */
+        margin-right: 9px; /* Space between tables */
+        margin-bottom: 20px;
+        border-radius: 5px;
     }
 
     th, td {
         padding: 4px;
         text-align: left;
-        border-bottom: 1px solid #8f8f8f38;
+        border-bottom: 1px solid #8f8f8f00;
+        border-radius: 5px;
     }
 
     th {
@@ -73,6 +78,7 @@
         color: #ffffff;
         font-size: 16px;
         text-decoration: none;
+        display: inline-block;
     }
 
     a:hover {
@@ -82,7 +88,23 @@
     
 
         .bold-link {
-    font-weight: bold;
+        font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            flex-wrap: wrap;
+            margin-left: 0;
+            padding: 10px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            margin-right: 0;
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
     }
 
 
@@ -90,7 +112,7 @@
     .dropdown {
         position: relative;
         
-        color: #ffffff;
+        color: #b2dbbb;
         font-size: 16px;
         font-weight: 700;
         padding: 4px;
@@ -328,6 +350,24 @@
         <tbody>
             
             <tr>
+                <td><a href="https://raw.githubusercontent.com/ISGW/Master_Links/833b8016342c533a4f141c43d7894d99c132cb6a/CDD/CASE_DATA_DOC.pdf" class="bold-link">CASE DATA DOC Download</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://masterlinks.isgtulsa.com/google-recent-filter.html">G Drive Search / Recent PDFs</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://docs.google.com/forms/d/e/1FAIpQLScU76k6db1bmts1StqNAm0nWIwhow25NV4vwsao2NkzpCfq4w/viewform?usp=sf_link" class="bold-link">Prospect Client INPUT FORM</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://docs.google.com/spreadsheets/d/1OJGjKwo0qMZAoRHUDo4pe7sS2AW_0KXAwrx2ZDlWTWo/preview">Prospect Client LIST</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://calendar.google.com/calendar/u/0/r/month" class="bold-link">Calendar ISG Appointments</a></td>
+            </tr>
+            <tr>
+                <td><a href="#">‎ </a></td>
+            </tr>
+            <tr>
                 <td class="dropdown">
                     <span onclick="toggleDropdown(this)">▼ Requirements Lists English</span>
                     <div class="dropdown-content">
@@ -370,24 +410,6 @@
             <tr>
                 <td><a href="https://docs.google.com/spreadsheets/u/0/d/1LYF3it9sUxfP8wCdM_1tGUC4A1SUKsT597ffTgBH9Ls/preview" class="bold-link">ISG Full Service Price List</a></td>
             </tr>
-            <tr>
-                <td><a href="#">‎ </a></td>
-            </tr>
-            <tr>
-                <td><a href="https://raw.githubusercontent.com/ISGW/Master_Links/833b8016342c533a4f141c43d7894d99c132cb6a/CDD/CASE_DATA_DOC.pdf" class="bold-link">CASE DATA DOC Download</a></td>
-            </tr>
-            <tr>
-                <td><a href="https://masterlinks.isgtulsa.com/google-recent-filter.html">G Drive Search / Recent PDFs</a></td>
-            </tr>
-            <tr>
-                <td><a href="https://docs.google.com/forms/d/e/1FAIpQLScU76k6db1bmts1StqNAm0nWIwhow25NV4vwsao2NkzpCfq4w/viewform?usp=sf_link" class="bold-link">Prospect Client INPUT FORM</a></td>
-            </tr>
-            <tr>
-                <td><a href="https://docs.google.com/spreadsheets/d/1OJGjKwo0qMZAoRHUDo4pe7sS2AW_0KXAwrx2ZDlWTWo/preview">Prospect Client LIST</a></td>
-            </tr>
-            <tr>
-                <td><a href="https://calendar.google.com/calendar/u/0/r/month" class="bold-link">Calendar ISG Appointments</a></td>
-            </tr>
             <!-- Add more rows as needed -->
         </tbody>
     </table>
@@ -402,7 +424,7 @@
         </thead>
         <tbody>
             <tr>
-                <td><a href="https://masterlinks.isgtulsa.com/contact-info-copy.html" class="bold-link">OFFICE INFO</a></td>
+                <td><a href="https://masterlinks.isgtulsa.com/contact-info-copy.html" class="bold-link">Office Info</a></td>
             </tr>
             <tr>
                 <td><a href="https://masterlinks.isgtulsa.com/ac-ps.html">Generate/Copy Acc Passwd</a></td>
