@@ -6,7 +6,7 @@
 <title>Employment History</title>
 <style>
   body {
-    background-color: #f5f5f5; /* Light grey background color */
+    background-color: #eaeaea; /* Light grey background color */
     font-family: Arial, sans-serif; /* Example font family */
     margin: 0; /* Remove default margin */
     padding: 0; /* Remove default padding */
@@ -14,7 +14,7 @@
 
   /* Style for h1 heading */
   h1 {
-    font-size: 18px; /* Adjust the font size as needed */
+    font-size: 16px; /* Adjust the font size as needed */
   }
   h1 {
     text-align: center;
@@ -23,6 +23,7 @@
   #nameForm {
     width: 40%;
     margin: 20px auto;
+    margin-bottom: -12px;
   }
 
   /* Style for form labels and inputs */
@@ -30,7 +31,8 @@
     display: block;
     margin-bottom: 1px;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
+    text-align:center;
   }
 
   #nameForm input {
@@ -40,11 +42,10 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
+    color: rgb(72, 72, 72);
   }
-
-
 
   /* Style for form */
   #employmentForm {
@@ -57,7 +58,7 @@
     display: block;
     margin-bottom: 1px;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 14px;
   }
 
   #employmentForm input {
@@ -67,15 +68,21 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
-    font-size: 18px;
+    font-size: 16px;
   }
 
-  /* Style for results table */
+  #employmentName {
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
   #employmentTable {
     width: 70%;
-    margin: 20px auto;
+    margin: 0 auto; /* Center the table */
     border-collapse: collapse;
-    font-size: 15px;
+    font-size: 14px;
   }
 
   #employmentTable th,
@@ -84,9 +91,26 @@
     border: 1px solid #ccc;
   }
 
+  button {
+    background-color: rgb(18, 121, 42);
+    color: rgb(255, 255, 255);
+    border: none;
+    padding: 7px 10px;
+    width: 140px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight:500;
+  }
+
+  button:hover {
+    background-color: #064708;
+  }
+
   /* Style for edit button */
   .editButton {
-    padding: 5px 10px;
+    padding: 7px 10px;
+    width: 50px;
     background-color: #4CAF50;
     color: white;
     border: none;
@@ -97,6 +121,16 @@
   .olderEmployment {
     background-color: #ffe6e6; /* Light red background color */
   }
+
+  /* Print-specific styles */
+  @media print {
+    #employmentForm label,
+    #employmentForm input,
+    #employmentForm button,
+    #employmentTable .editButton {
+      display: none; /* Hide specified elements when printing */
+    }
+  }
 </style>
 </head>
 <body>
@@ -106,6 +140,8 @@
     <label for="name">Name</label>
     <input type="text" id="name" required>
   </form>
+
+  <div id="employmentName"></div>
 
   <form id="employmentForm" onsubmit="addEmployment(event)">
     <label for="employer">Employer Name</label>
@@ -123,11 +159,8 @@
     <label for="dateLeft">Date Left</label>
     <input type="date" id="dateLeft" required>
 
-    <button type="submit">List Employment</button>
-    <br>
-    <br>
-    <button onclick="saveToFile()">Save Text File</button>
-    <button onclick="printContent()">Print/PDF</button>
+    <button type="submit">List Employment</button><br><br>
+    <button onclick="exportToTSV()">Export TSV</button>
   </form>
 
   <h2></h2>
@@ -217,32 +250,41 @@
       row.remove(); // Remove the row being edited
     }
 
-    function saveToFile() {
-      const employmentList = document.getElementById('employmentList');
-      const rows = Array.from(employmentList.querySelectorAll('tr'));
-      let textContent = '';
+    function exportToTSV() {
+      const name = document.getElementById('name').value;
+      const rows = document.querySelectorAll('#employmentTable tbody tr');
+      let tsvContent = `Name: ${name}\n\n`;
 
+      // Get header cells for alignment
+      const headersRow = document.querySelector('#employmentTable thead tr');
+      const headers = Array.from(headersRow.querySelectorAll('th')).map(header => header.textContent);
+
+      // Determine the maximum length of each field for fixed-width alignment
+      const maxLengths = headers.map(header => header.length);
+
+      // Loop through table rows and update maxLengths based on cell content
       rows.forEach(row => {
-        const cells = row.cells;
-        const employer = cells[0].textContent;
-        const employerAddress = cells[1].textContent;
-        const position = cells[2].textContent;
-        const dateEntry = cells[3].textContent;
-        const dateLeft = cells[4].textContent;
-        textContent += `Employer: ${employer}, Employer Address: ${employerAddress}, Position: ${position}, Date of Entry: ${dateEntry}, Date Left: ${dateLeft}\n`;
+        const cells = Array.from(row.querySelectorAll('td')).map(cell => cell.textContent);
+        cells.forEach((cell, index) => {
+          maxLengths[index] = Math.max(maxLengths[index], cell.length);
+        });
       });
 
-      const blob = new Blob([textContent], { type: 'text/plain' });
-      const downloadLink = document.createElement('a');
-      downloadLink.href = URL.createObjectURL(blob);
-      downloadLink.download = 'employment_history.txt';
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
-    }
+      // Generate fixed-width format TSV content
+      tsvContent += headers.map((header, index) => header.padEnd(maxLengths[index])).join('\t') + '\n';
+      rows.forEach(row => {
+        const cells = Array.from(row.querySelectorAll('td')).map((cell, index) => cell.textContent.padEnd(maxLengths[index]));
+        tsvContent += cells.join('\t') + '\n';
+      });
 
-    function printContent() {
-      window.print();
+      // Create a blob containing the TSV content
+      const blob = new Blob([tsvContent], { type: 'text/tab-separated-values' });
+
+      // Create a download link and trigger the download
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `${name}_employment_history.tsv`;
+      link.click();
     }
 
     function sortRowsByDate() {
