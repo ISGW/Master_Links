@@ -6,7 +6,7 @@
 <title>Address History</title>
 <style>
   body {
-    background-color: #f5f5f5; /* Light grey background color */
+    background-color: #eaeaea; /* Light grey background color */
     font-family: Arial, sans-serif; /* Example font family */
     margin: 0; /* Remove default margin */
     padding: 0; /* Remove default padding */
@@ -14,7 +14,7 @@
 
   /* Style for h1 heading */
   h1 {
-    font-size: 20px; /* Adjust the font size as needed */
+    font-size: 16px; /* Adjust the font size as needed */
   }
   h1 {
     text-align: center;
@@ -23,6 +23,7 @@
   #nameForm {
     width: 40%;
     margin: 20px auto;
+    margin-bottom: -12px;
   }
 
   /* Style for form labels and inputs */
@@ -30,7 +31,8 @@
     display: block;
     margin-bottom: 1px;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 16px;
+    text-align:center;
   }
 
   #nameForm input {
@@ -42,8 +44,8 @@
     box-sizing: border-box;
     font-size: 20px;
     font-weight: bold;
+    color: rgb(72, 72, 72);
   }
-
 
   /* Style for form */
   #addressForm {
@@ -56,7 +58,7 @@
     display: block;
     margin-bottom: 1px;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 16px;
   }
 
   #addressForm input {
@@ -69,12 +71,29 @@
     font-size: 20px;
   }
 
+  button {
+    background-color: rgb(18, 121, 42);
+    color: rgb(255, 255, 255);
+    border: none;
+    padding: 7px 10px;
+    width: 120px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight:500;
+  }
+
+  button:hover {
+  background-color: #064708;
+}
+
   /* Style for results table */
   #addressTable {
     width: 70%;
     margin: 20px auto;
     border-collapse: collapse;
-    font-size: 20px;
+    font-size: 16px;
+    text-align: center;
   }
 
   #addressTable th,
@@ -85,7 +104,8 @@
 
   /* Style for edit button */
   .editButton {
-    padding: 5px 10px;
+    padding: 7px 10px;
+    width: 50px;
     background-color: #4CAF50;
     color: white;
     border: none;
@@ -96,6 +116,17 @@
   .olderAddress {
     background-color: #ffe6e6; /* Light red background color */
   }
+
+  /* Print-specific styles */
+  @media print {
+    #addressForm label,
+    #addressForm input,
+    #addressForm button,
+    #addressTable .editButton {
+      display: none; /* Hide labels, inputs, buttons inside #addressForm, and edit buttons in the table */
+    }
+  }
+
 </style>
 </head>
 <body>
@@ -115,11 +146,8 @@
     <label for="moveOutDate">Move-out Date</label>
     <input type="date" id="moveOutDate" required>
 
-    <button type="submit">List Address</button>
-    <br>
-    <br>
-    <button type="button" onclick="saveToFile()">Save Text File</button>
-    <button onclick="printContent()">Print/PDF</button>
+    <button type="submit">List Address</button> <br><br>
+    <button onclick="saveToFile()">Export as TSV</button>
   </form>
 
   <h2></h2>
@@ -195,9 +223,46 @@
       row.remove(); // Remove the row being edited
     }
 
-    function printContent() {
-      window.print();
-    }	
+    function saveToFile() {
+  const name = document.getElementById('name').value;
+  const addressTable = document.getElementById('addressTable');
+
+  // Create the TSV content
+  let tsvContent = 'Name: ' + name + '\n\n';
+
+  // Get header cells for alignment
+  const headersRow = addressTable.querySelector('thead tr');
+  const headers = Array.from(headersRow.querySelectorAll('th')).map(header => header.textContent);
+
+  // Determine the maximum length of each field for fixed-width alignment
+  const maxLengths = headers.map(header => header.length);
+
+  // Loop through table rows and update maxLengths based on cell content
+  const rows = addressTable.querySelectorAll('tbody tr');
+  rows.forEach(row => {
+    const cells = Array.from(row.querySelectorAll('td')).map(cell => cell.textContent);
+    cells.forEach((cell, index) => {
+      maxLengths[index] = Math.max(maxLengths[index], cell.length);
+    });
+  });
+
+  // Generate fixed-width format TSV content
+  tsvContent += headers.map((header, index) => header.padEnd(maxLengths[index])).join('\t') + '\n';
+  rows.forEach(row => {
+    const cells = Array.from(row.querySelectorAll('td')).map((cell, index) => cell.textContent.padEnd(maxLengths[index]));
+    tsvContent += cells.join('\t') + '\n';
+  });
+
+  // Create a blob containing the TSV content
+  const blob = new Blob([tsvContent], { type: 'text/tab-separated-values' });
+
+  // Create a download link and trigger the download
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = name + '_address_history.tsv';
+  link.click();
+}
+
 
     function sortRowsByDate() {
       const addressList = document.getElementById('addressList');
@@ -223,28 +288,6 @@
           row.classList.add('olderAddress');
         }
       });
-    }
-
-    function saveToFile() {
-      const addressList = document.getElementById('addressList');
-      const rows = Array.from(addressList.querySelectorAll('tr'));
-      let textContent = '';
-
-      rows.forEach(row => {
-        const cells = row.cells;
-        const address = cells[0].textContent;
-        const moveInDate = cells[1].textContent;
-        const moveOutDate = cells[2].textContent;
-        textContent += `Address: ${address}, Move-in Date: ${moveInDate}, Move-out Date: ${moveOutDate}\n`;
-      });
-
-      const blob = new Blob([textContent], { type: 'text/plain' });
-      const downloadLink = document.createElement('a');
-      downloadLink.href = URL.createObjectURL(blob);
-      downloadLink.download = 'address_history.txt';
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
     }
 
     // Call sortRowsByDate initially to sort the rows on page load
