@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
 <title>Office Info</title>
 <style>
-
 body{
   background-color: #262626;
 }
@@ -61,7 +60,7 @@ button {
   cursor: pointer;
   border-radius: 3px;
   font-size: 12px;
-  font-style: italic;
+  font-weight: 600;
 }
 
 button:hover {
@@ -71,7 +70,7 @@ button:hover {
 .field p {
   font-size: 12px;
   font-weight: bold;
-  margin-bottom: 1.5px;
+  margin-bottom: 3px;
 }
 
 .field p span {
@@ -79,7 +78,6 @@ button:hover {
   color: #ffffff;
   font-family: "Open Sans", sans-serif;
 }
-
 </style>
 </head>
 <body>
@@ -89,39 +87,27 @@ button:hover {
 <div class="container">
   <div class="field">
     <p>Email <br><span id="email">contact@isgtulsa.com</span></p>
-    <button onclick="copyEmail()"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 448 512">
-        <path fill="currentColor" d="M320 448v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V120c0-13.255 10.745-24 24-24h72v296c0 30.879 25.121 56 56 56zm0-344V0H152c-13.255 0-24 10.745-24 24v368c0 13.255 10.745 24 24 24h272c13.255 0 24-10.745 24-24V128H344c-13.2 0-24-10.8-24-24m120.971-31.029L375.029 7.029A24 24 0 0 0 358.059 0H352v96h96v-6.059a24 24 0 0 0-7.029-16.97" />
-    </svg></button>
+    <button onclick="copyTextToClipboard('email')">COPY</button>
   </div>
   <div class="field">
     <p>Phone <br><span id="phoneNumber">9183081138</span></p>
-    <button onclick="copyPhoneNumber()"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 448 512">
-        <path fill="currentColor" d="M320 448v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V120c0-13.255 10.745-24 24-24h72v296c0 30.879 25.121 56 56 56zm0-344V0H152c-13.255 0-24 10.745-24 24v368c0 13.255 10.745 24 24 24h272c13.255 0 24-10.745 24-24V128H344c-13.2 0-24-10.8-24-24m120.971-31.029L375.029 7.029A24 24 0 0 0 358.059 0H352v96h96v-6.059a24 24 0 0 0-7.029-16.97" />
-    </svg></button>
+    <button onclick="copyTextToClipboard('phoneNumber')">COPY</button>
   </div>
   <div class="field">
     <p>Address <br><span id="address">7633 E 63RD PL STE 300 TULSA OK 74133</span></p>
-    <button onclick="copyAddress()"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 448 512">
-        <path fill="currentColor" d="M320 448v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V120c0-13.255 10.745-24 24-24h72v296c0 30.879 25.121 56 56 56zm0-344V0H152c-13.255 0-24 10.745-24 24v368c0 13.255 10.745 24 24 24h272c13.255 0 24-10.745 24-24V128H344c-13.2 0-24-10.8-24-24m120.971-31.029L375.029 7.029A24 24 0 0 0 358.059 0H352v96h96v-6.059a24 24 0 0 0-7.029-16.97" />
-    </svg></button>
+    <button onclick="copyTextToClipboard('address')">COPY</button>
   </div>
   <div class="field">
     <p>CashApp <br><span id="cashApp">https://cash.app/ISGTULSA</span></p>
-    <button onclick="copyCashApp()"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 448 512">
-        <path fill="currentColor" d="M320 448v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V120c0-13.255 10.745-24 24-24h72v296c0 30.879 25.121 56 56 56zm0-344V0H152c-13.255 0-24 10.745-24 24v368c0 13.255 10.745 24 24 24h272c13.255 0 24-10.745 24-24V128H344c-13.2 0-24-10.8-24-24m120.971-31.029L375.029 7.029A24 24 0 0 0 358.059 0H352v96h96v-6.059a24 24 0 0 0-7.029-16.97" />
-    </svg></button>
+    <button onclick="copyTextToClipboard('cashApp')">COPY</button>
   </div>
   <div class="field">
     <p>Zelle <br><span id="zelle">payisg@proton.me</span></p>
-    <button onclick="copyZelle()"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 448 512">
-        <path fill="currentColor" d="M320 448v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V120c0-13.255 10.745-24 24-24h72v296c0 30.879 25.121 56 56 56zm0-344V0H152c-13.255 0-24 10.745-24 24v368c0 13.255 10.745 24 24 24h272c13.255 0 24-10.745 24-24V128H344c-13.2 0-24-10.8-24-24m120.971-31.029L375.029 7.029A24 24 0 0 0 358.059 0H352v96h96v-6.059a24 24 0 0 0-7.029-16.97" />
-    </svg></button>
+    <button onclick="copyTextToClipboard('zelle')">COPY</button>
   </div>
   <div class="field">
     <p>Website <br><span id="website">https://www.isgtulsa.com</span></p>
-    <button onclick="copyWebsite()"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 448 512">
-        <path fill="currentColor" d="M320 448v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V120c0-13.255 10.745-24 24-24h72v296c0 30.879 25.121 56 56 56zm0-344V0H152c-13.255 0-24 10.745-24 24v368c0 13.255 10.745 24 24 24h272c13.255 0 24-10.745 24-24V128H344c-13.2 0-24-10.8-24-24m120.971-31.029L375.029 7.029A24 24 0 0 0 358.059 0H352v96h96v-6.059a24 24 0 0 0-7.029-16.97" />
-    </svg></button>
+    <button onclick="copyTextToClipboard('website')">COPY</button>
   </div>
 
 </div>
@@ -129,96 +115,22 @@ button:hover {
 <div class="alert" id="alertMessage">Copied to clipboard</div>
 
 <script>
-function copyEmail() {
-  const email = document.getElementById('email').innerText;
-
-  navigator.clipboard.writeText(email)
-    .then(() => {
-      showAlert();
-    })
-    .catch(err => {
-      console.error('Unable to copy email to clipboard', err);
-    });
-}
-
-function copyPhoneNumber() {
-  const phoneNumber = document.getElementById('phoneNumber').innerText;
-
-  navigator.clipboard.writeText(phoneNumber)
-    .then(() => {
-      showAlert();
-    })
-    .catch(err => {
-      console.error('Unable to copy phone number to clipboard', err);
-    });
-}
-
-function copyAddress() {
-  const address = document.getElementById('address').innerText;
-
-  navigator.clipboard.writeText(address)
-    .then(() => {
-      showAlert();
-    })
-    .catch(err => {
-      console.error('Unable to copy address to clipboard', err);
-    });
-}
-
-function copyCashApp() {
-  const cashApp = document.getElementById('cashApp').innerText;
-
-  navigator.clipboard.writeText(cashApp)
-    .then(() => {
-      showAlert();
-    })
-    .catch(err => {
-      console.error('Unable to copy CashApp to clipboard', err);
-    });
-}
-
-function copyZelle() {
-  const zelle = document.getElementById('zelle').innerText;
-
-  navigator.clipboard.writeText(zelle)
-    .then(() => {
-      showAlert();
-    })
-    .catch(err => {
-      console.error('Unable to copy Zelle to clipboard', err);
-    });
-}
-
-function copyClientEmail() {
-  const clientEmail = document.getElementById('clientEmail').innerText;
-
-  navigator.clipboard.writeText(clientEmail)
-    .then(() => {
-      showAlert();
-    })
-    .catch(err => {
-      console.error('Unable to copy Client Email to clipboard', err);
-    });
-}
-
-
-
-function copyWebsite() {
-  const website = document.getElementById('website').innerText;
-
-  navigator.clipboard.writeText(website)
-    .then(() => {
-      showAlert();
-    })
-    .catch(err => {
-      console.error('Unable to copy Website to clipboard', err);
-    });
+function copyTextToClipboard(id) {
+  const text = document.getElementById(id).innerText;
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand('copy');
+  document.body.removeChild(textarea);
+  showAlert(); // Show alert after copying
 }
 
 function showAlert() {
-  document.getElementById('alertMessage').style.display = 'block';
+  const alertMessage = document.getElementById('alertMessage');
+  alertMessage.style.display = 'block';
   setTimeout(function() {
-    document.getElementById('alertMessage').style.display = 'none';
+    alertMessage.style.display = 'none';
   }, 3000); // Hide alert after 3 seconds
 }
 </script>
