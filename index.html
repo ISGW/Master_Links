@@ -157,8 +157,8 @@
 .popup {
             width: 70%;
             height: 80%;
-            background-color: rgba(39, 159, 33, 0);
-            border: 1px solid #cccccc00;
+            background-color: rgba(0, 0, 0, 0);
+            border: 1px solid #00000000;
             border-radius: 15px;
             padding: 0px;
             position: fixed;
@@ -197,12 +197,11 @@ button{
 @media (max-width: 768px) {
     .popup {
         width: 90%; /* Adjust width for smaller screens */
-        max-height: 100vh; /* Limit maximum height to 90% of viewport height */
-        overflow-y: auto; /* Enable vertical scrolling if content exceeds height */
+        max-height: 90vh; /* Limit maximum height to 90% of viewport height */
         top: 43vh; /* Set top position to 50% of viewport height */
         transform: translate(-50%, -50%); /* Adjust transform for vertical centering */
         padding-left: 0px;
-        padding-right: 16px;
+        padding-right: 3px;
     }
 }
 
