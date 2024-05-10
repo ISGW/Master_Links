@@ -5,26 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         body {
-            background-color: #222; /* Dark background color */
-            color: #38e42f; /* Light text color */
+            background-color: #262626; /* Dark background color */
+            color: #ffffff; /* Light text color */
             font-family: Arial, sans-serif; /* Font family */
             padding: 20px; /* Add some padding for spacing */
+            font-size: 15px;
         }
         
         h2 {
             margin-bottom: 50px; /* Add margin below the heading */
+            font-size: 17px;
+            color: #929292;
         }
 
         input[type="number"],
+        input{
+            background-color: rgb(17, 17, 17);
+            color: #00FF00;
+            font-size: 15px;
+            border-radius: 3px;
+            padding: 10px;
+            font-weight: bold;
+            max-width: 80px;
+        }
         button {
-            background-color: #0e0e10; /* Dark background color for input and button */
-            color: #2fe4db; /* Light text color for input and button */
+            background-color: #4CAF50; /* Dark background color for input and button */
+            color: #ffffff; /* Light text color for input and button */
             border: none; /* Remove borders */
-            padding: 8px; /* Add padding */
+            padding: 10px 20px; /* Add padding */
             margin-bottom: 10px; /* Add margin below input and button */
             cursor: pointer; /* Change cursor to pointer on hover */
+            border-radius: 3px;
+            font-size: 15px;
         }
 
+        button:hover {
+        background-color: #075409;
+    }
         input[type="number"]::-webkit-inner-spin-button,
         input[type="number"]::-webkit-outer-spin-button {
             -webkit-appearance: none; /* Hide spin buttons */
@@ -33,6 +50,8 @@
 
         span {
             font-weight: bold; /* Make result text bold */
+            color: #00FF00;
+            font-size: 15px;
         }
     </style>
 </head>
