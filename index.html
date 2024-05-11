@@ -153,6 +153,29 @@
         background-color: #1d1d1d;
     }
 
+    /* Styles for the arrow icon */
+    .arrow-down {
+        width: 0;
+        height: 0;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 8px solid #b2dbbb; /* Adjust color and size as needed */
+        position: absolute;
+        top: 50%;
+        left: 4px; /* Adjust this value to position the arrow */
+        transform: translateY(-50%);
+        transition: transform 0.3s ease;
+    }
+
+        /* Rotate the arrow icon when the dropdown content is visible */
+        .dropdown.active .arrow-down {
+        transform: translateY(-50%) rotate(180deg);
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 8px solid #00FF00; /* Adjust color and size as needed */
+    }
+
+
 /* Styles for the popup and table */
 .popup {
             width: 70%;
@@ -222,7 +245,8 @@ button{
         <tbody>
             <tr>
                 <td class="dropdown">
-                    <span onclick="toggleDropdown(this)">▼ Process Information</span>
+                    <div class="arrow-down"></div>
+                    <span onclick="toggleDropdown(this)">‎ ‎ ‎ ‎ Process Information</span>
                     <div class="dropdown-content">
                         <a href="https://www.uscis.gov/policy-manual/table-of-contents">USCIS Policy Manual</a>
                         <a href="https://www.uscis.gov/military/discretionary-options-for-military-members-enlistees-and-their-families">Military Parole in Place</a>
@@ -292,7 +316,8 @@ button{
         <tbody>
             <tr>
                 <td class="dropdown">
-                    <span onclick="toggleDropdown(this)">▼ Immigrant Visa Embassy</span>
+                    <div class="arrow-down"></div>
+                    <span onclick="toggleDropdown(this)">‎ ‎ ‎ ‎ Immigrant Visa Embassy</span>
                     <div class="dropdown-content">
                         <a href="https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/list-of-posts.html">GENERAL INSTRUCTIONS IV</a>
                         <a href="https://ais.usvisa-info.com/en-mx/iv">Mexico Embassy Account</a>
@@ -307,7 +332,8 @@ button{
 
             <tr>
                 <td class="dropdown">
-                    <span onclick="toggleDropdown(this)">▼ Visitor Visa Embassy</span>
+                    <div class="arrow-down"></div>
+                    <span onclick="toggleDropdown(this)">‎ ‎ ‎ ‎ Visitor Visa Embassy</span>
                     <div class="dropdown-content">
                         <a href="https://travel.state.gov/content/travel/en/us-visas/tourism-visit/visitor.html">GENERAL INSTRUCTIONS Visitor</a>
                         <a href="https://ais.usvisa-info.com/en-mx/niv">Mexico Embassy Account Visitor</a>
@@ -320,7 +346,8 @@ button{
             </tr>
             <tr>
                 <td class="dropdown">
-                    <span onclick="toggleDropdown(this)">▼ Other Visas</span>
+                    <div class="arrow-down"></div>
+                    <span onclick="toggleDropdown(this)">‎ ‎ ‎ ‎ Other Visas</span>
                     <div class="dropdown-content">
                         <a href="https://studyinthestates.dhs.gov/students/prepare/student-forms">Student Visa Forms</a>
                         <a href="https://www.fmjfee.com/i901fee/index.html">Student Visa Fees</a>
@@ -401,7 +428,8 @@ button{
             </tr>
             <tr>
                 <td class="dropdown">
-                    <span onclick="toggleDropdown(this)">▼ IRS, SS, Other Agencies</span>
+                    <div class="arrow-down"></div>
+                    <span onclick="toggleDropdown(this)">‎ ‎ ‎ ‎ IRS, SS, Other Agencies</span>
                     <div class="dropdown-content">
                         <a href="https://www.irs.gov/individuals/get-transcript">IRS Tax Record</a>
                         <a href="https://www.ssa.gov/">Social Security Home</a>
@@ -427,7 +455,7 @@ button{
         <tbody>
             
             <tr>
-                <td><a href="https://raw.githubusercontent.com/ISGW/Master_Links/833b8016342c533a4f141c43d7894d99c132cb6a/CDD/CASE_DATA_DOC.pdf" class="bold-link">CASE DATA DOC ‎ <svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 8 8">
+                <td><a href="https://raw.githubusercontent.com/ISGW/Master_Links/833b8016342c533a4f141c43d7894d99c132cb6a/CDD/CASE_DATA_DOC.pdf" class="bold-link">CASE DATA DOC ‎ <svg xmlns="http://www.w3.org/2000/svg" width="0.8em" height="0.8em" viewBox="0 0 8 8">
                     <path fill="currentColor" d="M3 0v3H1l3 3l3-3H5V0zM0 7v1h8V7z" />
                 </svg></a></td>
             </tr>
@@ -451,7 +479,8 @@ button{
             </tr>
             <tr>
                 <td class="dropdown">
-                    <span onclick="toggleDropdown(this)">▼ Requirements Lists English</span>
+                    <div class="arrow-down"></div>
+                    <span onclick="toggleDropdown(this)">‎ ‎ ‎ ‎ Requirements Lists English</span>
                     <div class="dropdown-content">
                         <a href="https://docs.google.com/document/d/1BNjOH2OH-6I7lA88QHdn9lwL874lLdCxiwVIuLlnX1I/preview">I-485 Adjustment of Status</a>
                         <a href="https://docs.google.com/document/d/1fJ6gl7v9J8iRCJxqv90q0rWf2LjDDBSxo1b_3hSldqA/preview">I-130 Petition for Spouse</a>
@@ -470,7 +499,8 @@ button{
 
             <tr>
                 <td class="dropdown">
-                    <span onclick="toggleDropdown(this)">▼ Requirements Lists Spanish</span>
+                    <div class="arrow-down"></div>
+                    <span onclick="toggleDropdown(this)">‎ ‎ ‎ ‎ Requirements Lists Spanish</span>
                     <div class="dropdown-content">
                         <a href="https://docs.google.com/document/d/1ch9dCiCORcmYPfsd0KExkq1tuwgg7wBIquS96ZK7mIE/preview">I-485 Ajuste de estatus</a>
                         <a href="https://docs.google.com/document/d/1f9XylD-nufDhqZEpbbPMI_i26xXyPi2w7SnXVEsMsDU/preview">I-130 Peticion para esposo</a>
@@ -540,7 +570,8 @@ button{
 
             <tr>
                 <td class="dropdown">
-                    <span onclick="toggleDropdown(this)">▼ Contacts</span>
+                    <div class="arrow-down"></div>
+                    <span onclick="toggleDropdown(this)">‎ ‎ ‎ ‎ Contacts</span>
                     <div class="dropdown-content">
                         <a href="https://drive.google.com/file/d/18mpMkHBD-J9F3l1PBcCUoWDg_shD0cz-/view">Austin's Accounting</a>
                         <a href="https://drive.google.com/file/d/1ZhIe-lOSgCvsn2FpN4XNUoeyqrUNLUp2/view?usp=sharing">Lawyers</a>
@@ -554,7 +585,8 @@ button{
             </tr>
             <tr>
                 <td class="dropdown">
-                    <span onclick="toggleDropdown(this)">▼ Mail</span>
+                    <div class="arrow-down"></div>
+                    <span onclick="toggleDropdown(this)">‎ ‎ ‎ ‎ Mail</span>
                     <div class="dropdown-content">
                         <a href="https://www.usps.com/">USPS Home</a>
                         <a href="https://www.fedex.com/en-us/tracking.html">FedEx Track</a>
