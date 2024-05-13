@@ -115,16 +115,18 @@
         }
     }
 
-
     /* Style for dropdown menu */
     .dropdown {
         position: relative;
-        
         color: #b2dbbb;
         font-size: 16px;
         font-weight: 700;
         padding: 4px;
         cursor: pointer;
+    }
+
+    .dropdown.active{
+        color: #00FF00;
     }
 
     .dropdown-content {
@@ -475,7 +477,7 @@ button{
                 <td><a href="#">‎ </a></td>
             </tr>
             <tr>
-                <td><a href="https://docs.google.com/spreadsheets/u/0/d/1LYF3it9sUxfP8wCdM_1tGUC4A1SUKsT597ffTgBH9Ls/preview" class="bold-link">ISG Full Service Price List</a></td>
+                <td><a href="https://docs.google.com/spreadsheets/u/0/d/1LYF3it9sUxfP8wCdM_1tGUC4A1SUKsT597ffTgBH9Ls/preview" class="bold-link">Full ISG Service Price List</a></td>
             </tr>
             <tr>
                 <td class="dropdown">
@@ -532,10 +534,10 @@ button{
         </thead>
         <tbody>
             <tr>
-                <td><a href="https://masterlinks.isgtulsa.com/contact-info-copy.html" class="bold-link" onclick="openPopup('example1')">Office Info</a></td>
+                <td><a href="https://masterlinks.isgtulsa.com/contact-info-copy.html" class="bold-link" onclick="openPopup('example1')">OFFICE INFO &#9432;</a></td>
             </tr>
             <tr>
-                <td><a href="https://masterlinks.isgtulsa.com/ac-ps.html" class="bold-link" onclick="openPopup('example2')">Generate/Copy Acc Passwd</a></td>
+                <td><a href="https://masterlinks.isgtulsa.com/ac-ps.html" class="link" onclick="openPopup('example2')">Password Generate/Copy</a></td>
             </tr>
             <tr>
                 <td><a href="https://cse.google.com/cse?cx=5268b33b856f3461b#gsc.tab=0">Google Custom Search</a></td>
@@ -612,7 +614,7 @@ button{
 </div>
 <!-- Popup content -->
 <div id="popupContent" class="popup">
-    <button onclick="closePopup()">close</button>
+    <button onclick="closePopup()">&#10006; Close</button>
 
     <div class="iframe-container">
         <iframe id="popupIframe" src=""></iframe>
