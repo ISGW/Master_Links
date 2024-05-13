@@ -550,13 +550,13 @@ button{
                 <td><a href="https://www.timeanddate.com/date/dateadd.html">Date/Time Calculator</a></td>
             </tr>
             <tr>
-                <td><a href="https://masterlinks.isgtulsa.com/address-history.html">Quick Entry Address Histroy</a></td>
+                <td><a href="https://masterlinks.isgtulsa.com/address-history.html" onclick="openInNewWindow('https://masterlinks.isgtulsa.com/address-history.html'); return false;">Quick Entry Address Histroy</a></td>
             </tr>
             <tr>
-                <td><a href="https://masterlinks.isgtulsa.com/employment-history.html">Quick Entry Employment History</a></td>
+                <td><a href="https://masterlinks.isgtulsa.com/employment-history.html" onclick="openInNewWindow('https://masterlinks.isgtulsa.com/employment-history.html'); return false;">Quick Entry Employment History</a></td>
             </tr>
             <tr>
-                <td><a href="https://masterlinks.isgtulsa.com/travel-calc.html">Quick Entry Time Outside the US</a></td>
+                <td><a href="https://masterlinks.isgtulsa.com/travel-calc.html" onclick="openInNewWindow('https://masterlinks.isgtulsa.com/travel-calc.html'); return false;">Quick Entry Time Outside the US</a></td>
             </tr>
             <tr>
                 <td><a href="https://www.unitconverters.net/" class="link" onclick="openPopup('example3')">Unit Converter Height Weight</a></td>
@@ -661,6 +661,10 @@ button{
         document.getElementById('popupContent').style.display = 'none';
     }
 </script>
-
+<script>
+    function openInNewWindow(url) {
+      window.open(url, "_blank", "width=1100,height=600");
+    }
+    </script>
 </body>
 </html>
