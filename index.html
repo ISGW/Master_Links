@@ -99,6 +99,10 @@
         font-weight: bold;
     }
 
+    .special-background1 {
+    background-color: #063b18; /* Example color, you can choose any color */
+}
+
     @media (max-width: 768px) {
         .container {
             flex-wrap: wrap;
@@ -118,7 +122,7 @@
     /* Style for dropdown menu */
     .dropdown {
         position: relative;
-        color: #b2dbbb;
+        color: #c3edcc;
         font-size: 16px;
         font-weight: 700;
         padding: 4px;
@@ -161,7 +165,7 @@
         height: 0;
         border-left: 6px solid transparent;
         border-right: 6px solid transparent;
-        border-top: 8px solid #b2dbbb; /* Adjust color and size as needed */
+        border-top: 8px solid #c3edcc; /* Adjust color and size as needed */
         position: absolute;
         top: 50%;
         left: 4px; /* Adjust this value to position the arrow */
@@ -248,13 +252,12 @@ button{
             <tr>
                 <td class="dropdown">
                     <div class="arrow-down"></div>
-                    <span onclick="toggleDropdown(this)">‎ ‎ ‎ ‎ Process Information</span>
+                    <span onclick="toggleDropdown(this)">‎ ‎ ‎ ‎ Process Source Information</span>
                     <div class="dropdown-content">
-                        <a href="https://www.uscis.gov/policy-manual/table-of-contents">USCIS Policy Manual</a>
-                        <a href="https://www.uscis.gov/military/discretionary-options-for-military-members-enlistees-and-their-families">Military Parole in Place</a>
                         <a href="https://www.uscis.gov/i-485">I-485 Adjustment of Status</a>
                         <a href="https://www.uscis.gov/i-130">I-130 Petition for Relative</a>
                         <a href="https://www.uscis.gov/i-864">I-864 Affidavit of Support</a>
+                        <a href="https://www.uscis.gov/military/discretionary-options-for-military-members-enlistees-and-their-families">Military Parole in Place</a>
                     </div>
                 </td>
             </tr>
@@ -462,29 +465,6 @@ button{
         <tbody>
             
             <tr>
-                <td><a href="https://raw.githubusercontent.com/ISGW/Master_Links/833b8016342c533a4f141c43d7894d99c132cb6a/CDD/CASE_DATA_DOC.pdf" class="bold-link">CASE DATA DOC ‎ <svg xmlns="http://www.w3.org/2000/svg" width="0.8em" height="0.8em" viewBox="0 0 8 8">
-                    <path fill="currentColor" d="M3 0v3H1l3 3l3-3H5V0zM0 7v1h8V7z" />
-                </svg></a></td>
-            </tr>
-            <tr>
-                <td><a href="https://masterlinks.isgtulsa.com/google-recent-filter.html">G Drive Search / Recent PDFs</a></td>
-            </tr>
-            <tr>
-                <td><a href="https://docs.google.com/forms/d/e/1FAIpQLScU76k6db1bmts1StqNAm0nWIwhow25NV4vwsao2NkzpCfq4w/viewform?usp=sf_link" class="bold-link" onclick="openPopup('example4')">Prospect Client INPUT FORM</a></td>
-            </tr>
-            <tr>
-                <td><a href="https://docs.google.com/spreadsheets/d/1OJGjKwo0qMZAoRHUDo4pe7sS2AW_0KXAwrx2ZDlWTWo/preview">Prospect Client LIST</a></td>
-            </tr>
-            <tr>
-                <td><a href="https://calendar.google.com/calendar/u/0/r/month" class="bold-link">Calendar ISG Appointments</a></td>
-            </tr>
-            <tr>
-                <td><a href="#">‎ </a></td>
-            </tr>
-            <tr>
-                <td><a href="https://docs.google.com/spreadsheets/u/0/d/1LYF3it9sUxfP8wCdM_1tGUC4A1SUKsT597ffTgBH9Ls/preview" class="bold-link">Full ISG Service Price List</a></td>
-            </tr>
-            <tr>
                 <td class="dropdown">
                     <div class="arrow-down"></div>
                     <span onclick="toggleDropdown(this)">‎ ‎ ‎ ‎ Requirements Lists English</span>
@@ -526,6 +506,33 @@ button{
                     </div>
                 </td>
             </tr>
+            <tr>
+                <td><a href="https://docs.google.com/spreadsheets/u/0/d/1LYF3it9sUxfP8wCdM_1tGUC4A1SUKsT597ffTgBH9Ls/preview" class="bold-link">Full ISG Service Price List</a></td>
+            </tr>
+            <tr>
+                <td><a href="#">‎ </a></td>
+            </tr>
+            <tr>
+                <td><a href="https://raw.githubusercontent.com/ISGW/Master_Links/833b8016342c533a4f141c43d7894d99c132cb6a/CDD/CASE_DATA_DOC.pdf" class="bold-link">CASE DATA DOC ‎ <svg xmlns="http://www.w3.org/2000/svg" width="0.8em" height="0.8em" viewBox="0 0 8 8">
+                    <path fill="currentColor" d="M3 0v3H1l3 3l3-3H5V0zM0 7v1h8V7z" />
+                </svg></a></td>
+            </tr>
+            <tr>
+                <td><a href="https://masterlinks.isgtulsa.com/google-recent-filter.html">G Drive Search / Recent PDFs</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://docs.google.com/forms/d/e/1FAIpQLScU76k6db1bmts1StqNAm0nWIwhow25NV4vwsao2NkzpCfq4w/viewform?usp=sf_link" class="bold-link" onclick="openPopup('example4')">Prospect Client INPUT FORM</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://docs.google.com/spreadsheets/d/1OJGjKwo0qMZAoRHUDo4pe7sS2AW_0KXAwrx2ZDlWTWo/preview">Prospect Client LIST</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://calendar.google.com/calendar/u/0/r/eventedit"class="bold-link">Calendar Create Event</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://calendar.google.com/calendar/u/0/r/month">Calendar - Month</a></td>
+            </tr>
+
             <!-- Add more rows as needed -->
         </tbody>
     </table>
@@ -540,14 +547,23 @@ button{
         </thead>
         <tbody>
             <tr>
+                <td class="dropdown">
+                    <div class="arrow-down"></div>
+                    <span onclick="toggleDropdown(this)">‎ ‎ ‎ ‎ Search Tools</span>
+                    <div class="dropdown-content">
+                        <a href="https://www.perplexity.ai/">Perplexity AI</a>
+                        <a href="https://chatgpt.com/">ChatGPT</a>
+                        <a href="https://www.uscis.gov/policy-manual/table-of-contents">USCIS Policy Manual</a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
                 <td><a href="https://masterlinks.isgtulsa.com/contact-info-copy.html" class="bold-link" onclick="openPopup('example1')">OFFICE INFO &#9432;</a></td>
             </tr>
             <tr>
                 <td><a href="https://masterlinks.isgtulsa.com/ac-ps.html" class="link" onclick="openPopup('example2')">Password Generate/Copy</a></td>
             </tr>
-            <tr>
-                <td><a href="https://www.perplexity.ai/" class="bold-link">Perplexity Search</a></td>
-            </tr>
+
             <tr>
                 <td><a href="https://translate.google.com/">Translate</a></td>
             </tr>
