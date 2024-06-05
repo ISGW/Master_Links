@@ -257,7 +257,6 @@ button{
                         <a href="https://www.uscis.gov/i-485">I-485 Adjustment of Status</a>
                         <a href="https://www.uscis.gov/i-130">I-130 Petition for Relative</a>
                         <a href="https://www.uscis.gov/i-864">I-864 Affidavit of Support</a>
-                        <a href="https://www.uscis.gov/military/discretionary-options-for-military-members-enlistees-and-their-families">Military Parole in Place</a>
                     </div>
                 </td>
             </tr>
@@ -558,6 +557,16 @@ button{
                 </td>
             </tr>
             <tr>
+                <td class="dropdown">
+                    <div class="arrow-down"></div>
+                    <span onclick="toggleDropdown(this)">‎ ‎ ‎ ‎ Research Links Repository</span>
+                    <div class="dropdown-content">
+                        <a href="https://docs.google.com/spreadsheets/d/1ne2m94w7M-Pbjs1Vf_Yn-qO1yxbleRtvmWLhoYzH0k0/preview">Links Repository List</a>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdq6UnAwaJgIN4ErJxHXZy-t4vyaM5iFHpliISqMz7mc_-0eQ/viewform" class="link" onclick="openPopup('example6')">Entry Form</a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
                 <td><a href="https://masterlinks.isgtulsa.com/contact-info-copy.html" class="bold-link" onclick="openPopup('example1')">OFFICE INFO &#9432;</a></td>
             </tr>
             <tr>
@@ -662,6 +671,8 @@ button{
             popupIframe.src = 'https://docs.google.com/forms/d/e/1FAIpQLScU76k6db1bmts1StqNAm0nWIwhow25NV4vwsao2NkzpCfq4w/viewform';
         } else if (exampleId === 'example5') {
             popupIframe.src = 'https://masterlinks.isgtulsa.com/60-40-ratio.html';
+        } else if (exampleId === 'example6') {
+            popupIframe.src = 'https://docs.google.com/forms/d/e/1FAIpQLSdq6UnAwaJgIN4ErJxHXZy-t4vyaM5iFHpliISqMz7mc_-0eQ/viewform';
         }
     
         popupContent.style.display = 'block';
