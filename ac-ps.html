@@ -63,6 +63,8 @@
     #generated-password {
         font-size: 20px;
         color: rgb(255, 255, 255);
+        background-color: #191919;
+        border-radius: 5px;
         font-weight: bold;
         word-break: break-all;
         margin-top: 10px;
@@ -92,6 +94,8 @@
     .permanent-message {
         font-size: 20px;
         color: rgb(255, 255, 255);
+        background-color: #191919;
+        border-radius: 5px;
         margin-bottom: 0px;
     }
 </style>
@@ -101,13 +105,15 @@
 <div class="container">
     <h1></h1>
     <div class="permanent-message">@tulsa-isg.com</div>
-    <button id="permanent-copy" onclick="copyPermanentText()">Copy</button>
+    <button id="permanent-copy" onclick="copyPermanentText()">Copy ↑</button>
     <label for="length">Length:</label>
     <input type="number" id="length" min="6" max="40" value="12">
-    <button onclick="generatePassword()">Generate</button>
+    <button onclick="generatePassword()">Generate ⚙</button>
+    <br>
     <div id="generated-password"></div>
-    <button id="copy-button" onclick="copyToClipboard()">Copy</button>
-    <div id="copy-message">Copied to clipboard</div>
+    <br>
+    <button id="copy-button" onclick="copyToClipboard()">Copy ↑</button>
+    <div id="copy-message">Copied to clipboard ✔</div>
 </div>
 
 <script>
