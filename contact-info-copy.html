@@ -7,16 +7,16 @@
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <title>Office Info</title>
 <style>
-body{
+body {
   background-color: #262626;
 }
 
-h1{
-    color: #929292;
-    font-family: Arial, sans-serif;
-    font-size: 24px;
-    margin-left: 50px;
-    margin-bottom: -10px;
+h1 {
+  color: #929292;
+  font-family: Arial, sans-serif;
+  font-size: 24px;
+  margin-left: 50px;
+  margin-bottom: -10px;
 }
 
 .alert {
@@ -31,28 +31,24 @@ h1{
   font-size: 20px;
   font-weight: bold;
   color: #00FF00;
-  margin-top: 10px;
+  margin-top: 430px;
   display: none;
   text-align: center;
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 3px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 20px 50px;
 }
 
 .field {
-  margin-bottom: 8px;
-  align-items: center;
-  margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   color: #929292;
   font-family: Arial, sans-serif;
-}
-
-.button-container {
-  margin-top: 10px;
-  margin-right: 10px;
 }
 
 button {
@@ -64,6 +60,7 @@ button {
   border-radius: 3px;
   font-size: 12px;
   font-weight: 600;
+  margin-top: 5px;
 }
 
 button:hover {
@@ -84,8 +81,7 @@ button:hover {
 </style>
 </head>
 <body>
-
-<h1></h1>
+<h1>‎ </h1>
 <div class="container">
   <div class="field">
     <p>Email <br><span id="email">contact@isgtulsa.com</span></p>
@@ -96,7 +92,7 @@ button:hover {
     <button onclick="copyTextToClipboard('phoneNumber')">COPY</button>
   </div>
   <div class="field">
-    <p>Address <br><span id="address">7633 E 63RD PL STE 300 TULSA OK 74133</span></p>
+    <p>Address <br><span id="address">7633 E 63RD PL STE 300 <br> TULSA OK 74133</span></p>
     <button onclick="copyTextToClipboard('address')">COPY</button>
   </div>
   <div class="field">
@@ -108,17 +104,12 @@ button:hover {
     <button onclick="copyTextToClipboard('zelle')">COPY</button>
   </div>
   <div class="field">
-    <p>Website <br><span id="website">https://isgtulsa.com</span></span></p>
+    <p>Website <br><span id="website">https://isgtulsa.com</span></p>
     <button onclick="copyTextToClipboard('website')">COPY</button>
-    <a href="https://isgtulsa.com"target="_blank"><p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
-      <rect width="48" height="48" fill="none" />
-      <path fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" d="M32.646 24.251L22.63 34.27l-8.898-8.898L23.75 15.354m8.898 8.897l3.235 3.235H42.5V5.5H20.516v6.619l3.234 3.234m8.235 9.562V42.5H5.5V16.017h17.588" />
-    </svg></p>
   </div>
-
 </div>
 
-<div class="alert" id="alertMessage">Copied to clipboard</div>
+<div class="alert" id="alertMessage">Copied to clipboard ✔</div>
 
 <script>
 function copyTextToClipboard(id) {
