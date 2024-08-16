@@ -12,10 +12,15 @@
         font-family: Arial, sans-serif;
     }
 
+    a:hover {
+        color: #00FF00 !important;
+	    transition: color 0.2s;
+        }
+
     .container {
         max-width: 500px;
         margin: 0 auto;
-        padding: 20px;
+        padding: 0px;
         border: 1px solid #92929200;
         border-radius: 5px;
         display: flex;
@@ -103,7 +108,10 @@
 <body>
 
 <div class="container">
-    <h1></h1>
+    <h1><a href="https://docs.google.com/document/d/1R4HuMJpGnanWGUdMcZrS0bDF1436PSsURnMx1QmtHUc/preview" target="_blank" style="color: #e5e5e5; text-decoration: none;">
+        <svg xmlns="http://www.w3.org/2000/svg" width=".8em" height=".8em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2S2 6.477 2 12s4.477 10 10 10"/><path d="M9 9c0-3.5 5.5-3.5 5.5 0c0 2.5-2.5 2-2.5 5m0 4.01l.01-.011"/></g></svg>
+    </a></h1>
+
     <div class="permanent-message">@tulsa-isg.com</div>
     <button id="permanent-copy" onclick="copyPermanentText()">Copy ↑</button>
     <label for="length">Length:</label>
