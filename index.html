@@ -212,7 +212,7 @@
             border-radius: 15px;
         }
 
-button{
+.special-button {
     background-color: #00FF00;
     color: #262626;
     font-size: 13px;
@@ -279,7 +279,54 @@ footer {
     opacity: 1;
 }
 
+        /* Style the input field */
+        #searchWord {
+            background-color: #131313;
+            color: #c3edcc;
+            padding: 4px;
+            font-size: 16px;
+            border: 2px solid #595959cc;
+            border-radius: 5px;
+            width: 190px;
+            margin-right: 1px;
+        }
 
+        /* Style the search button */
+        button {
+            padding: 6px 6px;
+            font-size: 14px;
+            color: #232323;
+            background-color: #acacac;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            height: 25px; /* Set the button height */
+            line-height: 25px; /* Match line-height to height for vertical centering */
+            vertical-align: middle ; /* Ensure it's centered in its context */
+        }
+
+        /* Change button color on hover */
+        button:hover {
+            background-color: #00FF00;
+        }
+
+        .clear-button {
+            align-items: center;
+            top: 50%;
+            right: 1px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+            color: #acacac;
+            padding: 0;
+            margin: 0;
+            
+        }
+
+        .clear-button:hover {
+            color: #232323;
+        }
 </style>
 </head>
 <body>
@@ -518,7 +565,19 @@ footer {
         <tbody>
 
             <tr>
-                <td><a href="https://masterlinks.isgtulsa.com/google-recent-filter.html" style="display: inline-flex; align-items: center;"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m20.017 19.412l1.407-2.583c.387-.71.58-1.067.576-1.451s-.208-.736-.613-1.438l-5.442-9.417c-.43-.743-.644-1.114-1.002-1.319S14.15 3 13.277 3h-2.554c-.872 0-1.308 0-1.666.204c-.358.205-.573.576-1.002 1.319L2.613 13.94c-.405.702-.608 1.053-.613 1.438c-.005.384.189.74.576 1.451l1.408 2.583c.421.774.632 1.16.996 1.374S5.792 21 6.688 21h10.624c.896 0 1.344 0 1.708-.214c.364-.213.575-.6.997-1.374M9 4l7 11M5.5 20.5L12 9m9 6H9" color="currentColor"/></svg>‎ Google Drive Search / Recent</a></td>
+                <td>
+                    <input type="text" id="searchWord" placeholder="Search" spellcheck="false">
+                    <button onclick="search()" style="display: inline-flex; align-items: center;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 512 512">
+                        <rect width="512" height="512" fill="none" />
+                        <path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34M208 336c-70.7 0-128-57.2-128-128c0-70.7 57.2-128 128-128c70.7 0 128 57.2 128 128c0 70.7-57.2 128-128 128" />
+                    </svg></button>
+                    <button class="clear-button" onclick="clearSearch()">&#x2715;</button>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td><a href="https://masterlinks.isgtulsa.com/google-recent-filter.html" style="display: inline-flex; align-items: center;"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m20.017 19.412l1.407-2.583c.387-.71.58-1.067.576-1.451s-.208-.736-.613-1.438l-5.442-9.417c-.43-.743-.644-1.114-1.002-1.319S14.15 3 13.277 3h-2.554c-.872 0-1.308 0-1.666.204c-.358.205-.573.576-1.002 1.319L2.613 13.94c-.405.702-.608 1.053-.613 1.438c-.005.384.189.74.576 1.451l1.408 2.583c.421.774.632 1.16.996 1.374S5.792 21 6.688 21h10.624c.896 0 1.344 0 1.708-.214c.364-.213.575-.6.997-1.374M9 4l7 11M5.5 20.5L12 9m9 6H9" color="currentColor"/></svg>‎ Google Drive Recent</a></td>
             </tr>
             <tr>
                 <td><a href="https://docs.google.com/forms/d/e/1FAIpQLScU76k6db1bmts1StqNAm0nWIwhow25NV4vwsao2NkzpCfq4w/viewform?usp=sf_link" class="bold-link" onclick="openPopup('example4')" style="display: inline-flex; align-items: center;"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 11.4c0-1.158.242-1.4 1.4-1.4h17.2c1.158 0 1.4.242 1.4 1.4v1.2c0 1.158-.242 1.4-1.4 1.4H3.4C2.242 14 2 13.758 2 12.6zm0-8C2 2.242 2.242 2 3.4 2h17.2c1.158 0 1.4.242 1.4 1.4v1.2c0 1.158-.242 1.4-1.4 1.4H3.4C2.242 6 2 5.758 2 4.6zm0 16c0-1.158.242-1.4 1.4-1.4h17.2c1.158 0 1.4.242 1.4 1.4v1.2c0 1.158-.242 1.4-1.4 1.4H3.4C2.242 22 2 21.758 2 20.6z" color="currentColor"/></svg>‎ Prospect Input Form</a></td>
@@ -556,6 +615,8 @@ footer {
                 </td>
             </tr>
 
+
+            
             <tr>
                 <td style="padding: 10px 0;"> <a></a>
                     <a href="https://trello.com/b/DQcD9WDv/" class="tooltip"><span class="tooltiptext">Trello Active Cases</span><svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 24 24"><path fill="currentColor" d="M21.003 0h.04c.814 0 1.55.337 2.075.88l.001.001a2.88 2.88 0 0 1 .88 2.076v.047v-.002v18.042c0 .814-.337 1.55-.88 2.075l-.001.001a2.88 2.88 0 0 1-2.076.88h-.043h.002H2.955c-.814 0-1.55-.337-2.075-.88l-.001-.001a2.88 2.88 0 0 1-.88-2.076V21v.002V2.96c0-.814.337-1.55.88-2.075L.88.884a2.88 2.88 0 0 1 2.076-.88h.043h-.002zM10.448 18.162V4.537c0-.395-.164-.751-.428-1.004a1.4 1.4 0 0 0-.998-.423H4.543c-.395 0-.751.164-1.004.428a1.4 1.4 0 0 0-.429 1.004v13.619l-.001.05c0 .392.165.745.429.994l.001.001c.258.248.609.4.996.4h.023h-.001h4.468c.387 0 .738-.153.997-.401c.265-.25.43-.603.43-.995l-.001-.052v.003zm10.448-6V4.538c0-.395-.164-.751-.428-1.004a1.4 1.4 0 0 0-1.004-.429h-4.473c-.395 0-.751.164-1.004.428c-.265.254-.429.61-.429 1.004v.014v-.001v7.608l-.001.05c0 .392.165.745.429.994l.001.001c.258.248.609.4.996.4h.023h-.001h4.468c.387 0 .738-.153.997-.401c.265-.25.43-.603.43-.995l-.001-.048v.002z"/></svg></a>
@@ -570,6 +631,7 @@ footer {
                 </td>
             </tr>
 
+            
             <tr>
                 <td style="padding: 10px 0;"> <a></a>
                     <a href="https://mail.proton.me/"class="tooltip"><span class="tooltiptext">Proton Mail</span><svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em" viewBox="0 0 24 24"><path fill="currentColor" d="M2.474 17.75V24h4.401v-5.979c0-.582.232-1.14.645-1.551a2.2 2.2 0 0 1 1.556-.643h4.513a7.96 7.96 0 0 0 5.612-2.318a7.9 7.9 0 0 0 2.325-5.595a7.9 7.9 0 0 0-2.325-5.596A7.96 7.96 0 0 0 13.587 0H2.474v7.812h4.401V4.129h6.416c.995 0 1.951.394 2.656 1.097c.704.7 1.1 1.653 1.101 2.646a3.74 3.74 0 0 1-1.101 2.648a3.77 3.77 0 0 1-2.656 1.097H8.627a6.16 6.16 0 0 0-4.352 1.795a6.13 6.13 0 0 0-1.801 4.338"/></svg></a>
@@ -717,8 +779,7 @@ footer {
 
 <!-- Popup content -->
 <div id="popupContent" class="popup">
-    <button onclick="closePopup()">&#10006; Close</button>
-
+    <button class="special-button" onclick="closePopup()">&#10006; Close</button>
     <div class="iframe-container">
         <iframe id="popupIframe" src=""></iframe>
     </div>
@@ -773,5 +834,27 @@ footer {
       window.open(url, "_blank", "width=1100,height=600");
     }
     </script>
+
+
+<script>
+    function search() {
+        const word = document.getElementById('searchWord').value;
+        if (word) {
+            const googleDriveUrl = `https://drive.google.com/drive/u/0/search?q=${encodeURIComponent(word)}`;
+            const trelloUrl = `https://trello.com/search?q=${encodeURIComponent(word)}`;
+            
+            window.open(googleDriveUrl, '_blank');
+            window.open(trelloUrl, '_blank');
+        } else {
+            alert("Please enter a word to search.");
+        }
+    }
+
+    function clearSearch() {
+            document.getElementById('searchWord').value = '';
+            
+        }
+</script>
+
 </body>
 </html>
