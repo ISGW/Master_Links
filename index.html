@@ -580,7 +580,7 @@ footer {
                 <td>
                     <div class="search-container">
                         <div style="position: relative; width: 190px;">
-                            <input type="text" id="searchWord" placeholder="Search G Drive & Trello" spellcheck="false" oninput="toggleClearButton()">
+                            <input type="text" id="searchWord" placeholder="Search" spellcheck="false" oninput="toggleClearButton()">
                             <button class="clear-button" onclick="clearSearch()">&#x2715;</button>
                         </div>
                         <button class="search-button" onclick="search()" style="display: inline-flex; align-items: center;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 512 512">
@@ -878,9 +878,11 @@ footer {
         if (word) {
             const googleDriveUrl = `https://drive.google.com/drive/u/0/search?q=${encodeURIComponent(word)}`;
             const trelloUrl = `https://trello.com/search?q=${encodeURIComponent(word)}`;
+            const gmailUrl = `https://mail.google.com/mail/u/0/#search/${encodeURIComponent(word)}`;
 
             window.open(googleDriveUrl, '_blank');
             window.open(trelloUrl, '_blank');
+            window.open(gmailUrl, '_blank');
         } else {
             alert("Please enter a word to search.");
         }
