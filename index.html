@@ -288,7 +288,7 @@ footer {
 
         /* Style the input field */
         #searchWord {
-            background-color: #131313;
+            background-color: #1d1d1d;
             color: #c3edcc;
             padding: 4px;
             font-size: 16px;
@@ -305,7 +305,7 @@ footer {
             padding: 6px 6px;
             font-size: 14px;
             color: #232323;
-            background-color: #acacac;
+            background-color: #8b8b8b;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -876,18 +876,39 @@ footer {
     function search() {
         const word = document.getElementById('searchWord').value;
         if (word) {
+            // Get the screen width and height
+            const screenWidth = window.screen.availWidth;
+            const screenHeight = window.screen.availHeight;
+
+            // Calculate the width and height of each window as one-fourth of the screen
+            const windowWidth = Math.floor(screenWidth / 2);
+            const windowHeight = Math.floor(screenHeight / 2);
+
+            // Define the positions for each window to open in different quarters
+            const positions = [
+                { left: 0, top: 0 },  // Top-left corner
+                { left: windowWidth, top: 0 },  // Top-right corner
+                { left: 0, top: windowHeight },  // Bottom-left corner
+                { left: windowWidth, top: windowHeight }  // Bottom-right corner
+            ];
+
+            // URLs to open
             const googleDriveUrl = `https://drive.google.com/drive/u/0/search?q=${encodeURIComponent(word)}`;
             const trelloUrl = `https://trello.com/search?q=${encodeURIComponent(word)}`;
             const gmailUrl = `https://mail.google.com/mail/u/0/#search/${encodeURIComponent(word)}`;
+            const calendarUrl = `https://calendar.google.com/calendar/u/0/r/search?q=${encodeURIComponent(word)}`;
 
-            window.open(googleDriveUrl, '_blank');
-            window.open(trelloUrl, '_blank');
-            window.open(gmailUrl, '_blank');
+            // Open each URL in a separate window, each occupying one-fourth of the screen
+            window.open(googleDriveUrl, '_blank', `width=${windowWidth},height=${windowHeight},left=${positions[0].left},top=${positions[0].top}`);
+            window.open(trelloUrl, '_blank', `width=${windowWidth},height=${windowHeight},left=${positions[1].left},top=${positions[1].top}`);
+            window.open(gmailUrl, '_blank', `width=${windowWidth},height=${windowHeight},left=${positions[2].left},top=${positions[2].top}`);
+            window.open(calendarUrl, '_blank', `width=${windowWidth},height=${windowHeight},left=${positions[3].left},top=${positions[3].top}`);
         } else {
             alert("Please enter a word to search.");
         }
     }
 </script>
+
 
 </body>
 </html>
