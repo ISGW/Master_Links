@@ -15,8 +15,6 @@
   /* Style for h1 heading */
   h1 {
     font-size: 16px; /* Adjust the font size as needed */
-  }
-  h1 {
     text-align: center;
   }
 
@@ -119,7 +117,7 @@
 
   /* Style for older employment entries */
   .olderEmployment {
-    background-color: #ffe6e6; /* Light red background color */
+    background-color: #ffd4d4; /* Light red background color */
   }
 
   /* Print-specific styles */
@@ -130,6 +128,19 @@
     #employmentTable .editButton {
       display: none; /* Hide specified elements when printing */
     }
+  }
+
+  /* Style for markdown output */
+  #markdownOutput {
+    width: 70%;
+    margin: 20px auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    white-space: pre-wrap; /* Preserve whitespace */
+    user-select: all;
+    overflow-x: auto;
+    cursor: pointer;
   }
 </style>
 </head>
@@ -160,7 +171,7 @@
     <input type="date" id="dateLeft" required>
 
     <button type="submit">List Employment</button><br><br>
-    <button onclick="exportToTSV()">Export TSV</button>
+    <button type="button" onclick="generateMarkdown()">Generate Markdown</button>
   </form>
 
   <h2></h2>
@@ -177,6 +188,8 @@
     </thead>
     <tbody id="employmentList"></tbody>
   </table>
+
+  <div id="markdownOutput" onclick="copyMarkdown()"></div>
 
   <script>
     function addEmployment(event) {
@@ -250,44 +263,32 @@
       row.remove(); // Remove the row being edited
     }
 
-    function exportToTSV() {
+    function generateMarkdown() {
       const name = document.getElementById('name').value;
       const rows = document.querySelectorAll('#employmentTable tbody tr');
-      let tsvContent = `Name: ${name}\n\n`;
+      let markdownContent = `| Employer | Employer Address | Position | Date of Entry | Date Left |\n`;
+      markdownContent += `|----------|------------------|----------|---------------|-----------|\n`;
 
-      // Get header cells for alignment
-      const headersRow = document.querySelector('#employmentTable thead tr');
-      const headers = Array.from(headersRow.querySelectorAll('th')).map(header => header.textContent);
-
-      // Determine the maximum length of each field for fixed-width alignment
-      const maxLengths = headers.map(header => header.length);
-
-      // Loop through table rows and update maxLengths based on cell content
       rows.forEach(row => {
         const cells = Array.from(row.querySelectorAll('td')).map(cell => cell.textContent);
-        cells.forEach((cell, index) => {
-          maxLengths[index] = Math.max(maxLengths[index], cell.length);
-        });
+        markdownContent += `| ${cells.join(' | ')} |\n`;
       });
 
-      // Generate fixed-width format TSV content
-      tsvContent += headers.map((header, index) => header.padEnd(maxLengths[index])).join('\t') + '\n';
-      rows.forEach(row => {
-        const cells = Array.from(row.querySelectorAll('td')).map((cell, index) => cell.textContent.padEnd(maxLengths[index]));
-        tsvContent += cells.join('\t') + '\n';
-      });
-
-      // Create a blob containing the TSV content
-      const blob = new Blob([tsvContent], { type: 'text/tab-separated-values' });
-
-      // Create a download link and trigger the download
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = `${name}_employment_history.tsv`;
-      link.click();
+      const markdownOutput = document.getElementById('markdownOutput');
+      markdownOutput.textContent = markdownContent;
     }
 
-    function sortRowsByDate() {
+    function copyMarkdown() {
+  const markdownOutput = document.getElementById('markdownOutput').textContent;
+
+  navigator.clipboard.writeText(markdownOutput).then(() => {
+    alert('Markdown copied as plain text to clipboard!');
+  }).catch(err => {
+    console.error('Failed to copy text: ', err);
+  });
+}
+
+function sortRowsByDate() {
       const employmentList = document.getElementById('employmentList');
       const rows = Array.from(employmentList.querySelectorAll('tr'));
 
@@ -312,14 +313,10 @@
         }
       });
     }
-
-    // Call sortRowsByDate initially to sort the rows on page load
-    sortRowsByDate();
-
-    // Add event listener for beforeunload event to show warning message
+    
     window.addEventListener('beforeunload', function(event) {
       event.preventDefault();
-      event.returnValue = ''; // This line is required for some browsers
+      event.returnValue = '';
     });
   </script>
 </body>
