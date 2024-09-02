@@ -130,17 +130,9 @@
     }
   }
 
-  /* Style for markdown output */
+  /* Hidden markdown output */
   #markdownOutput {
-    width: 70%;
-    margin: 20px auto;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    white-space: pre-wrap; /* Preserve whitespace */
-    user-select: all;
-    overflow-x: auto;
-    cursor: pointer;
+    display: none;
   }
 </style>
 </head>
@@ -171,9 +163,9 @@
     <input type="date" id="dateLeft" required>
 
     <button type="submit">List Employment</button><br><br>
-    <button type="button" onclick="generateMarkdown()">Generate Markdown</button>
+    <button type="button" onclick="generateMarkdown()">Copy Table</button>
   </form>
-
+  
   <h2></h2>
   <table id="employmentTable">
     <thead>
@@ -189,7 +181,7 @@
     <tbody id="employmentList"></tbody>
   </table>
 
-  <div id="markdownOutput" onclick="copyMarkdown()"></div>
+  <div id="markdownOutput"></div>
 
   <script>
     function addEmployment(event) {
@@ -276,30 +268,29 @@
 
       const markdownOutput = document.getElementById('markdownOutput');
       markdownOutput.textContent = markdownContent;
+
+      copyMarkdown(); // Automatically copy markdown after generating
     }
 
     function copyMarkdown() {
-  const markdownOutput = document.getElementById('markdownOutput').textContent;
+      const markdownOutput = document.getElementById('markdownOutput').textContent;
 
-  navigator.clipboard.writeText(markdownOutput).then(() => {
-    alert('Markdown copied as plain text to clipboard!');
-  }).catch(err => {
-    console.error('Failed to copy text: ', err);
-  });
-}
+      navigator.clipboard.writeText(markdownOutput).then(() => {
+        alert('Markdown copied as plain text to clipboard!');
+      }).catch(err => {
+        console.error('Failed to copy text: ', err);
+      });
+    }
 
-function sortRowsByDate() {
+    function sortRowsByDate() {
       const employmentList = document.getElementById('employmentList');
-      const rows = Array.from(employmentList.querySelectorAll('tr'));
+      const rows = Array.from(employmentList.rows);
 
-      rows.sort((a, b) => {
-        const dateA = new Date(a.cells[3].textContent);
-        const dateB = new Date(b.cells[3].textContent);
+      rows.sort((rowA, rowB) => {
+        const dateA = new Date(rowA.cells[3].textContent);
+        const dateB = new Date(rowB.cells[3].textContent);
         return dateB - dateA;
       });
-
-      // Remove all rows from the table
-      employmentList.innerHTML = '';
 
       // Insert sorted rows back into the table
       rows.forEach(row => {
