@@ -6,37 +6,32 @@
 <title>Address History</title>
 <style>
   body {
-    background-color: #eaeaea; /* Light grey background color */
-    font-family: Arial, sans-serif; /* Example font family */
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */
+    background-color: #eaeaea;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
   }
 
-  /* Style for h1 heading */
-  h1 {
-    font-size: 16px; /* Adjust the font size as needed */
-  }
   h1 {
     text-align: center;
+    font-size: 16px;
   }
 
-  #nameForm {
+  #nameForm, #addressForm {
     width: 40%;
     margin: 20px auto;
-    margin-bottom: -12px;
   }
 
-  /* Style for form labels and inputs */
-  #nameForm label {
+  #nameForm label, #addressForm label {
     display: block;
     margin-bottom: 1px;
     font-weight: bold;
     font-size: 16px;
-    text-align:center;
+    text-align: center;
   }
 
-  #nameForm input {
-    width: calc(100% - 20px); /* Adjust input width */
+  #nameForm input, #addressForm input {
+    width: calc(100% - 20px);
     padding: 8px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
@@ -45,30 +40,6 @@
     font-size: 20px;
     font-weight: bold;
     color: rgb(72, 72, 72);
-  }
-
-  /* Style for form */
-  #addressForm {
-    width: 40%;
-    margin: 20px auto;
-  }
-
-  /* Style for form labels and inputs */
-  #addressForm label {
-    display: block;
-    margin-bottom: 1px;
-    font-weight: bold;
-    font-size: 16px;
-  }
-
-  #addressForm input {
-    width: calc(100% - 20px); /* Adjust input width */
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 20px;
   }
 
   button {
@@ -80,14 +51,13 @@
     cursor: pointer;
     border-radius: 3px;
     font-size: 14px;
-    font-weight:500;
+    font-weight: 500;
   }
 
   button:hover {
-  background-color: #064708;
-}
+    background-color: #064708;
+  }
 
-  /* Style for results table */
   #addressTable {
     width: 70%;
     margin: 20px auto;
@@ -102,7 +72,19 @@
     border: 1px solid #ccc;
   }
 
-  /* Style for edit button */
+  #markdownOutput {
+    width: 70%;
+    margin: 20px auto;
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: monospace;
+    white-space: pre-wrap;
+    user-select: all;
+    cursor: pointer; /* Change cursor to indicate it's clickable */
+  }
+
   .editButton {
     padding: 7px 10px;
     width: 50px;
@@ -112,18 +94,16 @@
     cursor: pointer;
   }
 
-  /* Style for older addresses */
   .olderAddress {
-    background-color: #ffe6e6; /* Light red background color */
+    background-color: #ffd4d4;
   }
 
-  /* Print-specific styles */
   @media print {
     #addressForm label,
     #addressForm input,
     #addressForm button,
     #addressTable .editButton {
-      display: none; /* Hide labels, inputs, buttons inside #addressForm, and edit buttons in the table */
+      display: none;
     }
   }
 
@@ -142,12 +122,11 @@
     <input type="text" id="address" required>
     <label for="moveInDate">Move-in Date</label>
     <input type="date" id="moveInDate" required>
-
     <label for="moveOutDate">Move-out Date</label>
     <input type="date" id="moveOutDate" required>
 
     <button type="submit">List Address</button> <br><br>
-    <button onclick="saveToFile()">Export as TSV</button>
+    <button type="button" onclick="generateMarkdown()">Show as Markdown</button>
   </form>
 
   <h2></h2>
@@ -163,6 +142,8 @@
     <tbody id="addressList"></tbody>
   </table>
 
+  <div id="markdownOutput" onclick="copyMarkdown()"></div>
+
   <script>
     function addAddress(event) {
       event.preventDefault();
@@ -173,10 +154,8 @@
 
       const addressList = document.getElementById('addressList');
 
-      // Create a new row
       const newRow = addressList.insertRow();
 
-      // Insert cells with data
       const cell1 = newRow.insertCell(0);
       cell1.textContent = address;
 
@@ -186,7 +165,6 @@
       const cell3 = newRow.insertCell(2);
       cell3.textContent = moveOutDate;
 
-      // Create an "Edit" button in the last cell
       const cell4 = newRow.insertCell(3);
       const editButton = document.createElement('button');
       editButton.textContent = 'Edit';
@@ -196,14 +174,13 @@
       };
       cell4.appendChild(editButton);
 
-      // Sort the rows by move-in date in descending order
       sortRowsByDate();
 
       document.getElementById('addressForm').reset();
     }
 
     function formatDate(dateString) {
-      const date = new Date(dateString + 'T00:00:00'); // Add timezone offset
+      const date = new Date(dateString + 'T00:00:00');
       const month = (date.getMonth() + 1).toString().padStart(2, '0');
       const day = date.getDate().toString().padStart(2, '0');
       const year = date.getFullYear();
@@ -220,49 +197,34 @@
       document.getElementById('moveInDate').valueAsDate = new Date(moveInDate);
       document.getElementById('moveOutDate').valueAsDate = new Date(moveOutDate);
 
-      row.remove(); // Remove the row being edited
+      row.remove();
     }
 
-    function saveToFile() {
-  const name = document.getElementById('name').value;
-  const addressTable = document.getElementById('addressTable');
+    function generateMarkdown() {
+      const addressTable = document.getElementById('addressTable');
+      const rows = addressTable.querySelectorAll('tbody tr');
+      let markdown = `| Address         | Move-in Date | Move-out Date |\n`;
+      markdown += `|-----------------|--------------|---------------|\n`;
 
-  // Create the TSV content
-  let tsvContent = 'Name: ' + name + '\n\n';
+      rows.forEach(row => {
+        const cells = Array.from(row.querySelectorAll('td')).map(cell => cell.textContent.trim());
+        markdown += `| ${cells[0]} | ${cells[1]} | ${cells[2]} |\n`;
+      });
 
-  // Get header cells for alignment
-  const headersRow = addressTable.querySelector('thead tr');
-  const headers = Array.from(headersRow.querySelectorAll('th')).map(header => header.textContent);
+      const markdownOutput = document.getElementById('markdownOutput');
+      markdownOutput.textContent = markdown;
+      markdownOutput.style.display = 'block';
+    }
 
-  // Determine the maximum length of each field for fixed-width alignment
-  const maxLengths = headers.map(header => header.length);
+    function copyMarkdown() {
+  const markdownOutput = document.getElementById('markdownOutput').textContent;
 
-  // Loop through table rows and update maxLengths based on cell content
-  const rows = addressTable.querySelectorAll('tbody tr');
-  rows.forEach(row => {
-    const cells = Array.from(row.querySelectorAll('td')).map(cell => cell.textContent);
-    cells.forEach((cell, index) => {
-      maxLengths[index] = Math.max(maxLengths[index], cell.length);
-    });
+  navigator.clipboard.writeText(markdownOutput).then(() => {
+    alert('Markdown copied as plain text to clipboard!');
+  }).catch(err => {
+    console.error('Failed to copy text: ', err);
   });
-
-  // Generate fixed-width format TSV content
-  tsvContent += headers.map((header, index) => header.padEnd(maxLengths[index])).join('\t') + '\n';
-  rows.forEach(row => {
-    const cells = Array.from(row.querySelectorAll('td')).map((cell, index) => cell.textContent.padEnd(maxLengths[index]));
-    tsvContent += cells.join('\t') + '\n';
-  });
-
-  // Create a blob containing the TSV content
-  const blob = new Blob([tsvContent], { type: 'text/tab-separated-values' });
-
-  // Create a download link and trigger the download
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.download = name + '_address_history.tsv';
-  link.click();
 }
-
 
     function sortRowsByDate() {
       const addressList = document.getElementById('addressList');
@@ -274,10 +236,8 @@
         return dateB - dateA;
       });
 
-      // Remove all rows from the table
       addressList.innerHTML = '';
 
-      // Insert sorted rows back into the table
       rows.forEach(row => {
         addressList.appendChild(row);
         const moveInDate = new Date(row.cells[1].textContent);
@@ -290,13 +250,11 @@
       });
     }
 
-    // Call sortRowsByDate initially to sort the rows on page load
     sortRowsByDate();
 
-    // Add event listener for beforeunload event to show warning message
     window.addEventListener('beforeunload', function(event) {
       event.preventDefault();
-      event.returnValue = ''; // This line is required for some browsers
+      event.returnValue = '';
     });
   </script>
 </body>
