@@ -72,19 +72,6 @@
     border: 1px solid #ccc;
   }
 
-  #markdownOutput {
-    width: 70%;
-    margin: 20px auto;
-    background-color: white;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-family: monospace;
-    white-space: pre-wrap;
-    user-select: all;
-    cursor: pointer; /* Change cursor to indicate it's clickable */
-  }
-
   .editButton {
     padding: 7px 10px;
     width: 50px;
@@ -107,6 +94,10 @@
     }
   }
 
+  /* Hide markdown output element */
+  #markdownOutput {
+    display: none;
+  }
 </style>
 </head>
 <body>
@@ -126,7 +117,7 @@
     <input type="date" id="moveOutDate" required>
 
     <button type="submit">List Address</button> <br><br>
-    <button type="button" onclick="generateMarkdown()">Show as Markdown</button>
+    <button type="button" onclick="copyMarkdown()">Copy Table</button>
   </form>
 
   <h2></h2>
@@ -142,7 +133,7 @@
     <tbody id="addressList"></tbody>
   </table>
 
-  <div id="markdownOutput" onclick="copyMarkdown()"></div>
+  <div id="markdownOutput"></div>
 
   <script>
     function addAddress(event) {
@@ -200,7 +191,7 @@
       row.remove();
     }
 
-    function generateMarkdown() {
+    function copyMarkdown() {
       const addressTable = document.getElementById('addressTable');
       const rows = addressTable.querySelectorAll('tbody tr');
       let markdown = `| Address         | Move-in Date | Move-out Date |\n`;
@@ -213,18 +204,13 @@
 
       const markdownOutput = document.getElementById('markdownOutput');
       markdownOutput.textContent = markdown;
-      markdownOutput.style.display = 'block';
+
+      navigator.clipboard.writeText(markdown).then(() => {
+        alert('Markdown copied as plain text to clipboard!');
+      }).catch(err => {
+        console.error('Failed to copy text: ', err);
+      });
     }
-
-    function copyMarkdown() {
-  const markdownOutput = document.getElementById('markdownOutput').textContent;
-
-  navigator.clipboard.writeText(markdownOutput).then(() => {
-    alert('Markdown copied as plain text to clipboard!');
-  }).catch(err => {
-    console.error('Failed to copy text: ', err);
-  });
-}
 
     function sortRowsByDate() {
       const addressList = document.getElementById('addressList');
