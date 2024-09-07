@@ -11,6 +11,7 @@
       background-color: #f4f4f4;
       margin: 0;
       padding: 20px;
+      font-size: 16px;
     }
 
     .container {
@@ -35,11 +36,15 @@
     input[type="text"], input[type="date"], input[type="number"] {
       font-size: 16px;
       font-weight: bold;
+      border-color: #0000000d;
       font-family: Arial, sans-serif;
+      padding: 4px;
+      width: 280px;
     }
 
     input[type="number"]:focus, input[type="text"]:focus, input[type="date"]:focus {
-      border-color: #007bff;
+      border-color: #28a745;
+      background-color: #eefff2;
       outline: none;
     }
 
@@ -101,31 +106,32 @@
     }
 
     .status-badge {
-      font-size: 20px;
-      font-weight: bold;
+      font-size: 25px;
+      font-weight:bolder;
       padding: 10px;
       border-radius: 5px;
+      width:fit-content;
     }
 
     .paid {
-      background-color: green;
-      color: white;
+      background-color: rgb(255, 255, 255);
+      color: rgb(0, 179, 0);
     }
 
     .due {
-      background-color: red;
-      color: white;
+      background-color: rgb(255, 255, 255);
+      color: red;
     }
 
     .partial {
-      background-color: orange;
-      color: white;
+      background-color: rgb(255, 255, 255);
+      color: orange;
     }
 
     .footer {
-      margin-top: 30px;
+      margin-top: 90px;
       font-size: 10px;
-      color: #7777779f;
+      color: #7777778e;
       text-align: center;
     }
 
@@ -177,7 +183,7 @@
         <defs>
           <style>
             .cls-1 {
-              fill: #626262;
+              fill: #707070;
             }
           </style>
         </defs>
@@ -197,13 +203,13 @@
 
   <h1>INVOICE</h1>
 
-  <h3>Customer Details</h3>
+  <h3>BILL TO</h3>
   <label for="customer-name">Name:</label>
-  <input type="text" id="customer-name" placeholder="Customer Name"><br><br>
+  <input type="text" id="customer-name" placeholder="Name"><br><br>
   <label for="invoice-date">Date:</label>
   <input type="date" id="invoice-date"><br><br>
 
-  <h3>Invoice Details</h3>
+  <h3>Details</h3>
   <table id="invoice-table">
     <thead>
       <tr>
@@ -238,7 +244,7 @@
 </div>
 
 <div class="footer">
-  <p><br><br><BR></BR>This is text. This is text. This is text. This is text. This is text. This is text. This is text. This is text.</p>
+  <p><br><br><br><br><br><br><br>This is text. This is text. This is text. This is text. This is text. This is text. This is text. This is text.</p>
 </div>
 
 <script>
