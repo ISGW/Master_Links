@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invoice</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: #000000;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #444;
+      font-size: 20px;
+    }
+
+    label {
+      font-size: 16px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    input[type="text"], input[type="date"], input[type="number"] {
+      font-size: 16px;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+    }
+
+    input[type="number"]:focus, input[type="text"]:focus, input[type="date"]:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+
+    .add-btn {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 4px 10px;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .add-btn:hover {
+      background-color: #218838;
+    }
+
+    .print-btn {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 20px;
+      display: inline-block;
+    }
+
+    .print-btn:hover {
+      background-color: #0056b3;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 3px;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f8f9fa;
+      font-size: 16px;
+    }
+
+    td {
+      background-color: #fff;
+      font-size: 16px;
+    }
+
+    .total-section div {
+      font-size: 16px;
+      font-weight: bold;
+      margin: 5px 0;
+    }
+
+    .status-badge {
+      font-size: 20px;
+      font-weight: bold;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .paid {
+      background-color: green;
+      color: white;
+    }
+
+    .due {
+      background-color: red;
+      color: white;
+    }
+
+    .partial {
+      background-color: orange;
+      color: white;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 10px;
+      color: #7777779f;
+      text-align: center;
+    }
+
+    .company-info {
+      display: flex;
+      font-size: 14px;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .company-details {
+      max-width: 60%;
+    }
+
+    .company-logo img {
+      max-width: 90px;
+      height: auto;
+    }
+
+    /* Print-specific styles */
+    @media print {
+      .print-btn, .add-btn {
+        display: none;
+      }
+
+      .footer {
+        font-size: 12px; /* Adjust font size if needed */
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  
+  <div class="company-info">
+    <div class="company-details">
+      <h2>ISG Tulsa</h2>
+      <p>7633 E 63RD PL STE 300</p>
+      <p>TULSA, OK 74133</p>
+      <p>(918) 308-1138</p>
+      <p>contact@isgtulsa.com</p>
+    </div>
+
+    <div class="company-logo">
+      <!-- Paste the SVG code directly here -->
+      <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 565.25 237.96">
+        <defs>
+          <style>
+            .cls-1 {
+              fill: #626262;
+            }
+          </style>
+        </defs>
+        <g id="main">
+          <g>
+            <path class="cls-1" d="M214.98,8.34l-5.28,1.71s-.03-.02-.04-.03c-3.04,.95-6.44,2.1-10.28,3.57-8.34,3.21-12.01,5.36-14.72,7.2-3.08,2.09-5.96,4.52-8.56,7.2l-.15,.17c-4.26,5.59-5.75,10.58-6.5,13.85-.59,2.57-.63,5.13-.7,9.76l-.03,1.81c-.04,2.2-.02,3.93,0,5.31,.03,2.86,.05,4.43-.42,6.85-.5,2.6-1.38,5.15-2.59,7.59-1.65,2.12-3.61,3.95-5.84,5.44-2.55,1.7-5.35,2.91-8.35,3.58-3.84-2.36-7.93-4.28-12.17-5.71-6.08-2.04-12.44-3.08-18.9-3.08-.44,0-.89,0-1.34,.01-6.38-.02-12.73,.89-18.83,2.7-4.89,1.46-9.62,3.49-14.05,6.05-2.28-.63-4.44-1.7-6.29-3.12-1.61-1.24-3-2.73-4.12-4.43l-.03-.04c-1.96-2.82-3.5-8.01-4.46-15.01-.87-6.34-.54-12.73,.97-18.99,1.13-3.46,2.63-6.77,4.47-9.85,1.57-2.63,6.23-7.63,13.84-14.86,2.91-2.76,5.07-4.8,8.96-8.23-.54,2.57-.95,5.17-1.23,7.77-.52,4.88-.89,8.41-.28,12.75,1.87,13.19,11.34,22,14.9,25.31,2.58,2.39,5.4,4.55,8.4,6.4l15.06,9.31-12.71-12.33c-3.62-3.51-6.63-7.55-8.94-12-2.97-5.73-4.7-11.94-5.14-18.44,.15-3.18,.97-7.94,4.03-12.74,1.37-2.15,3.09-4.37,4.81-6.27h.08c2.78-2.89,4.47-4.11,8.91-7.58H50.49C22.65,0,0,22.65,0,50.49V187.46c0,27.84,22.65,50.49,50.49,50.49h39.91l-.64-8.12h-.04c-1.15-14.46-2.25-28.42-2.25-28.42-.02-.27-.13-.53-.28-.76,12-2.94,37.66-7.37,64.25-.18-.13,.22-.23,.47-.26,.74,0,0-1.29,16.58-2.51,32.36h.04l-.34,4.39h39.08c27.84,0,50.49-22.65,50.49-50.49V50.49c0-17.74-9.09-33.15-22.97-42.15Zm-18.16,142.85v.02s0,.02,0,.02c-.57,2.27-1.3,4.53-2.07,6.78-4.73-5.81-15.7-8.96-21.51-10.6-17.5-4.57-35.46-5.97-53.43-6.06-17.92,.06-35.93,1.38-53.42,5.52-5.94,1.49-19.21,4.97-24.41,11.31-.11-.34-.22-.68-.33-1.02-.56-1.83-1.43-4.5-1.68-5.94,.34-2.93,3.8-4.93,6.38-6.32,28.28-13.32,90.36-12.6,121.29-6.8,7.83,1.51,15.97,3.32,23.02,6.91,1.69,.89,3.3,1.92,4.49,3.1,.89,.91,1.51,1.79,1.67,2.95v.11Zm-108.54-61.04c.98-.59,4.24-2.43,9.06-4.24,5.68-2.14,13.5-4.21,22.28-4.21,4.62,0,9.5,.57,14.52,1.99,5,1.42,10.14,3.68,15.31,7.12v18.67l-27.46-25.3c-1.43-1.31-3.67-1.37-5.15-.05l-28.56,25.23v-19.22Zm-2.8,29.94c1.13,.27,2.4-.04,3.3-.89l30.54-26.99c7.43,6.84,28.65,26.28,28.64,26.36,.83,.75,2,1.11,3.18,.84l44.5-10.01-7.06,18.61c-.16,.44-.17,.94,.02,1.4l4.43,10.97c-13.28-7.91-38.49-11.12-49.24-12.08-29.25-2.36-66.46-1.5-94.01,9.18-1.36,.58-2.9,1.27-4.44,2.08l5.17-9.99c.26-.52,.3-1.16,.02-1.72l-8.89-18.3,43.85,10.53Zm17.97,67.88c-8.86,1.04-16.03,2.64-20.67,3.87,2.33-3.12,4.42-6.4,5.95-10.05,1.02-1.78,1.67-3.43,2.67-5.88,2.24-5.49,.08-10-3.78-12.11-1.39-.76-3.85-.69-6.26-.2l-4.34,1.03-9.54,2.87c-.13-.03,9.7,2.32,10.52,2.31,4.05,1.09,5.39,1.45,6.7,2.61,1.6,1.67,1.6,4.12,1.29,6.47-10.3-1.65-20.55-3.43-30.21-7.18-1.97-.78-3.88-1.66-5.62-2.68-1.57-.92-3.19-2.08-4.19-3.48-.42-.62-.61-1.17-.6-1.6,.29-3.38,7.12-6.11,10.17-7.24,12.17-4.22,25.28-5.74,38.11-6.82,25.94-1.68,52.42-1.15,77.9,4.32,4.69,1.1,18.35,4.71,19.36,9.63-.13,2.42-3.83,4.51-6.04,5.73-6.76,3.45-14.52,5.43-22,7.1-3.34,.77-6.75,1.34-10.14,1.96-.27-2.27-.21-4.59,1.32-6.2,1.31-1.16,2.65-1.52,6.7-2.61,.83,0,10.65-2.34,10.52-2.31l-9.54-2.87-4.34-1.03c-2.41-.49-4.87-.56-6.26,.2-3.86,2.11-6.02,6.62-3.78,12.11,1.04,2.54,1.7,4.22,2.79,6.08,1.5,3.53,3.53,6.72,5.79,9.76-19.96-5.77-39.29-5.32-52.48-3.78Z"/>
+            <g>
+              <path class="cls-1" d="M309.36,195.39h-29.34V43.03h29.34V195.39Z"/>
+              <path class="cls-1" d="M378.94,61.26c-6.29,0-11.32,1.54-15.09,4.61-3.77,3.07-5.66,6.99-5.66,11.74s1.78,8.87,5.34,12.36c3.56,3.49,7.96,6.78,13.2,9.85,5.24,3.07,10.97,6.22,17.18,9.43,6.22,3.21,11.95,6.92,17.19,11.11,5.24,4.19,9.64,9.15,13.2,14.88,3.56,5.73,5.34,12.65,5.34,20.75,0,6.71-1.29,12.68-3.88,17.92-2.59,5.24-6.22,9.64-10.9,13.2-4.68,3.56-10.31,6.29-16.87,8.17-6.57,1.89-13.83,2.83-21.8,2.83-6.01,0-12.96-.8-20.85-2.41-7.9-1.6-16.66-4.64-26.3-9.12l7.96-19.49c7.55,3.64,14.63,6.11,21.27,7.44,6.63,1.33,12.61,1.99,17.92,1.99,3.77,0,7.23-.52,10.37-1.57,3.14-1.05,5.87-2.48,8.17-4.3,2.31-1.81,4.09-3.91,5.34-6.29,1.26-2.37,1.89-4.96,1.89-7.75,0-5.03-1.75-9.36-5.24-12.99-3.49-3.63-7.9-7.02-13.2-10.16-5.31-3.14-11-6.25-17.08-9.33-6.08-3.07-11.77-6.6-17.08-10.58-5.31-3.98-9.71-8.66-13.2-14.04-3.49-5.38-5.24-11.84-5.24-19.39,0-6.84,1.22-12.78,3.67-17.81,2.44-5.03,5.76-9.15,9.95-12.37,4.19-3.21,9.08-5.62,14.67-7.23,5.59-1.61,11.53-2.41,17.81-2.41,3.21,0,6.32,.1,9.33,.31,3,.21,6.15,.56,9.43,1.05,3.28,.49,6.71,1.19,10.27,2.09,3.56,.91,7.58,2.06,12.05,3.46l-7.75,19.07c-6.29-1.81-11.95-3.11-16.98-3.88-5.03-.77-9.85-1.15-14.46-1.15Z"/>
+              <path class="cls-1" d="M519.15,61.89c-8.38,0-15.79,1.57-22.21,4.72-6.43,3.14-11.84,7.34-16.24,12.57-4.4,5.24-7.72,11.35-9.95,18.34-2.24,6.99-3.35,14.25-3.35,21.8s1.12,14.32,3.35,21.17c2.23,6.85,5.48,12.92,9.75,18.23,4.26,5.31,9.57,9.57,15.93,12.78,6.36,3.22,13.73,4.82,22.11,4.82,3.07,0,6.08-.1,9.01-.31,2.93-.21,6.63-.87,11.11-1.99v-49.25h26.62v62.87c-3.77,1.68-7.78,3.18-12.03,4.51-4.26,1.33-8.47,2.41-12.66,3.25-4.19,.84-8.2,1.47-12.03,1.89-3.84,.42-7.22,.63-10.15,.63-12.97,0-24.59-2.03-34.84-6.08-10.25-4.05-18.94-9.64-26.05-16.77-7.12-7.13-12.56-15.47-16.32-25.04-3.77-9.57-5.65-19.8-5.65-30.7s1.95-21.34,5.87-30.91c3.91-9.57,9.5-17.92,16.77-25.04,7.26-7.13,16.03-12.75,26.3-16.87,10.27-4.12,21.83-6.18,34.68-6.18,5.87,0,12.71,.7,20.54,2.1,7.82,1.4,15.72,3.77,23.68,7.13l-7.75,20.12c-7.96-3.07-14.81-5.14-20.54-6.18-5.73-1.05-11.04-1.57-15.93-1.57Z"/>
+            </g>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <h1>INVOICE</h1>
+
+  <h3>Customer Details</h3>
+  <label for="customer-name">Name:</label>
+  <input type="text" id="customer-name" placeholder="Customer Name"><br><br>
+  <label for="invoice-date">Date:</label>
+  <input type="date" id="invoice-date"><br><br>
+
+  <h3>Invoice Details</h3>
+  <table id="invoice-table">
+    <thead>
+      <tr>
+        <th>Service</th>
+        <th>Price</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody id="invoice-body">
+      <tr>
+        <td><input type="text" placeholder="Service"></td>
+        <td><input type="number" step="0.01" min="0" placeholder="0.00"></td>
+        <td class="total-cell">$0.00</td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="add-btn" onclick="addRow()">Add Service</button>
+
+  <div class="total-section">
+    <div><strong>Total Amount:</strong> $<span id="total-amount">0.00</span></div>
+    <div><strong>Paid Amount:</strong> $<input type="number" id="paid-amount" step="0.01" min="0" value="0" oninput="updateDueAmount()"></div>
+    <div><strong>Due Amount:</strong> $<span id="due-amount">0.00</span></div>
+  </div>
+
+  <div class="status-section">
+    <div id="status-badge" class="status-badge due">DUE</div>
+  </div>
+
+  <!-- Add the print button here -->
+  <button class="print-btn" onclick="window.print()">Print Invoice</button>
+
+</div>
+
+<div class="footer">
+  <p><br><br><BR></BR>This is text. This is text. This is text. This is text. This is text. This is text. This is text. This is text.</p>
+</div>
+
+<script>
+  function addRow() {
+    const tableBody = document.getElementById("invoice-body");
+    const newRow = document.createElement("tr");
+    newRow.innerHTML = `
+      <td><input type="text" placeholder="Service"></td>
+      <td><input type="number" step="0.01" min="0" placeholder="0.00"></td>
+      <td class="total-cell">$0.00</td>
+    `;
+    tableBody.appendChild(newRow);
+    updateTotal();
+  }
+
+  function updateTotal() {
+    const rows = document.querySelectorAll("#invoice-body tr");
+    let totalAmount = 0;
+
+    rows.forEach(row => {
+      const unitPrice = row.querySelector("td:nth-child(2) input").value;
+      const totalCell = row.querySelector(".total-cell");
+      const rowTotal = unitPrice || 0;
+      totalCell.textContent = `$${parseFloat(rowTotal).toFixed(2)}`;
+      totalAmount += parseFloat(rowTotal);
+    });
+
+    document.getElementById("total-amount").textContent = totalAmount.toFixed(2);
+    updateDueAmount();
+  }
+
+  function updateDueAmount() {
+    const totalAmount = parseFloat(document.getElementById("total-amount").textContent) || 0;
+    const paidAmount = parseFloat(document.getElementById("paid-amount").value) || 0;
+    const dueAmount = totalAmount - paidAmount;
+
+    document.getElementById("due-amount").textContent = dueAmount.toFixed(2);
+    updateStatus();
+  }
+
+  function updateStatus() {
+    const totalAmount = parseFloat(document.getElementById("total-amount").textContent) || 0;
+    const paidAmount = parseFloat(document.getElementById("paid-amount").value) || 0;
+    const dueAmount = totalAmount - paidAmount;
+    const badge = document.getElementById("status-badge");
+
+    if (dueAmount <= 0) {
+      badge.textContent = "PAID";
+      badge.classList.remove("due", "partial");
+      badge.classList.add("paid");
+    } else if (paidAmount > 0 && paidAmount < totalAmount) {
+      badge.textContent = "PARTIAL";
+      badge.classList.remove("paid", "due");
+      badge.classList.add("partial");
+    } else {
+      badge.textContent = "DUE";
+      badge.classList.remove("paid", "partial");
+      badge.classList.add("due");
+    }
+  }
+
+  document.getElementById("invoice-body").addEventListener("input", updateTotal);
+</script>
+
+</body>
+</html>
