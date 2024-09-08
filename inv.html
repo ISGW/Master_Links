@@ -5,13 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Invoice</title>
   <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
     body {
       font-family: Arial, sans-serif;
       color: #000000;
       background-color: #f4f4f4;
       margin: 0;
-      padding: 20px;
       font-size: 16px;
+      display: flex;
+      flex-direction: column;
+      font-family: Arial, sans-serif;
     }
 
     .container {
@@ -19,6 +27,7 @@
       margin: 0 auto;
       background: #fff;
       padding: 20px;
+      flex: 1;
     }
 
     h1 {
@@ -129,11 +138,15 @@
     }
 
     .footer {
-      margin-top: 90px;
+      margin-top: 0px;
       font-size: 10px;
-      color: #7777778e;
-      text-align: center;
+      color: #7777776a;
+      text-align: left;
+      background-color: #f4f4f400;
+      padding: 10px;
+      width: 100%;
     }
+
 
     .company-info {
       display: flex;
@@ -156,10 +169,6 @@
     @media print {
       .print-btn, .add-btn {
         display: none;
-      }
-
-      .footer {
-        font-size: 12px; /* Adjust font size if needed */
       }
     }
   </style>
@@ -244,7 +253,7 @@
 </div>
 
 <div class="footer">
-  <p><br><br><br><br><br><br><br>This is text. This is text. This is text. This is text. This is text. This is text. This is text. This is text.</p>
+  <p><br><br><br><br>Immigrant Services & Guidance LLC (ISG Tulsa) is company that provides assistance with immigration-related processes, entering data, doing document translations and interpretation. A fee is charged for such services. We are not an attorney firm; we do not give legal advice or represent clients in a court of law, nor do we accept fees for legal advice. We are not associated with any government agency. | Immigrant Services & Guidance LLC (ISG Tulsa) es una empresa privada que brinda asistencia con procesos relacionados con inmigración, ingresando datos, realizando traducciones e interpretación de documentos. Se cobra una tarifa por dichos servicios. No somos una firma de abogados; No brindamos asesoramiento legal ni representamos a clientes ante la corte, tampoco aceptamos honorarios por asesoramiento legal. No estamos asociados con ninguna agencia gubernamental.</p>
 </div>
 
 <script>
