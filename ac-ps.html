@@ -89,11 +89,20 @@
     }
     
     #copy-message {
+        position: fixed;
+        background-color: #2e344000;
+        padding: 3px;
+        border-radius: 3px;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: Arial, sans-serif;
         font-size: 20px;
         font-weight: bold;
         color: #00FF00;
-        margin-top: 20px;
+        margin-top: 5px;
         display: none;
+        text-align: center;
     }
     
     .permanent-message {
@@ -106,11 +115,10 @@
 </style>
 </head>
 <body>
-
+    <h1>‎ </h1>
 <div class="container">
-    <h1><a href="https://docs.google.com/document/d/1R4HuMJpGnanWGUdMcZrS0bDF1436PSsURnMx1QmtHUc/preview" target="_blank" style="color: #e5e5e5; text-decoration: none;">
-        <svg xmlns="http://www.w3.org/2000/svg" width=".8em" height=".8em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2S2 6.477 2 12s4.477 10 10 10"/><path d="M9 9c0-3.5 5.5-3.5 5.5 0c0 2.5-2.5 2-2.5 5m0 4.01l.01-.011"/></g></svg>
-    </a></h1>
+
+    <div id="copy-message">Copied ✔</div>
 
     <div class="permanent-message">@tulsa-isg.com</div>
     <button id="permanent-copy" onclick="copyPermanentText()">Copy ↑</button>
@@ -121,7 +129,6 @@
     <div id="generated-password"></div>
     <br>
     <button id="copy-button" onclick="copyToClipboard()">Copy ↑</button>
-    <div id="copy-message">Copied to clipboard ✔</div>
 </div>
 
 <script>
