@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<title>***</title>
+<style>
+    body {
+        background-color: #2e3440;
+        font-family: Arial, sans-serif;
+    }
+
+    a:hover {
+        color: #00FF00 !important;
+	    transition: color 0.2s;
+        }
+
+    .container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 0px;
+        border: 1px solid #92929200;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center; /* Center items horizontally */
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items horizontally */
+    }
+
+    label {
+        font-size: 16px;
+        display: block;
+        margin-top: 10px;
+        margin-bottom: 8px;
+        color: #aeaeae
+    }
+
+    input[type="number"] {
+        font-size: 17px;
+        background-color: #20242c;
+        color: #ffffff;
+        width: 23%;
+        padding: 8px;
+        border-radius: 5px;
+        margin-bottom: 0px;
+    }
+
+    button {
+        width: 25%;
+        min-width:fit-content;
+        padding: 10px 20px;
+        background-color: #8abcbb;
+        font-size: 17px;
+        font-weight: bold;
+        color: #111417;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 15px;
+    }
+
+    button:hover {
+        background-color: #eecb91;
+    }
+
+    #generated-password {
+        font-size: 20px;
+        color: rgb(255, 255, 255);
+        background-color: #20242c;
+        border-radius: 5px;
+        font-weight: bold;
+        word-break: break-all;
+        margin-top: 10px;
+    }
+
+    #copy-button {
+        padding: 10px 20px;
+        background-color: #8abcbb;
+        color: #111417;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #copy-button:hover {
+        background-color: #eecb91;
+    }
+    
+    #copy-message {
+        position: fixed;
+        background-color: #2e344000;
+        padding: 3px;
+        border-radius: 3px;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: Arial, sans-serif;
+        font-size: 20px;
+        font-weight: bold;
+        color: #00FF00;
+        margin-top: 5px;
+        display: none;
+        text-align: center;
+    }
+    
+    .permanent-message {
+        font-size: 20px;
+        color: rgb(255, 255, 255);
+        background-color: #20242c;
+        border-radius: 5px;
+        margin-bottom: 0px;
+    }
+</style>
+</head>
+<body>
+    <h1>‎ </h1>
+<div class="container">
+
+    <div id="copy-message">Copied ✔</div>
+
+    <div class="permanent-message">@tulsa-isg.com</div>
+    <button id="permanent-copy" onclick="copyPermanentText()">Copy ↑</button>
+    <label for="length">Length:</label>
+    <input type="number" id="length" min="6" max="40" value="12">
+    <button onclick="generatePassword()">Generate ⚙</button>
+    <br>
+    <div id="generated-password"></div>
+    <br>
+    <button id="copy-button" onclick="copyToClipboard()">Copy ↑</button>
+</div>
+
+<script>
+    function generatePassword() {
+        var length = document.getElementById('length').value;
+        var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*()+:?=";
+        var password = "";
+
+        for (var i = 0; i < length; i++) {
+            var randomIndex = Math.floor(Math.random() * charset.length);
+            password += charset[randomIndex];
+        }
+
+        document.getElementById('generated-password').textContent = password;
+        hideCopyMessage(); // Hide the copy message if visible
+    }
+
+    function copyToClipboard() {
+        var password = document.getElementById('generated-password').textContent;
+
+        if (password) {
+            var textarea = document.createElement('textarea');
+            textarea.value = password;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            showCopyMessage(); // Show the copy message after copying
+        }
+    }
+
+    function copyPermanentText() {
+        var permanentText = document.querySelector('.permanent-message').textContent;
+        var textarea = document.createElement('textarea');
+        textarea.value = permanentText;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        showCopyMessage(); // Show the copy message after copying
+    }
+
+    function showCopyMessage() {
+        var copyMessage = document.getElementById('copy-message');
+        copyMessage.style.display = 'block';
+        setTimeout(function() {
+            copyMessage.style.display = 'none';
+        }, 3000); // Hide message after 3 seconds
+    }
+
+    function hideCopyMessage() {
+        var copyMessage = document.getElementById('copy-message');
+        copyMessage.style.display = 'none';
+    }
+
+</script>
+
+</body>
+</html>
