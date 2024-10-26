@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<title>Office Info</title>
+<style>
+body {
+  background-color: #2e3440;
+}
+
+h1 {
+  color: #929292;
+  font-family: Arial, sans-serif;
+  font-size: 24px;
+  margin-left: 50px;
+  margin-bottom: -10px;
+}
+
+.alert {
+  position: fixed;
+  background-color: #2e344000;
+  padding: 3px;
+  border-radius: 3px;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: #00FF00;
+  margin-top: 5px;
+  display: none;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3px;
+}
+
+.field {
+  margin-bottom: 8px;
+  align-items: center;
+  margin-left: 40px;
+  color: #aeaeae;
+  font-family: Arial, sans-serif;
+}
+
+button {
+  background-color: #8abcbb;
+  color: #111417;
+  font-weight: bold;
+  border: none;
+  padding: 8px 24px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+button:hover {
+  background-color: #eecb91;
+}
+
+.field p {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 3px;
+}
+
+.field p span {
+  font-size: 20px;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+}
+</style>
+</head>
+<body>
+<h1>‎ </h1>
+<div class="container">
+  <div class="field">
+    <p>Email <br><span id="email">contact@isgtulsa.com</span></p>
+    <button onclick="copyTextToClipboard('email')">COPY</button>
+  </div>
+  <div class="field">
+    <p>Phone <br><span id="phoneNumber">9183081138</span></p>
+    <button onclick="copyTextToClipboard('phoneNumber')">COPY</button>
+  </div>
+  <div class="field">
+    <p>Address <br><span id="address">7633 E 63RD PL STE 300 <br> TULSA OK 74133</span></p>
+    <button onclick="copyTextToClipboard('address')">COPY</button>
+  </div>
+  <div class="field">
+    <p>CashApp <br><span id="cashApp">https://cash.app/ISGTULSA</span></p>
+    <button onclick="copyTextToClipboard('cashApp')">COPY</button>
+  </div>
+  <div class="field">
+    <p>Zelle / QB Invoice <br><span id="zelle">payisg@proton.me</span></p>
+    <button onclick="copyTextToClipboard('zelle')">COPY</button>
+  </div>
+  <div class="field">
+    <p>Website <br><span id="website">https://isgtulsa.com</span></p>
+    <button onclick="copyTextToClipboard('website')">COPY</button>
+  </div>
+</div>
+
+<div class="alert" id="alertMessage">Copied ✔</div>
+
+<script>
+function copyTextToClipboard(id) {
+  const text = document.getElementById(id).innerText;
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand('copy');
+  document.body.removeChild(textarea);
+  showAlert(); // Show alert after copying
+}
+
+function showAlert() {
+  const alertMessage = document.getElementById('alertMessage');
+  alertMessage.style.display = 'block';
+  setTimeout(function() {
+    alertMessage.style.display = 'none';
+  }, 3000); // Hide alert after 3 seconds
+}
+</script>
+
+</body>
+</html>
