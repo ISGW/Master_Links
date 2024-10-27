@@ -8,19 +8,14 @@
 <title>***</title>
 <style>
     body {
-        background-color: #3b4252;
+        background-color: #262626;
         font-family: Arial, sans-serif;
     }
-
-    a:hover {
-        color: #00FF00 !important;
-	    transition: color 0.2s;
-        }
 
     .container {
         max-width: 500px;
         margin: 0 auto;
-        padding: 0px;
+        padding: 20px;
         border: 1px solid #92929200;
         border-radius: 5px;
         display: flex;
@@ -32,14 +27,14 @@
     label {
         font-size: 16px;
         display: block;
-        margin-top: 10px;
+        margin-top: 20px;
         margin-bottom: 8px;
         color: #929292
     }
 
     input[type="number"] {
         font-size: 17px;
-        background-color: #2e3440;
+        background-color: #191919;
         color: #ffffff;
         width: 23%;
         padding: 8px;
@@ -68,7 +63,7 @@
     #generated-password {
         font-size: 20px;
         color: rgb(255, 255, 255);
-        background-color: #2e3440;
+        background-color: #191919;
         border-radius: 5px;
         font-weight: bold;
         word-break: break-all;
@@ -89,37 +84,26 @@
     }
     
     #copy-message {
-        position: fixed;
-        background-color: #2e344000;
-        padding: 3px;
-        border-radius: 3px;
-        top: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-family: Arial, sans-serif;
         font-size: 20px;
         font-weight: bold;
         color: #00FF00;
-        margin-top: 5px;
+        margin-top: 20px;
         display: none;
-        text-align: center;
     }
     
     .permanent-message {
         font-size: 20px;
         color: rgb(255, 255, 255);
-        background-color: #2e3440;
+        background-color: #191919;
         border-radius: 5px;
         margin-bottom: 0px;
     }
 </style>
 </head>
 <body>
-    <h1>‎ </h1>
+
 <div class="container">
-
-    <div id="copy-message">Copied ✔</div>
-
+    <h1></h1>
     <div class="permanent-message">@tulsa-isg.com</div>
     <button id="permanent-copy" onclick="copyPermanentText()">Copy ↑</button>
     <label for="length">Length:</label>
@@ -129,6 +113,7 @@
     <div id="generated-password"></div>
     <br>
     <button id="copy-button" onclick="copyToClipboard()">Copy ↑</button>
+    <div id="copy-message">Copied to clipboard ✔</div>
 </div>
 
 <script>
