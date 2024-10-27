@@ -21,16 +21,16 @@ h1 {
 
 .alert {
   position: fixed;
-  background-color: #2e344000;
-  padding: 3px;
-  border-radius: 3px;
+  background-color: #00ff007d;
+  padding: 250px;
+  border-radius: 10px;
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
   font-family: Arial, sans-serif;
-  font-size: 20px;
-  font-weight: bold;
-  color: #00FF00;
+  font-size: 30px;
+  font-weight: bolder;
+  color: #000000;
   margin-top: 5px;
   display: none;
   text-align: center;
@@ -109,7 +109,7 @@ button:hover {
   </div>
 </div>
 
-<div class="alert" id="alertMessage">Copied ✔</div>
+<div class="alert" id="alertMessage"><svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M12 21a9 9 0 1 0 0-18a9 9 0 0 0 0 18m-.232-5.36l5-6l-1.536-1.28l-4.3 5.159l-2.225-2.226l-1.414 1.414l3 3l.774.774z" clip-rule="evenodd"/></svg></div>
 
 <script>
 function copyTextToClipboard(id) {
@@ -128,7 +128,7 @@ function showAlert() {
   alertMessage.style.display = 'block';
   setTimeout(function() {
     alertMessage.style.display = 'none';
-  }, 3000); // Hide alert after 3 seconds
+  }, 200); // Hide alert after 3 seconds
 }
 </script>
 
