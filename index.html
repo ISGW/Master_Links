@@ -23,11 +23,11 @@
     body::-webkit-scrollbar {
         display: none; /* Chrome, Safari, and Opera */
         }
-
+ 
     body {
         font-family: "Open Sans", sans-serif;
         font-weight: 400;
-        background-color: #1d1d1d;
+        background: linear-gradient(to bottom, #1d1d1d, #262626);
         color: #00FF00;
         font-size: 16px;
         text-align: center;
@@ -45,7 +45,7 @@
 
     .table-container {
         margin-right: 3px; /* Space between tables */
-        margin-top: 25px;
+        margin-top: 20px;
         background-color: #262626;
         border-radius: 10px 10px 0 0;
     }
@@ -62,12 +62,13 @@
     th, td {
         padding: 4px;
         text-align: left;
-        border-bottom: 1px solid #8f8f8f00;
+        border-bottom: 1px solid #ff000000;
         border-radius: 5px;
     }
 
     th {
         background-color: #194587;
+        border-bottom: 5px solid #1d1d1d;
         border-radius: 10px 10px 0 0;
         color: #ffffff;
         font-size: 16px;
@@ -138,7 +139,7 @@
     .dropdown-content {
         display: none;
         position: absolute;
-        background-color: #3d3d3d;
+        background-color: #353535;
         border-radius: 5px;
         min-width: 256px;
         box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.679);
@@ -337,9 +338,9 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #1d1d1d;
-    border-top: 2px solid #4caf4f00;
-    padding: 15px 0;
+    background-color: #262626;
+    border-top: 5px solid #1d1d1d;
+    padding: 16px 0;
 }
 
 .icon-container {
@@ -386,7 +387,7 @@
             <tr>
                 <td class="dropdown">
                     <div class="arrow-down"></div>
-                    <span onclick="toggleDropdown(this)">‎ ‎ ‎ ‎ Common Process/Forms</span>
+                    <span onclick="toggleDropdown(this)">‎ ‎ ‎ ‎ Common Process / Forms</span>
                     <div class="dropdown-content">
                         <a href="https://www.uscis.gov/i-485">I-485 Adjustment of Status</a>
                         <a href="https://www.uscis.gov/i-130">I-130 Petition for Relative</a>
@@ -443,7 +444,6 @@
             <tr>
                 <td><a href="https://www.uscis.gov/contactcenter">USCIS Contact</a></td>
             </tr>
-            
             <!-- Add more rows as needed -->
         </tbody>
     </table>
