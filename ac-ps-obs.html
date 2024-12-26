@@ -10,6 +10,7 @@
     body {
         background-color: #2e3440;
         font-family: Arial, sans-serif;
+        color: #ff942a;
     }
 
     a:hover {
@@ -66,7 +67,7 @@
     }
 
     #generated-password {
-        font-size: 20px;
+        font-size: 22px;
         color: rgb(255, 255, 255);
         background-color: #20242c;
         border-radius: 5px;
@@ -107,7 +108,7 @@
     }
     
     .permanent-message {
-        font-size: 20px;
+        font-size: 22px;
         color: rgb(255, 255, 255);
         background-color: #20242c;
         border-radius: 5px;
@@ -127,8 +128,9 @@
     <input type="number" id="length" min="6" max="40" value="12">
     <button onclick="generatePassword()">Generate ⚙</button>
     <br>
-    <div id="generated-password"></div>
     <br>
+    <div id="generated-password"></div>
+    <div>__________________</div>
     <button id="copy-button" onclick="copyToClipboard()">Copy ↑</button>
 </div>
 
