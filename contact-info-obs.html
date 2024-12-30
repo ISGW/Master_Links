@@ -21,19 +21,19 @@ h1 {
 
 .alert {
   position: fixed;
-  background-color: #00ff007d;
-  padding: 250px;
-  border-radius: 10px;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
+  background-color: #ff5e00c3;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
   font-family: Arial, sans-serif;
-  font-size: 30px;
+  font-size: 24px;
   font-weight: bolder;
   color: #000000;
-  margin-top: 5px;
-  display: none;
   text-align: center;
+  display: none;
+  align-items: center;
+  justify-content: center;
 }
 
 .container {
@@ -55,14 +55,14 @@ button {
   color: #111417;
   font-weight: bold;
   min-height: 35px;
-  min-width: 100px;
+  min-width: 10px;
   border: none;
   padding: 10px 26px;
   cursor: pointer;
   border-radius: 3px;
   font-size: 12px;
   font-weight: 600;
-  margin-top: 5px;
+  margin-top: 3px;
 }
 
 button:hover {
@@ -94,8 +94,12 @@ button:hover {
     <button onclick="copyTextToClipboard('phoneNumber')">COPY</button>
   </div>
   <div class="field">
-    <p>Address <br><span id="address">7633 E 63RD PL STE 300 <br> TULSA OK 74133</span></p>
+    <p>Address <br><span id="address">ISG Tulsa<br>7633 E 63RD PL STE 300 <br> TULSA OK 74133</span></p>
     <button onclick="copyTextToClipboard('address')">COPY</button>
+  </div>
+  <div class="field">
+    <p>Inquiries / NVC <br><span id="website">user@mailisg.com</span></p>
+    <button onclick="copyTextToClipboard('website')">COPY</button>
   </div>
   <div class="field">
     <p>CashApp <br><span id="cashApp">https://cash.app/ISGTULSA</span></p>
@@ -105,10 +109,7 @@ button:hover {
     <p>Zelle / QB Invoice <br><span id="zelle">payisg@proton.me</span></p>
     <button onclick="copyTextToClipboard('zelle')">COPY</button>
   </div>
-  <div class="field">
-    <p>Inquiries / NVC <br><span id="website">user@mailisg.com</span></p>
-    <button onclick="copyTextToClipboard('website')">COPY</button>
-  </div>
+
 </div>
 
 <div class="alert" id="alertMessage"><svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M12 21a9 9 0 1 0 0-18a9 9 0 0 0 0 18m-.232-5.36l5-6l-1.536-1.28l-4.3 5.159l-2.225-2.226l-1.414 1.414l3 3l.774.774z" clip-rule="evenodd"/></svg></div>
