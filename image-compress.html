@@ -12,11 +12,13 @@
             padding: 20px;
             line-height: 1.5;
             color: #333;
+            background-color: #eaeaea;
         }
         
         h1 {
             text-align: center;
             margin-bottom: 30px;
+            font-size: 22px;
         }
         
         .container {
@@ -137,7 +139,7 @@
     </style>
 </head>
 <body>
-    <h1>Image Compressor</h1>
+    <h1>Image Compressor <br> (jpg, png)</h1>
     
     <div class="container" id="dropArea">
         <input type="file" id="fileInput" accept="image/*">
@@ -150,7 +152,14 @@
         
         <label>
             Max Width (pixels):
-            <input type="number" id="maxWidth" value="1920" min="100" step="100">
+            <select id="maxWidth">
+                <option value="640">640px</option>
+                <option value="768">768px</option>
+                <option value="1024" selected>1024px</option>  
+                <option value="1280">1280px</option>
+                <option value="1536">1536px</option>
+                <option value="1920">1920px</option>
+              </select>
         </label>
         
         <label>
