@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Compressor</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.5;
+            color: #333;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .container {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 40px 20px;
+            text-align: center;
+            transition: border-color 0.3s;
+            margin-bottom: 20px;
+        }
+        
+        .container:hover, .container.active {
+            border-color: #0066ff;
+        }
+        
+        #fileInput {
+            display: none;
+        }
+        
+        .upload-btn {
+            background: #0066ff;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: inline-block;
+            margin-bottom: 15px;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        .upload-btn:hover {
+            background: #0052cc;
+        }
+        
+        .settings {
+            margin: 30px 0;
+            text-align: left;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+        
+        .settings label {
+            display: block;
+            margin-bottom: 15px;
+        }
+        
+        .settings input, .settings select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .compress-btn {
+            background: #00aa55;
+            color: white;
+            padding: 12px 32px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            display: block;
+            margin: 30px auto 0;
+            transition: background 0.3s;
+        }
+        
+        .compress-btn:hover {
+            background: #008844;
+        }
+        
+        .result-container {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background: #f0f8ff;
+            border-radius: 8px;
+        }
+        
+        .image-preview {
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .image-preview img {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .file-info {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .download-btn {
+            background: #0066ff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        
+        .download-btn:hover {
+            background: #0052cc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Compressor</h1>
+    
+    <div class="container" id="dropArea">
+        <input type="file" id="fileInput" accept="image/*">
+        <label for="fileInput" class="upload-btn">Choose Image</label>
+        <p>or drag & drop your image here</p>
+    </div>
+    
+    <div class="settings" id="settingsPanel" style="display: none;">
+        <h2>Compression Settings</h2>
+        
+        <label>
+            Max Width (pixels):
+            <input type="number" id="maxWidth" value="1920" min="100" step="100">
+        </label>
+        
+        <label>
+            Quality (1-100):
+            <input type="range" id="quality" min="1" max="100" value="80">
+            <span id="qualityValue">80</span>
+        </label>
+        
+        <label>
+            Format:
+            <select id="format">
+                <option value="jpeg">JPEG</option>
+                <option value="png">PNG</option>
+                <option value="webp">WebP</option>
+            </select>
+        </label>
+        
+        <button id="compressBtn" class="compress-btn">Compress Image</button>
+    </div>
+    
+    <div class="result-container" id="resultContainer">
+        <h2>Compression Result</h2>
+        
+        <div class="file-info">
+            <span>Original Size:</span>
+            <span id="originalSize">-</span>
+        </div>
+        
+        <div class="file-info">
+            <span>Compressed Size:</span>
+            <span id="compressedSize">-</span>
+        </div>
+        
+        <div class="file-info">
+            <span>Compression Ratio:</span>
+            <span id="compressionRatio">-</span>
+        </div>
+        
+        <div class="image-preview">
+            <img id="previewImage" src="#" alt="Compressed image preview">
+        </div>
+        
+        <a id="downloadLink" class="download-btn" download="compressed-image">Download Compressed Image</a>
+    </div>
+    
+    <script>
+        // Elements
+        const dropArea = document.getElementById('dropArea');
+        const fileInput = document.getElementById('fileInput');
+        const settingsPanel = document.getElementById('settingsPanel');
+        const maxWidthInput = document.getElementById('maxWidth');
+        const qualityInput = document.getElementById('quality');
+        const qualityValue = document.getElementById('qualityValue');
+        const formatSelect = document.getElementById('format');
+        const compressBtn = document.getElementById('compressBtn');
+        const resultContainer = document.getElementById('resultContainer');
+        const originalSizeElement = document.getElementById('originalSize');
+        const compressedSizeElement = document.getElementById('compressedSize');
+        const compressionRatioElement = document.getElementById('compressionRatio');
+        const previewImage = document.getElementById('previewImage');
+        const downloadLink = document.getElementById('downloadLink');
+        
+        // Variables
+        let originalFile = null;
+        
+        // Update quality value display
+        qualityInput.addEventListener('input', () => {
+            qualityValue.textContent = qualityInput.value;
+        });
+        
+        // Handle file selection
+        fileInput.addEventListener('change', handleFileSelect);
+        
+        // Handle drag and drop
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, () => {
+                dropArea.classList.add('active');
+            });
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, () => {
+                dropArea.classList.remove('active');
+            });
+        });
+        
+        dropArea.addEventListener('drop', (e) => {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            
+            if (files.length) {
+                fileInput.files = files;
+                handleFileSelect();
+            }
+        });
+        
+        // Handle compression
+        compressBtn.addEventListener('click', compressImage);
+        
+        function handleFileSelect() {
+            if (fileInput.files.length === 0) return;
+            
+            originalFile = fileInput.files[0];
+            
+            // Check if file is an image
+            if (!originalFile.type.match('image.*')) {
+                alert('Please select an image file (JPEG, PNG, etc.)');
+                return;
+            }
+            
+            // Show settings panel
+            settingsPanel.style.display = 'block';
+            
+            // Hide results if visible
+            resultContainer.style.display = 'none';
+            
+            // Show file size
+            const originalSizeMB = (originalFile.size / (1024 * 1024)).toFixed(2);
+            originalSizeElement.textContent = `${originalSizeMB} MB`;
+        }
+        
+        function compressImage() {
+            if (!originalFile) return;
+            
+            const reader = new FileReader();
+            reader.readAsDataURL(originalFile);
+            reader.onload = function(event) {
+                const img = new Image();
+                img.src = event.target.result;
+                
+                img.onload = function() {
+                    // Get settings
+                    const maxWidth = parseInt(maxWidthInput.value);
+                    const quality = parseInt(qualityInput.value) / 100;
+                    const format = formatSelect.value;
+                    
+                    // Calculate dimensions while maintaining aspect ratio
+                    let width = img.width;
+                    let height = img.height;
+                    
+                    if (width > maxWidth) {
+                        height = Math.round((height * maxWidth) / width);
+                        width = maxWidth;
+                    }
+                    
+                    // Create canvas
+                    const canvas = document.createElement('canvas');
+                    canvas.width = width;
+                    canvas.height = height;
+                    
+                    // Draw image on canvas
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+                    
+                    // Convert to desired format
+                    const mimeType = format === 'jpeg' ? 'image/jpeg' : 
+                                    format === 'png' ? 'image/png' : 'image/webp';
+                    
+                    // Get compressed image as Data URL
+                    const compressedDataUrl = canvas.toDataURL(mimeType, quality);
+                    
+                    // Calculate compressed size
+                    const base64str = compressedDataUrl.split(',')[1];
+                    const compressedSize = Math.round((base64str.length * 3) / 4);
+                    const compressedSizeMB = (compressedSize / (1024 * 1024)).toFixed(2);
+                    
+                    // Calculate compression ratio
+                    const ratio = ((1 - (compressedSize / originalFile.size)) * 100).toFixed(2);
+                    
+                    // Update UI
+                    compressedSizeElement.textContent = `${compressedSizeMB} MB`;
+                    compressionRatioElement.textContent = `${ratio}%`;
+                    
+                    // Show preview
+                    previewImage.src = compressedDataUrl;
+                    
+                    // Set download link
+                    downloadLink.href = compressedDataUrl;
+                    downloadLink.download = `compressed-${originalFile.name.split('.')[0]}.${format}`;
+                    
+                    // Show result container
+                    resultContainer.style.display = 'block';
+                };
+            };
+        }
+        
+        // Helper function to format file size
+        function formatSize(bytes) {
+            if (bytes < 1024) return bytes + ' bytes';
+            else if (bytes < 1048576) return (bytes / 1024).toFixed(2) + ' KB';
+            else return (bytes / 1048576).toFixed(2) + ' MB';
+        }
+    </script>
+</body>
+</html>
