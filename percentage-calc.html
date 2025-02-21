@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Percentage Calculator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+        }
+        .calculator {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        h1 {
+            text-align: center;
+            color: #68BA7F;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #253D2C;
+            margin-top: 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #2E6F40;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #253D2C;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #CFFFDC;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 18px;
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+    </style>
+</head> 
+<body>
+    <div class="calculator">
+        <h1>Percentage Calculator</h1>
+        
+        <h2>Find % of Amount</h2>
+        <div class="input-group">
+            <label for="percentage">Percentage (%)</label>
+            <input type="number" id="percentage" placeholder="Enter percentage" step="any">
+        </div>
+        
+        <div class="input-group">
+            <label for="amount">Amount</label>
+            <input type="number" id="amount" placeholder="Enter amount" step="any">
+        </div>
+        
+        <button id="calculate">Calculate</button>
+        
+        <div id="result" class="result">
+            <span id="resultText">Result will appear here</span>
+        </div>
+    </div>
+
+    <div class="calculator">
+        <h2>Find What % is X of Z</h2>
+        <div class="input-group">
+            <label for="number1">X</label>
+            <input type="number" id="number1" placeholder="Enter first number" step="any">
+        </div>
+        
+        <div class="input-group">
+            <label for="number2">Z</label>
+            <input type="number" id="number2" placeholder="Enter second number" step="any">
+        </div>
+        
+        <button id="calculatePercentage">Calculate Percentage</button>
+        
+        <div id="percentageResult" class="result">
+            <span id="percentageResultText">Result will appear here</span>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Calculator 1: Find X% of Amount
+            const percentageInput = document.getElementById('percentage');
+            const amountInput = document.getElementById('amount');
+            const calculateButton = document.getElementById('calculate');
+            const resultDiv = document.getElementById('result');
+            const resultText = document.getElementById('resultText');
+            
+            // Calculator 2: Find percentage relationship
+            const number1Input = document.getElementById('number1');
+            const number2Input = document.getElementById('number2');
+            const calculatePercentageButton = document.getElementById('calculatePercentage');
+            const percentageResultDiv = document.getElementById('percentageResult');
+            const percentageResultText = document.getElementById('percentageResultText');
+            
+            // Calculate when button is clicked for Calculator 1
+            calculateButton.addEventListener('click', calculatePercentageOfAmount);
+            
+            // Calculate when button is clicked for Calculator 2
+            calculatePercentageButton.addEventListener('click', calculatePercentageRelationship);
+            
+            // Handle Enter key for appropriate calculator based on focus
+            document.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    // Check which calculator has focus
+                    const activeElement = document.activeElement;
+                    if (activeElement === percentageInput || activeElement === amountInput) {
+                        calculatePercentageOfAmount();
+                    } else if (activeElement === number1Input || activeElement === number2Input) {
+                        calculatePercentageRelationship();
+                    }
+                }
+            });
+            
+            function calculatePercentageOfAmount() {
+                const percentage = parseFloat(percentageInput.value);
+                const amount = parseFloat(amountInput.value);
+                
+                if (isNaN(percentage) || isNaN(amount)) {
+                    resultText.textContent = "Please enter valid numbers";
+                    resultDiv.classList.add('active');
+                    return;
+                }
+                
+                const result = (percentage / 100) * amount;
+                
+                resultText.textContent = `${percentage}% of ${amount} = ${result.toFixed(2)}`;
+                resultDiv.classList.add('active');
+            }
+            
+            function calculatePercentageRelationship() {
+                const number1 = parseFloat(number1Input.value);
+                const number2 = parseFloat(number2Input.value);
+                
+                if (isNaN(number1) || isNaN(number2)) {
+                    percentageResultText.textContent = "Please enter valid numbers";
+                    percentageResultDiv.classList.add('active');
+                    return;
+                }
+                
+                if (number2 === 0) {
+                    percentageResultText.textContent = "Cannot divide by zero";
+                    percentageResultDiv.classList.add('active');
+                    return;
+                }
+                
+                const percentageResult = (number1 / number2) * 100;
+                
+                percentageResultText.textContent = `${number1} is ${percentageResult.toFixed(2)}% of ${number2}`;
+                percentageResultDiv.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
