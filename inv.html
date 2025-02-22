@@ -82,7 +82,7 @@
       background-color: #f8f9fa;
       border-color: var(--primary-color);
     }
-
+    
     input[type="number"]:focus, input[type="text"]:focus, input[type="date"]:focus {
       border-color: var(--primary-color);
       background-color: #fff;
@@ -350,7 +350,7 @@
     </div>
     <div>
       <strong>Paid Amount:</strong>
-      <span>$<input type="number" id="paid-amount" step="0.01" min="0" value="0" oninput="updateDueAmount()"></span>
+      <span>$<input type="number" id="paid-amount" step="0.01" min="0" placeholder="0.00" oninput="updateDueAmount()"></span>
     </div>
     <div>
       <strong>Due Amount:</strong>
