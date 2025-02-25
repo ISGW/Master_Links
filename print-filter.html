@@ -24,7 +24,7 @@
             text-align: center;
             font-size: 24px;
         }
-
+        
         .container {
             background-color: #f9f9f9;
             border-radius: 8px;
@@ -42,7 +42,7 @@
         }
         .upload-area:hover {
             border-color: #68BA7F;
-            background-color: #f9f9f9;
+            background-color: #CFFFDC;
         }
         .controls {
             display: flex;
@@ -72,18 +72,18 @@
         }
         .image-box {
             flex: 1;
-            min-width: 300px;
+            min-width: 100%;
             text-align: center;
         }
         /* Adjusted sizes for images */
         .image-box img {
             max-width: 100%;
-            max-height: 200px; /* Reduced original image height */
+            max-height: 800px; /* Reduced original image height */
             border: 1px solid #ddd;
         }
         .image-box canvas {
             max-width: 100%;
-            max-height: 600px; /* Enlarged processed image height */
+            max-height: 800px; /* Enlarged processed image height */
             border: 1px solid #ddd;
         }
         button {
@@ -101,7 +101,7 @@
         }
         .button-group {
             display: flex;
-            justify-content: center;
+            justify-content: center !important;
             gap: 10px;
             margin-top: 20px;
         }
@@ -199,6 +199,7 @@
                 margin: .5; /* Remove default margins */
             }
         }
+
     </style>
 </head>
 <body>
@@ -245,20 +246,22 @@
             
             <div class="image-container">
                 <div class="image-box">
+                    <h3></h3>
+                    <div class="button-group">
+                        <button id="download-btn">Download Image</button>
+                        <button id="print-btn">Print Image</button>
+                        <button id="reset-btn">Reset Filters</button>
+                    </div><br>
+                    <canvas id="processed-image"></canvas>
+                </div>
+
+                <div class="image-box">
                     <h3>Original Image</h3>
                     <img id="original-image" src="" alt="Original image">
                 </div>
-                <div class="image-box">
-                    <h3>Printer-Friendly Version</h3>
-                    <canvas id="processed-image"></canvas>
-                </div>
             </div>
             
-            <div class="button-group">
-                <button id="download-btn">Download Image</button>
-                <button id="print-btn">Print Image</button>
-                <button id="reset-btn">Reset Filters</button>
-            </div>
+
         </div>
     </div>
     
