@@ -5,137 +5,314 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Address History</title>
 <style>
-  body {
-    background-color: #eaeaea;
-    font-family: Arial, sans-serif;
+  :root {
+    --primary: #2E6F40;
+    --primary-dark: #253D2C;
+    --primary-light: #68BA7F;
+    --primary-lightest: #CFFFDC;
+    --gray-100: #f8f9fa;
+    --gray-200: #e9ecef;
+    --gray-300: #dee2e6;
+    --gray-400: #ced4da;
+    --gray-500: #adb5bd;
+    --gray-600: #6c757d;
+    --gray-700: #495057;
+    --gray-800: #343a40;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --radius: 8px;
+  }
+
+  * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
   }
 
+  body {
+    background-color: var(--gray-100);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--gray-800);
+    padding: 20px;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  header {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
   h1 {
-    text-align: center;
-    font-size: 16px;
+    color: var(--primary-dark);
+    font-size: 18px;
+    margin-bottom: 10px;
   }
 
-  #nameForm, #addressForm {
-    width: 40%;
-    margin: 20px auto;
+  .card {
+    background-color: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+    margin-bottom: 24px;
   }
 
-  #nameForm label, #addressForm label {
-    display: block;
-    margin-bottom: 1px;
-    font-weight: bold;
-    font-size: 16px;
-    text-align: center;
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
   }
 
-  #nameForm input, #addressForm input {
-    width: calc(100% - 20px);
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 20px;
-    font-weight: bold;
-    color: rgb(72, 72, 72);
-  }
-
-  button {
-    background-color: rgb(18, 121, 42);
-    color: rgb(255, 255, 255);
-    border: none;
-    padding: 7px 10px;
-    width: 120px;
-    cursor: pointer;
-    border-radius: 3px;
-    font-size: 14px;
-    font-weight: 500;
-  }
-
-  button:hover {
-    background-color: #064708;
-  }
-
-  #addressTable {
-    width: 70%;
-    margin: 20px auto;
-    border-collapse: collapse;
-    font-size: 16px;
-    text-align: center;
-  }
-
-  #addressTable th,
-  #addressTable td {
-    padding: 4px;
-    border: 1px solid #ccc;
-  }
-
-  .editButton {
-    padding: 7px 10px;
-    width: 50px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-
-  .olderAddress {
-    background-color: #ffd4d4;
-  }
-
-  @media print {
-    #addressForm label,
-    #addressForm input,
-    #addressForm button,
-    #addressTable .editButton {
-      display: none;
+  @media (max-width: 768px) {
+    .form-grid {
+      grid-template-columns: 1fr;
     }
   }
 
-  /* Hide markdown output element */
-  #markdownOutput {
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--gray-700);
+  }
+
+  input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius);
+    font-size: 16px;
+    color: black;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  input:focus {
+    outline: none;
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 3px rgba(104, 186, 127, 0.25);
+  }
+
+  .button-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  button:hover {
+    background-color: var(--primary-dark);
+  }
+
+  button:active {
+    transform: translateY(1px);
+  }
+
+  button.secondary {
+    background-color: var(--gray-200);
+    color: var(--gray-800);
+  }
+
+  button.secondary:hover {
+    background-color: var(--gray-300);
+  }
+
+  .table-container {
+    overflow-x: auto;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    font-size: 14px;
+  }
+
+  thead {
+    background-color: var(--primary-lightest);
+  }
+
+  th {
+    text-align: left;
+    padding: 14px 16px;
+    font-weight: 600;
+    color: var(--primary-dark);
+    border-bottom: 2px solid var(--primary-light);
+  }
+
+  td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--gray-200);
+    vertical-align: middle;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  tr:hover {
+    background-color: var(--gray-100);
+  }
+
+  .edit-button {
+    background-color: var(--primary-light);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: var(--radius);
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .edit-button:hover {
+    background-color: var(--primary);
+  }
+
+  .olderAddress {
+    background-color: rgba(255, 212, 212, 0.3);
+  }
+
+  .olderAddress td {
+    color: var(--gray-600);
+  }
+
+  .name-display {
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: var(--primary-dark);
+  }
+
+  /* Toast notification */
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--primary-dark);
+    color: white;
+    padding: 12px 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    opacity: 0;
+    transform: translateY(100px);
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 1000;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hidden {
     display: none;
+  }
+
+  @media print {
+    .no-print {
+      display: none;
+    }
+    
+    .card, .table-container {
+      box-shadow: none;
+    }
+    
+    body {
+      background-color: white;
+      padding: 0;
+    }
   }
 </style>
 </head>
 <body>
-  <h1>Address History</h1>
+  <div class="container">
+    <header>
+      <h1>Address History</h1>
+    </header>
+    <div id="addressName" class="name-display"></div>
+    <div class="card no-print">
+      <div id="nameForm" class="form-group">
+        <label for="name"></label>
+        <input type="text" id="name" placeholder="Enter your full name" required>
+      </div>
+    </div>
+    
+    <div class="card no-print">
+      <form id="addressForm" onsubmit="addAddress(event)">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" id="address" placeholder="Enter full address" required>
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="moveInDate">Move-in Date</label>
+            <input type="date" id="moveInDate" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="moveOutDate">Move-out Date</label>
+            <input type="date" id="moveOutDate" required>
+          </div>
+        </div>
 
-  <form id="nameForm">
-    <label for="name">Name</label>
-    <input type="text" id="name" required>
-  </form>
+        <div class="button-group">
+          <button type="submit">Add Address</button>
+          <button type="button" class="secondary" onclick="copyMarkdown()">Copy as Text</button>
+        </div>
+      </form>
+    </div>
 
-  <form id="addressForm" onsubmit="addAddress(event)">
-    <label for="address">Address</label>
-    <input type="text" id="address" required>
-    <label for="moveInDate">Move-in Date</label>
-    <input type="date" id="moveInDate" required>
-    <label for="moveOutDate">Move-out Date</label>
-    <input type="date" id="moveOutDate" required>
+    <div class="table-container">
+      <table id="addressTable">
+        <thead>
+          <tr>
+            <th>Address</th>
+            <th>Move-in Date</th>
+            <th>Move-out Date</th>
+            <th class="no-print"></th>
+          </tr>
+        </thead>
+        <tbody id="addressList"></tbody>
+      </table>
+    </div>
+  </div>
 
-    <button type="submit">List Address</button> <br><br>
-    <button type="button" onclick="copyMarkdown()">Copy Table</button>
-  </form>
-
-  <h2></h2>
-  <table id="addressTable">
-    <thead>
-      <tr>
-        <th>Address</th>
-        <th>Move-in Date</th>
-        <th>Move-out Date</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody id="addressList"></tbody>
-  </table>
-
-  <div id="markdownOutput"></div>
+  <div id="markdownOutput" class="hidden"></div>
+  <div id="toast" class="toast">Markdown copied to clipboard!</div>
 
   <script>
+        // Add event listener for name input
+        document.getElementById('name').addEventListener('input', function() {
+      document.getElementById('addressName').textContent = this.value;
+    });
     function addAddress(event) {
       event.preventDefault();
 
@@ -157,9 +334,10 @@
       cell3.textContent = moveOutDate;
 
       const cell4 = newRow.insertCell(3);
+      cell4.classList.add('no-print');
       const editButton = document.createElement('button');
       editButton.textContent = 'Edit';
-      editButton.classList.add('editButton');
+      editButton.classList.add('edit-button');
       editButton.onclick = function() {
         editAddress(newRow);
       };
@@ -168,6 +346,7 @@
       sortRowsByDate();
 
       document.getElementById('addressForm').reset();
+      showToast('Address added successfully!');
     }
 
     function formatDate(dateString) {
@@ -181,24 +360,46 @@
     function editAddress(row) {
       const cells = row.cells;
       const address = cells[0].textContent;
-      const moveInDate = cells[1].textContent;
-      const moveOutDate = cells[2].textContent;
-
+      
+      // Parse the date strings to valid date objects
+      const moveInDateStr = cells[1].textContent;
+      const moveOutDateStr = cells[2].textContent;
+      
+      // Set the address input value
       document.getElementById('address').value = address;
-      document.getElementById('moveInDate').valueAsDate = new Date(moveInDate);
-      document.getElementById('moveOutDate').valueAsDate = new Date(moveOutDate);
+      
+      // Parse dates in MM/DD/YYYY format
+      const parseDate = (dateStr) => {
+        const parts = dateStr.split('/');
+        return new Date(parts[2], parts[0] - 1, parts[1]);
+      };
+      
+      // Format dates for the input fields (YYYY-MM-DD)
+      const formatDateForInput = (date) => {
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      };
+      
+      const moveInDate = parseDate(moveInDateStr);
+      const moveOutDate = parseDate(moveOutDateStr);
+      
+      document.getElementById('moveInDate').value = formatDateForInput(moveInDate);
+      document.getElementById('moveOutDate').value = formatDateForInput(moveOutDate);
 
       row.remove();
+      showToast('Address loaded for editing');
     }
 
     function copyMarkdown() {
       const addressTable = document.getElementById('addressTable');
       const rows = addressTable.querySelectorAll('tbody tr');
-      let markdown = `| Address         | Move-in Date | Move-out Date |\n`;
-      markdown += `|-----------------|--------------|---------------|\n`;
+      let markdown = `| Address | Move-in Date | Move-out Date |\n`;
+      markdown += `|---------|--------------|---------------|\n`;
 
       rows.forEach(row => {
-        const cells = Array.from(row.querySelectorAll('td')).map(cell => cell.textContent.trim());
+        const cells = Array.from(row.querySelectorAll('td')).slice(0, 3).map(cell => cell.textContent.trim());
         markdown += `| ${cells[0]} | ${cells[1]} | ${cells[2]} |\n`;
       });
 
@@ -206,9 +407,10 @@
       markdownOutput.textContent = markdown;
 
       navigator.clipboard.writeText(markdown).then(() => {
-        alert('Markdown copied as plain text to clipboard!');
+        showToast('Address table copied to clipboard!');
       }).catch(err => {
         console.error('Failed to copy text: ', err);
+        showToast('Failed to copy. Try again.');
       });
     }
 
@@ -232,15 +434,32 @@
         fiveYearsAgo.setFullYear(currentDate.getFullYear() - 5);
         if (moveInDate < fiveYearsAgo) {
           row.classList.add('olderAddress');
+        } else {
+          row.classList.remove('olderAddress');
         }
       });
     }
 
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    // Initialize sorting
     sortRowsByDate();
 
+    // Confirm before page refresh/close
     window.addEventListener('beforeunload', function(event) {
-      event.preventDefault();
-      event.returnValue = '';
+      const addressList = document.getElementById('addressList');
+      if (addressList.rows.length > 0) {
+        event.preventDefault();
+        event.returnValue = '';
+      }
     });
   </script>
 </body>
