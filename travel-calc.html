@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Time Outside the US</title>
+<title>Travel Days Calculator</title>
 <style>
   body {
     background-color: #eaeaea; /* Light grey background color */
@@ -16,7 +16,7 @@
   
   h1 {
     font-size: 16px; /* Adjust the font size as needed */
-    color: rgb(0, 0, 0);
+    color: #2E6F40;
   }
   
   #tripTable tr {
@@ -35,7 +35,7 @@
   }
   
   button {
-    background-color: rgb(18, 121, 42);
+    background-color: #2c3e50;
     color: rgb(255, 255, 255);
     border: none;
     padding: 8px 18px;
@@ -43,12 +43,19 @@
     border-radius: 3px;
     font-size: 14px;
     font-weight:500;
+    min-width: 180px;
   }
 
   button:hover {
-  background-color: #064708;
+  background-color: #1a252f;
 }
 
+#calculate-btn {
+            background-color: #2E6F40;
+        }
+#calculate-btn:hover {
+            background-color: #253D2C;
+        }
 
   /* Hide buttons when printing */
   @media print {
@@ -59,13 +66,13 @@
 </style>
 </head>
 <body>
-  <h1>Time Outside the US</h1>
+  <h1>Travel Calculator</h1>
 
   <table id="tripTable">
     <thead>
       <tr>
-        <th style="width: 100px;">Left the US</th>
-        <th style="width: 100px;">Returned to US</th>
+        <th style="width: 100px;">Left</th>
+        <th style="width: 100px;">Returned</th>
         <th style="width: 60px;">Days</th>
       </tr>
     </thead>
@@ -78,12 +85,14 @@
       </tr>
     </tbody>
   </table>
-  <br>
-  <button onclick="calculateTotalDays()">Calculate Total Days</button>
+
   <br>
   <br>
   <button onclick="addRow()">Add Row</button>
-  <button onclick="printContent()">Print</button>
+  <br>  <br>
+  <button id="calculate-btn" onclick="calculateTotalDays()">Calculate Total Days</button>
+  <br>  <br>
+  <button id="calculate-btn" onclick="printContent()">Print</button>
 
   <p id="totalDays"></p>
   <p id="totalTrips"></p>
@@ -124,7 +133,7 @@
         daysDiffElement.innerText = daysDiff;
       }
 
-      document.getElementById('totalDays').innerText = `Total Days Outside US: ${totalDays}`;
+      document.getElementById('totalDays').innerText = `Total Travel Days: ${totalDays}`;
       document.getElementById('totalTrips').innerText = `Total Trips: ${totalTrips}`;
     }
 
