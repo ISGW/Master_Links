@@ -20,6 +20,8 @@
     --gray-800: #343a40;
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     --radius: 8px;
+    --warning: #FFC107;
+    --warning-light: #FFF3CD;
   }
 
   * {
@@ -235,6 +237,33 @@
     display: none;
   }
 
+  /* Gap warning styles */
+  .gap-warning {
+    background-color: var(--warning-light);
+    border-left: 4px solid var(--warning);
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    border-radius: var(--radius);
+    font-size: 14px;
+    display: none; /* Hidden by default */
+  }
+
+  .gap-warning.show {
+    display: block;
+  }
+
+  .gap-item {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .gap-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
   @media print {
     .no-print {
       display: none;
@@ -264,6 +293,12 @@
       </div>
     </div>
     
+    <!-- Gap warning container -->
+    <div id="gapWarning" class="gap-warning">
+      <h3>Gaps detected in your address history:</h3>
+      <div id="gapList"></div>
+    </div>
+    
     <div class="card no-print">
       <form id="addressForm" onsubmit="addAddress(event)">
         <div class="form-grid">
@@ -286,6 +321,7 @@
         <div class="button-group">
           <button type="submit">Add Address</button>
           <button type="button" class="secondary" onclick="copyMarkdown()">Copy as Text</button>
+          <button type="button" class="secondary" onclick="printContent()"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-printer"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button>
         </div>
       </form>
     </div>
@@ -309,10 +345,11 @@
   <div id="toast" class="toast">Markdown copied to clipboard!</div>
 
   <script>
-        // Add event listener for name input
-        document.getElementById('name').addEventListener('input', function() {
+    // Add event listener for name input
+    document.getElementById('name').addEventListener('input', function() {
       document.getElementById('addressName').textContent = this.value;
     });
+    
     function addAddress(event) {
       event.preventDefault();
 
@@ -344,6 +381,7 @@
       cell4.appendChild(editButton);
 
       sortRowsByDate();
+      checkForGaps();
 
       document.getElementById('addressForm').reset();
       showToast('Address added successfully!');
@@ -389,6 +427,7 @@
       document.getElementById('moveOutDate').value = formatDateForInput(moveOutDate);
 
       row.remove();
+      checkForGaps();
       showToast('Address loaded for editing');
     }
 
@@ -440,6 +479,82 @@
       });
     }
 
+    function checkForGaps() {
+      const gapWarning = document.getElementById('gapWarning');
+      const gapList = document.getElementById('gapList');
+      gapList.innerHTML = '';
+      
+      const addressList = document.getElementById('addressList');
+      const rows = Array.from(addressList.querySelectorAll('tr'));
+      
+      // No gaps if there are less than 2 addresses
+      if (rows.length < 2) {
+        gapWarning.classList.remove('show');
+        return;
+      }
+      
+      // Sort rows chronologically for gap detection
+      const sortedRows = [...rows].sort((a, b) => {
+        const dateA = parseDate(a.cells[1].textContent);
+        const dateB = parseDate(b.cells[1].textContent);
+        return dateA - dateB;
+      });
+      
+      let hasGaps = false;
+      
+      // Check for gaps between consecutive addresses
+      for (let i = 0; i < sortedRows.length - 1; i++) {
+        const currentMoveOutDate = parseDate(sortedRows[i].cells[2].textContent);
+        const nextMoveInDate = parseDate(sortedRows[i+1].cells[1].textContent);
+        
+        // Add one day to move-out date for comparison
+        const dayAfterMoveOut = new Date(currentMoveOutDate);
+        dayAfterMoveOut.setDate(dayAfterMoveOut.getDate() + 1);
+        
+        // Check if there's a gap between move-out and next move-in
+        if (dayAfterMoveOut < nextMoveInDate) {
+          hasGaps = true;
+          
+          // Calculate gap duration
+          const gapDays = Math.floor((nextMoveInDate - dayAfterMoveOut) / (1000 * 60 * 60 * 24));
+          const gapMonths = Math.floor(gapDays / 30);
+          
+          // Create gap item
+          const gapItem = document.createElement('div');
+          gapItem.classList.add('gap-item');
+          
+          const formattedMoveOutDate = formatDateForDisplay(currentMoveOutDate);
+          const formattedMoveInDate = formatDateForDisplay(nextMoveInDate);
+          
+          gapItem.innerHTML = `
+            <strong>${formattedMoveOutDate} to ${formattedMoveInDate}</strong>
+            <div>Gap of ${gapDays} days (${gapMonths} months)</div>
+          `;
+          
+          gapList.appendChild(gapItem);
+        }
+      }
+      
+      // Show or hide warning based on gaps
+      if (hasGaps) {
+        gapWarning.classList.add('show');
+      } else {
+        gapWarning.classList.remove('show');
+      }
+    }
+    
+    function parseDate(dateStr) {
+      const parts = dateStr.split('/');
+      return new Date(parts[2], parts[0] - 1, parts[1]);
+    }
+    
+    function formatDateForDisplay(date) {
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const day = date.getDate().toString().padStart(2, '0');
+      const year = date.getFullYear();
+      return `${month}/${day}/${year}`;
+    }
+
     function showToast(message) {
       const toast = document.getElementById('toast');
       toast.textContent = message;
@@ -452,6 +567,10 @@
 
     // Initialize sorting
     sortRowsByDate();
+
+    function printContent() {
+      window.print();
+    }	
 
     // Confirm before page refresh/close
     window.addEventListener('beforeunload', function(event) {
