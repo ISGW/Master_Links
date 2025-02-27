@@ -20,6 +20,8 @@
     --gray-800: #343a40;
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     --radius: 8px;
+    --alert: #FFC107;
+    --alert-light: #FFF3CD;
   }
 
   * {
@@ -235,6 +237,41 @@
     display: none;
   }
 
+  /* Gap warning styles */
+  .gap-warning {
+    background-color: var(--alert-light);
+    border-left: 4px solid var(--alert);
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    border-radius: var(--radius);
+    font-size: 14px;
+  }
+
+  .gap-warning h3 {
+    color: black;
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .gap-list {
+    list-style-type: none;
+    margin-top: 8px;
+  }
+
+  .gap-list li {
+    margin-bottom: 4px;
+    padding-left: 16px;
+    position: relative;
+    font-weight: 600;
+  }
+
+  .gap-list li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--alert);
+  }
+
   @media print {
     .no-print {
       display: none;
@@ -264,7 +301,12 @@
       </div>
     </div>
 
-
+    <!-- Gap warning area -->
+    <div id="gapWarning" class="gap-warning hidden">
+      <h3>Employment History Gaps Detected</h3>
+      <p>The following gaps were found in your employment history:</p>
+      <ul id="gapList" class="gap-list"></ul>
+    </div>
 
     <div class="card no-print">
       <form id="employmentForm" onsubmit="addEmployment(event)">
@@ -298,6 +340,7 @@
         <div class="button-group">
           <button type="submit">Add Employment</button>
           <button type="button" class="secondary" onclick="generateMarkdown()">Copy as Text</button>
+          <button type="button" class="secondary" onclick="printContent()"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-printer"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button>
         </div>
       </form>
     </div>
@@ -334,8 +377,14 @@
       const employer = document.getElementById('employer').value;
       const employerAddress = document.getElementById('employerAddress').value;
       const position = document.getElementById('position').value;
-      const dateEntry = formatDate(document.getElementById('dateEntry').value);
-      const dateLeft = formatDate(document.getElementById('dateLeft').value);
+      
+      // Get the date values
+      const dateEntryValue = document.getElementById('dateEntry').value;
+      const dateLeftValue = document.getElementById('dateLeft').value;
+      
+      // Format the dates for display
+      const dateEntry = formatDate(dateEntryValue);
+      const dateLeft = formatDate(dateLeftValue);
 
       const employmentList = document.getElementById('employmentList');
 
@@ -357,6 +406,10 @@
 
       const cell5 = newRow.insertCell(4);
       cell5.textContent = dateLeft;
+      
+      // Store the actual date objects for sorting and gap calculation
+      newRow.dataset.entryDate = dateEntryValue;
+      newRow.dataset.leftDate = dateLeftValue;
 
       // Create an "Edit" button in the last cell
       const cell6 = newRow.insertCell(5);
@@ -371,6 +424,9 @@
 
       // Sort the rows by date of entry in descending order
       sortRowsByDate();
+      
+      // Check for employment gaps
+      checkEmploymentGaps();
 
       document.getElementById('employmentForm').reset();
       showToast('Employment added successfully!');
@@ -390,36 +446,22 @@
       const employerAddress = cells[1].textContent;
       const position = cells[2].textContent;
       
-      // Parse the date strings to valid date objects
-      const dateEntryStr = cells[3].textContent;
-      const dateLeftStr = cells[4].textContent;
+      // Use the stored date values for editing
+      const dateEntryStr = row.dataset.entryDate;
+      const dateLeftStr = row.dataset.leftDate;
       
       // Set form values
       document.getElementById('employer').value = employer;
       document.getElementById('employerAddress').value = employerAddress;
       document.getElementById('position').value = position;
-      
-      // Parse dates in MM/DD/YYYY format
-      const parseDate = (dateStr) => {
-        const parts = dateStr.split('/');
-        return new Date(parts[2], parts[0] - 1, parts[1]);
-      };
-      
-      // Format dates for the input fields (YYYY-MM-DD)
-      const formatDateForInput = (date) => {
-        const year = date.getFullYear();
-        const month = (date.getMonth() + 1).toString().padStart(2, '0');
-        const day = date.getDate().toString().padStart(2, '0');
-        return `${year}-${month}-${day}`;
-      };
-      
-      const dateEntry = parseDate(dateEntryStr);
-      const dateLeft = parseDate(dateLeftStr);
-      
-      document.getElementById('dateEntry').value = formatDateForInput(dateEntry);
-      document.getElementById('dateLeft').value = formatDateForInput(dateLeft);
+      document.getElementById('dateEntry').value = dateEntryStr;
+      document.getElementById('dateLeft').value = dateLeftStr;
 
       row.remove(); // Remove the row being edited
+      
+      // Recalculate gaps after removing the row
+      checkEmploymentGaps();
+      
       showToast('Employment loaded for editing');
     }
 
@@ -449,8 +491,8 @@
       const rows = Array.from(employmentList.rows);
 
       rows.sort((rowA, rowB) => {
-        const dateA = new Date(rowA.cells[3].textContent);
-        const dateB = new Date(rowB.cells[3].textContent);
+        const dateA = new Date(rowA.dataset.entryDate);
+        const dateB = new Date(rowB.dataset.entryDate);
         return dateB - dateA;
       });
 
@@ -460,7 +502,7 @@
       // Insert sorted rows back into the table
       rows.forEach(row => {
         employmentList.appendChild(row);
-        const dateEntry = new Date(row.cells[3].textContent);
+        const dateEntry = new Date(row.dataset.entryDate);
         const currentDate = new Date();
         const fiveYearsAgo = new Date();
         fiveYearsAgo.setFullYear(currentDate.getFullYear() - 5);
@@ -481,6 +523,81 @@
         toast.classList.remove('show');
       }, 3000);
     }
+
+    // New function to check for employment gaps
+    function checkEmploymentGaps() {
+      const employmentList = document.getElementById('employmentList');
+      const rows = Array.from(employmentList.rows);
+      const gapWarning = document.getElementById('gapWarning');
+      const gapList = document.getElementById('gapList');
+      
+      // Clear previous gaps
+      gapList.innerHTML = '';
+      
+      // No need to check for gaps if less than 2 employments
+      if (rows.length < 2) {
+        gapWarning.classList.add('hidden');
+        return;
+      }
+      
+      // Sort rows chronologically by left date (earliest to latest)
+      rows.sort((a, b) => {
+        return new Date(a.dataset.leftDate) - new Date(b.dataset.leftDate);
+      });
+      
+      let gaps = [];
+      
+      // Check for gaps between consecutive employments
+      for (let i = 0; i < rows.length - 1; i++) {
+        const currentEndDate = new Date(rows[i].dataset.leftDate);
+        const nextStartDate = new Date(rows[i+1].dataset.entryDate);
+        
+        // Add one day to end date to account for same day transitions
+        currentEndDate.setDate(currentEndDate.getDate() + 1);
+        
+        // If there's a gap of more than 31 days (approximately 1 month)
+        if (nextStartDate > currentEndDate) {
+          const gapDays = Math.floor((nextStartDate - currentEndDate) / (1000 * 60 * 60 * 24)) + 1;
+          
+          // Calculate months and remaining days
+          const gapMonths = Math.floor(gapDays / 30);
+          const remainingDays = gapDays % 30;
+          
+          let gapDescription = "";
+          if (gapMonths > 0) {
+            gapDescription += `${gapMonths} month${gapMonths > 1 ? 's' : ''}`;
+            if (remainingDays > 0) {
+              gapDescription += ` and ${remainingDays} day${remainingDays > 1 ? 's' : ''}`;
+            }
+          } else {
+            gapDescription = `${gapDays} day${gapDays > 1 ? 's' : ''}`;
+          }
+          
+          gaps.push({
+            startDate: formatDate(rows[i].dataset.leftDate),
+            endDate: formatDate(rows[i+1].dataset.entryDate),
+            duration: gapDescription
+          });
+        }
+      }
+      
+      // Display gaps if found
+      if (gaps.length > 0) {
+        gaps.forEach(gap => {
+          const listItem = document.createElement('li');
+          listItem.textContent = `Gap of ${gap.duration} between ${gap.startDate} and ${gap.endDate}`;
+          gapList.appendChild(listItem);
+        });
+        
+        gapWarning.classList.remove('hidden');
+      } else {
+        gapWarning.classList.add('hidden');
+      }
+    }
+
+    function printContent() {
+      window.print();
+    }	
 
     // Confirm before page refresh/close
     window.addEventListener('beforeunload', function(event) {
