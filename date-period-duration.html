@@ -97,10 +97,22 @@
   #totalDays, #humanReadableDuration, #totalTrips {
     margin: 5px 0;
   }
+  
+  .delete-btn {
+    color: #FF0000;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 0 5px;
+  }
+  
+  .delete-btn:hover {
+    color: #CC0000;
+  }
 
   /* Hide buttons when printing */
   @media print {
-    button {
+    button, .delete-btn {
       display: none;
     }
     
@@ -163,10 +175,17 @@
         <td>
           <span class="daysDiff">0</span>
           <span class="row-duration"></span>
+          <span class="delete-btn" onclick="deleteRow(this)">X</span>
         </td>
       `;
 
       tableBody.appendChild(newRow);
+    }
+    
+    function deleteRow(element) {
+      const row = element.closest('tr');
+      row.remove();
+      calculateTotalDays();
     }
 
     function calculateDays(startDate, endDate) {
