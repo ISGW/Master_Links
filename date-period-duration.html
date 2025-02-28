@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Date Period Duration Calculator</title>
+<style>
+  body {
+    background-color: #f8f9fa; /* Light forest green background */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    margin-left: 45px;
+    padding-top: 40px;
+  }
+  
+  h1 {
+    font-size: 18px;
+    color: #68BA7F; /* Dark forest green for heading */
+    margin-bottom: 15px;
+  }
+  
+
+  #tripTable {
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  #tripTable tr {
+    margin-bottom: 30px;
+    font-size: 14px;
+    color: #253D2C; /* Dark forest green text */
+    border-radius: 3px;
+    background-color: rgb(255, 255, 255);
+    text-align: center; 
+  }
+
+  #tripTable th {
+    padding: 7px 1px;
+    background-color: #dee2e6; /* Medium forest green for headers */
+    color: #253D2C;
+  }
+  
+  button {
+    background-color: #6c757d; /* Medium forest green for regular buttons */
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 500;
+    min-width: fit-content;
+    transition: background-color 0.2s;
+    margin-right: 5px;
+  }
+
+  button:hover {
+    background-color: #343a40; /* Darker green on hover */
+  }
+
+  #calculate-btn {
+    background-color: #2E6F40; /* Primary forest green for main action */
+  }
+  
+  #calculate-btn:hover {
+    background-color: #253D2C; /* Darkest green on hover */
+  }
+
+  .label-input {
+    width: 100%;
+    padding: 5px;
+    color: #253D2C;
+    box-sizing: border-box;
+    border: 1px solid #68BA7F;
+    border-radius: 3px;
+  }
+  
+  input[type="date"] {
+    border: 1px solid #68BA7F;
+    border-radius: 3px;
+    padding: 5px;
+    color: #253D2C;
+  }
+  
+  .row-duration {
+    font-size: 12px;
+    color: #2E6F40;
+    margin-top: 3px;
+    display: block;
+  }
+  
+  p {
+    color: #253D2C;
+    font-weight: 500;
+  }
+  
+  #totalDays, #humanReadableDuration, #totalTrips {
+    margin: 5px 0;
+  }
+
+  /* Hide buttons when printing */
+  @media print {
+    button {
+      display: none;
+    }
+    
+    body {
+      background-color: white;
+    }
+  }
+</style>
+</head>
+<body>
+  <h1>Date Period Duration Calculator</h1>
+
+  <table id="tripTable">
+    <thead>
+      <tr>
+        <th colspan="3" style="width: 260px;">
+          <input type="text" class="label-input" placeholder="Description">
+        </th>
+      </tr>
+      <tr>
+        <th style="width: 100px;">Start Date</th>
+        <th style="width: 100px;">End Date</th>
+        <th style="width: 80px;">Days</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Example row for the first trip -->
+      <tr>
+        <td><input type="date" class="startDate"></td>
+        <td><input type="date" class="endDate"></td>
+        <td>
+          <span class="daysDiff">0</span>
+          <span class="row-duration"></span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <br>
+  <button onclick="addRow()">Add Row / Period</button>
+
+  <button id="calculate-btn" onclick="calculateTotalDays()">Calculate Duration</button>
+  <br>  <br>
+  <button id="calculate-btn" onclick="printContent()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-printer"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button>
+
+  <p id="totalDays"></p>
+  <p id="humanReadableDuration"></p>
+  <p id="totalTrips"></p>
+
+  
+  <script>
+    function addRow() {
+      const tableBody = document.querySelector('#tripTable tbody');
+      const newRow = document.createElement('tr');
+
+      newRow.innerHTML = `
+        <td><input type="date" class="startDate"></td>
+        <td><input type="date" class="endDate"></td>
+        <td>
+          <span class="daysDiff">0</span>
+          <span class="row-duration"></span>
+        </td>
+      `;
+
+      tableBody.appendChild(newRow);
+    }
+
+    function calculateDays(startDate, endDate) {
+      const timeDiff = endDate.getTime() - startDate.getTime();
+      return Math.ceil(timeDiff / (1000 * 3600 * 24));
+    }
+
+    function getDurationInYearsMonthsDays(totalDays) {
+      const years = Math.floor(totalDays / 365);
+      const remainingDaysAfterYears = totalDays % 365;
+      const months = Math.floor(remainingDaysAfterYears / 30);
+      const days = remainingDaysAfterYears % 30;
+      
+      let result = "";
+      
+      if (years > 0) {
+        result += `${years} year${years > 1 ? 's' : ''}`;
+        if (months > 0 || days > 0) result += ", ";
+      }
+      
+      if (months > 0) {
+        result += `${months} month${months > 1 ? 's' : ''}`;
+        if (days > 0) result += ", ";
+      }
+      
+      if (days > 0 || (years === 0 && months === 0)) {
+        result += `${days} day${days !== 1 ? 's' : ''}`;
+      }
+      
+      return result;
+    }
+
+    function calculateTotalDays() {
+      const allStartDates = document.querySelectorAll('.startDate');
+      const allEndDates = document.querySelectorAll('.endDate');
+      const allRowDurations = document.querySelectorAll('.row-duration');
+      let totalDays = 0;
+      let totalTrips = allStartDates.length;
+
+      for (let i = 0; i < allStartDates.length; i++) {
+        const startDate = new Date(allStartDates[i].value);
+        const endDate = new Date(allEndDates[i].value);
+
+        if (allStartDates[i].value && allEndDates[i].value) {
+          const daysDiff = calculateDays(startDate, endDate);
+          totalDays += daysDiff;
+
+          const daysDiffElement = document.querySelectorAll('.daysDiff')[i];
+          daysDiffElement.innerText = daysDiff;
+          
+          // Add human-readable duration to each row if applicable (more than 30 days)
+          if (daysDiff > 30) {
+            const rowHumanReadable = getDurationInYearsMonthsDays(daysDiff);
+            allRowDurations[i].innerText = `(${rowHumanReadable})`;
+            allRowDurations[i].style.display = 'block';
+          } else {
+            allRowDurations[i].style.display = 'none';
+          }
+        }
+      }
+      
+      const humanReadableDuration = getDurationInYearsMonthsDays(totalDays);
+      
+      document.getElementById('totalDays').innerText = `Total Days: ${totalDays}`;
+      
+      // Only show the human-readable format if it contains months or years
+      if (totalDays > 30) {
+        document.getElementById('humanReadableDuration').innerText = `Or ${humanReadableDuration}`;
+        document.getElementById('humanReadableDuration').style.display = 'block';
+      } else {
+        document.getElementById('humanReadableDuration').style.display = 'none';
+      }
+      
+      document.getElementById('totalTrips').innerText = `Total Periods/Trips: ${totalTrips}`;
+    }
+
+    function printContent() {
+      window.print();
+    }	
+
+    // Add event listener for beforeunload event to show warning message
+    window.addEventListener('beforeunload', function(event) {
+      event.preventDefault();
+      event.returnValue = ''; // This line is required for some browsers
+    });
+  </script>
+</body>
+</html>
