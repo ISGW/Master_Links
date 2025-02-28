@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add or Subtract From a Date</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #68BA7F;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .calculator {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 20px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .date-inputs {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .duration-inputs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        input[type="number"] {
+            width: 70px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="date"] {
+            padding: 8px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            width: 180px;
+        }
+        .date-input-container {
+            position: relative;
+            display: inline-block;
+        }
+        select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: white;
+        }
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        button {
+            background-color: #2E6F40;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #253D2C;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #cfffdccf;
+            border-radius: 4px;
+        }
+        .divider {
+            border-top: 1px dotted #ccc;
+            margin: 10px 0;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>Date Calculator: Add or Subtract From a Date</h1>
+        <br>
+        <div class="input-group">
+            <div class="date-inputs">
+                <label>Date:</label>
+                <div class="date-input-container">
+                    <input type="date" id="startDate" value="2025-02-27">
+                </div>
+            </div>
+            
+            <div class="duration-inputs">
+                <label>Add/Subtract:</label>
+                <select id="operation">
+                    <option value="add">Add</option>
+                    <option value="subtract" selected>(−) Subtract</option>
+                </select>
+                
+                <label>Years:</label>
+                <input type="number" id="years" min="0" value="0">
+                
+                <label>Months:</label>
+                <input type="number" id="months" min="0" value="0">
+                
+                <label>Weeks:</label>
+                <input type="number" id="weeks" min="0" value="0">
+                
+                <label>Days:</label>
+                <input type="number" id="days" min="0" value="0">
+            </div>
+        </div>
+        
+        <button id="calculate">Calculate Date</button>
+        
+        <div class="result" id="resultArea">
+            <div id="fromDate">From Thursday, February 27, 2025</div>
+            <div id="operation-display">Subtracted 6 years, 2 months</div>
+            
+            <div class="divider"></div>
+            
+            <div id="resultDate"><strong>Result:</strong> Thursday, December 27, 2018</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const startDateInput = document.getElementById('startDate');
+            const operationSelect = document.getElementById('operation');
+            const yearsInput = document.getElementById('years');
+            const monthsInput = document.getElementById('months');
+            const weeksInput = document.getElementById('weeks');
+            const daysInput = document.getElementById('days');
+            const calculateButton = document.getElementById('calculate');
+            const fromDateDisplay = document.getElementById('fromDate');
+            const operationDisplay = document.getElementById('operation-display');
+            const resultDateDisplay = document.getElementById('resultDate');
+            
+            // Format date as "Day, Month DD, YYYY"
+            function formatDate(date) {
+                const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                
+                const dayOfWeek = daysOfWeek[date.getDay()];
+                const month = months[date.getMonth()];
+                const day = date.getDate();
+                const year = date.getFullYear();
+                
+                return `${dayOfWeek}, ${month} ${day}, ${year}`;
+            }
+            
+            // Format the duration string (e.g., "6 years, 2 months, 1 week, 3 days")
+            function formatDuration(years, months, weeks, days) {
+                const parts = [];
+                
+                if (years > 0) {
+                    parts.push(`${years} ${years === 1 ? 'year' : 'years'}`);
+                }
+                
+                if (months > 0) {
+                    parts.push(`${months} ${months === 1 ? 'month' : 'months'}`);
+                }
+                
+                if (weeks > 0) {
+                    parts.push(`${weeks} ${weeks === 1 ? 'week' : 'weeks'}`);
+                }
+                
+                if (days > 0) {
+                    parts.push(`${days} ${days === 1 ? 'day' : 'days'}`);
+                }
+
+                if (parts.length === 0) {
+                    return "0 days";
+                }
+                
+                return parts.join(', ');
+            }
+            
+            // Calculate the new date based on inputs
+            function calculateNewDate() {
+                // Get input values
+                const startDateStr = startDateInput.value; // Format: YYYY-MM-DD
+                const operation = operationSelect.value;
+                const years = parseInt(yearsInput.value) || 0;
+                const months = parseInt(monthsInput.value) || 0;
+                const weeks = parseInt(weeksInput.value) || 0;
+                const days = parseInt(daysInput.value) || 0;
+                
+                // Create date object with correct timezone handling
+                // Parse the date parts to avoid timezone issues
+                const [year, month, day] = startDateStr.split('-').map(Number);
+                const startDate = new Date(year, month - 1, day); // month is 0-indexed in JS Date
+                
+                // Create a new date for calculation
+                const resultDate = new Date(year, month - 1, day);
+                
+                // Calculate new date
+                if (operation === 'add') {
+                    resultDate.setFullYear(resultDate.getFullYear() + years);
+                    resultDate.setMonth(resultDate.getMonth() + months);
+                    resultDate.setDate(resultDate.getDate() + (weeks * 7) + days);
+                } else {
+                    resultDate.setFullYear(resultDate.getFullYear() - years);
+                    resultDate.setMonth(resultDate.getMonth() - months);
+                    resultDate.setDate(resultDate.getDate() - (weeks * 7) - days);
+                }
+                
+                // Update displays
+                fromDateDisplay.textContent = `From ${formatDate(startDate)}`;
+                
+                const operationText = operation === 'add' ? 'Added' : 'Subtracted';
+                operationDisplay.textContent = `${operationText} ${formatDuration(years, months, weeks, days)}`;
+                
+                resultDateDisplay.innerHTML = `<strong>Result:</strong> ${formatDate(resultDate)}`;
+            }
+            
+            // Set up event listeners
+            calculateButton.addEventListener('click', calculateNewDate);
+            
+            // Initialize with default calculation
+            calculateNewDate();
+        });
+    </script>
+</body>
+</html>
