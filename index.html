@@ -12,238 +12,230 @@
 <base target="_blank">
 
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
-</style>
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
-<style>
-        /* Hide scrollbar for all browsers */
-    body {
-        scrollbar-color: rgba(0, 0, 0, 0); /* Firefox */
-        }
-    body::-webkit-scrollbar {
-        display: none; /* Chrome, Safari, and Opera */
-        }
- 
-    body {
-        font-family: "Open Sans", sans-serif;
-        font-weight: 400;
-        background: linear-gradient(to bottom, #1d1d1d, #262626);
-        color: #00FF00;
-        font-size: 16px;
-        text-align: center;
-    }
-
-
-    .container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        margin-bottom: 20px;
-        margin-left: 60PX;
-        margin-right: 60px;
-    }
-
-    .table-container {
-        margin-right: 3px; /* Space between tables */
-        margin-top: 20px;
-        background-color: #262626;
-        border-radius: 10px 10px 0 0;
-    }
-
-    table {
-        border-collapse: collapse;
-        width: calc(20% - 10px); /* Adjust width to distribute evenly with space between */
-        min-width: 280px;
-        margin-right: 0px; /* Space between tables */
-        margin-bottom: 20px;
-        border-radius: 5px;
-    }
-
-    th, td {
-        padding: 4px;
-        text-align: left;
-        border-bottom: 1px solid #ff000000;
-        border-radius: 5px;
-    }
-
-    th {
-        background-color: #194587;
-        border-bottom: 5px solid #1d1d1d;
-        border-radius: 10px 10px 0 0;
-        color: #ffffff;
-        font-size: 16px;
-        font-weight: 600;
-        font-style: italic;
-        text-align: center;
-    }
-
-    th.special-header {
-        background-color: #004833; /* Change the background color for special headers */
-    }
-
-    tr:hover {
-        background-color: #1d1d1d;
-    }
-
-    a {
-        color: #ffffff;
-        font-size: 16px;
-        text-decoration: none;
-        display: inline-block;
-    }
-
-    a:hover {
-        color: #00FF00 !important;
-	    transition: color 0.2s;
-        }
-    
-
-        .bold-link {
-        font-weight: bold;
-    }
-
-    .special-background1 {
-    background-color: #063b18; /* Example color, you can choose any color */
+/* Hide scrollbar for all browsers */
+body {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    background: linear-gradient(to bottom, #1d1d1d, #262626);
+    color: #00FF00;
+    font-size: 17px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    scrollbar-color: rgba(0, 0, 0, 0); /* Firefox */
+    /* Ensure the page has a minimum height */
+    min-height: 100vh;
+    /* Set up for footer spacing */
+    position: relative;
+    padding-bottom: 80px; /* This should be at least the height of your footer */
 }
 
-    @media (max-width: 768px) {
-        .container {
-            flex-wrap: wrap;
-            margin-left: 0;
-            padding: 10px;
-            overflow-x: auto;
-        }
+body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
+}
 
-        table {
-            width: 100%;
-            margin-right: 0;
-            margin-bottom: 20px;
-            overflow-x: auto;
-        }
-    }
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+    /* Add bottom padding to ensure space for footer */
+    padding-bottom: 80px;
+}
 
-    /* Style for dropdown menu */
-    .dropdown {
-        position: relative;
-        color: #c3edcc;
-        font-size: 16px;
-        font-weight: 700;
-        padding: 4px;
-        cursor: pointer;
-    }
+.table-container {
+    background-color: #262626;
+    border-radius: 10px 10px 0 0;
+    flex: 1 1 280px;
+    max-width: 350px;
+    margin-bottom: 20px;
+}
 
-    .dropdown.active{
-        color: #00FF00;
-    }
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+}
 
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #353535;
-        border-radius: 5px;
-        min-width: 256px;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.679);
-        z-index: 1;
-    }
+th, td {
+    padding: 4px 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 0, 0, 0);
+}
 
-    .dropdown.active .dropdown-content {
-        display: block;
-    }
+th {
+    background-color: #194587;
+    border-bottom: 5px solid #1d1d1d;
+    border-radius: 10px 10px 0 0;
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 600;
+    font-style: italic;
+    text-align: center;
+    padding: 8px 12px;
+}
 
-    .dropdown-content a {
-        color: rgb(255, 255, 255);
-        padding: 3px 16px;
-        text-decoration: none;
-        display: block;
-        font-weight: 400;
-    }
+th.special-header {
+    background-color: #004833;
+}
 
-    .dropdown-content a:hover {
-        background-color: #1d1d1d;
-    }
+tr:hover {
+    background-color: #1d1d1d;
+    transition: background-color 0.2s;
+}
 
-    /* Styles for the arrow icon */
-    .arrow-down {
-        width: 0;
-        height: 0;
-        border-left: 6px solid transparent;
-        border-right: 6px solid transparent;
-        border-top: 8px solid #c3edcc; /* Adjust color and size as needed */
-        position: absolute;
-        top: 50%;
-        left: 4px; /* Adjust this value to position the arrow */
-        transform: translateY(-50%);
-        transition: transform 0.3s ease;
-    }
+a {
+    color: #ffffff;
+    font-size: 17px;
+    text-decoration: none;
+    display: block;
+    padding: 4px 0;
+    transition: color 0.2s;
+}
 
-        /* Rotate the arrow icon when the dropdown content is visible */
-        .dropdown.active .arrow-down {
-        transform: translateY(-50%) rotate(180deg);
-        border-left: 6px solid transparent;
-        border-right: 6px solid transparent;
-        border-top: 8px solid #00FF00; /* Adjust color and size as needed */
-    }
+a:hover {
+    color: #00FF00 !important;
+}
 
+a.secondary {
+    color: #ffffff;
+    font-size: 17px;
+    text-decoration: none;
+    display: block;
+    padding: 0px 0;
+    transition: color 0.2s;
+}
 
-/* Styles for the popup and table */
+a.secondary:hover {
+    color: #00FF00 !important;
+}
+
+.bold-link {
+    font-weight: bold;
+}
+
+.special-background1 {
+    background-color: #063b18;
+}
+
+/* Dropdown styling */
+.dropdown {
+    position: relative;
+    color: #c3edcc;
+    font-size: 17px;
+    font-weight: 700;
+    padding: 8px;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.dropdown.active {
+    color: #00FF00;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #353535;
+    border-radius: 5px;
+    min-width: 300px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.679);
+    z-index: 10;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.dropdown.active .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: rgb(255, 255, 255);
+    padding: 8px 16px;
+    text-decoration: none;
+    display: block;
+    font-weight: 400;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #1d1d1d;
+}
+
+/* Arrow icon */
+.arrow-down {
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid #c3edcc;
+    position: absolute;
+    top: 50%;
+    left: 4px;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease;
+}
+
+.dropdown.active .arrow-down {
+    transform: translateY(-50%) rotate(180deg);
+    border-top: 8px solid #00FF00;
+}
+
+/* Popup and iframe */
 .popup {
-            width: 70%;
-            height: 80%;
-            background-color: rgba(0, 0, 0, 0);
-            border: 1px solid #00000000;
-            border-radius: 15px;
-            padding: 0px;
-            position: fixed;
-            top: 43%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1000;
-            display: none;
-            max-width: 90%; /* Limit the maximum width of the popup */
-        }
-        .iframe-container {
-            width: 100%;
-            height: 100%; 
-            background-color: #262626;
-            border-radius: 15px;
-        }
+    width: 70%;
+    height: 80%;
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid #00000000;
+    border-radius: 15px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    display: none;
+    max-width: 1200px;
+}
 
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: 2px solid #00FF00;
-            border-radius: 15px;
-        }
+.iframe-container {
+    width: 100%;
+    height: 100%; 
+    background-color: #262626;
+    border-radius: 15px;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+    border: 2px solid #00FF00;
+    border-radius: 15px;
+}
 
 .special-button {
     background-color: #00FF00;
     color: #262626;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: bold;
-    align-items: center;
+    text-align: center;
     border: none;
     border-radius: 10px 10px 0 0;
-    padding: 5px 50px;
+    padding: 8px 20px;
     cursor: pointer;
+    margin: 0 auto;
+    display: block;
 }
-
-/* Media query for smaller screens (mobile devices) */
-@media (max-width: 768px) {
-    .popup {
-        width: 90%; /* Adjust width for smaller screens */
-        max-height: 90vh; /* Limit maximum height to 90% of viewport height */
-        top: 43vh; /* Set top position to 50% of viewport height */
-        transform: translate(-50%, -50%); /* Adjust transform for vertical centering */
-        padding-left: 0px;
-        padding-right: 3px;
-    }
-}
-
 
 .right-content {
-    float: right; /* Align this specific element to the right */
+    float: right;
 }
 
+/* Tooltip */
 .tooltip {
     position: relative;
     display: inline-block;
@@ -258,81 +250,35 @@
     text-align: center;
     border-radius: 5px;
     padding: 5px 0;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%; /* Position the tooltip above the link */
-    left: 50%;
-    margin-left: -80px; /* Center the tooltip */
+    /* Changed positioning to fixed instead of absolute */
+    position: fixed;
+    z-index: 1001;
+    /* Dynamic positioning based on the icon's position */
+    transform: translateX(-50%) translateY(-10px);
     opacity: 0;
     transition: opacity 0.3s;
+    pointer-events: none;
 }
 
+/* Add arrow to tooltip */
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #1d1d1d transparent transparent transparent;
+}
+
+/* JavaScript will be needed to position the tooltip correctly */
 .tooltip:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
 }
 
-.search-container {
-            display: flex;
-            justify-content: space-between; /* Space between elements to push the button to the right */
-            align-items: center; /* Align items vertically in the center */
-            width: 100%; /* Take full width of the container */
-        }
-
-        /* Style the input field */
-        #searchWord {
-            background-color: #1d1d1d;
-            color: #c3edcc;
-            padding: 4px;
-            font-size: 16px;
-            border: 2px solid #595959cc;
-            border-radius: 5px;
-            width: 190px;
-            margin-right: 1px;
-            padding-right: 20px; /* Add padding to the right for the clear button */
-            position: relative;
-        }
-
-        /* Style the search button */
-        .search-button {
-            padding: 6px 6px;
-            font-size: 14px;
-            color: #232323;
-            background-color: #8b8b8b;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            height: 25px; /* Set the button height */
-            line-height: 25px; /* Match line-height to height for vertical centering */
-            vertical-align: middle; /* Ensure it's centered in its context */
-        }
-
-        /* Change button color on hover */
-        .search-button:hover {
-            background-color: #00FF00;
-        }
-
-        /* Style for the clear button inside the input field */
-        .clear-button {
-            position: absolute;
-            top: 50%;
-            right: -17px; /* Position it inside the input field */
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 15px;
-            color: #c4c4c4;
-            padding: 0;
-            margin: 0;
-            display: none; /* Hidden by default */
-        }
-
-        .clear-button:hover {
-            color: #00FF00;
-        }
-
-/* footer links icons*/
+/* Footer icons */
 .icon-footer {
     position: fixed;
     bottom: 0;
@@ -340,16 +286,22 @@
     width: 100%;
     background-color: #262626;
     border-top: 5px solid #1d1d1d;
-    padding: 16px 0;
+    padding: 12px 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    z-index: 100;
+    height: 72px;
+    box-sizing: border-box;
 }
 
 .icon-container {
-    max-width: 800px;
-    margin: 0 auto;
     display: flex;
     justify-content: center;
     gap: 2rem;
     align-items: center;
+    padding: 0 20px;
+    min-width: max-content;
+    margin: 0 auto;
 }
 
 .icon-link {
@@ -360,6 +312,8 @@
     justify-content: center;
     border-radius: 50%;
     transition: transform 0.2s;
+    flex-shrink: 0;
+    position: relative; /* Ensure relative positioning for tooltip positioning */
 }
 
 .icon-link:hover {
@@ -371,6 +325,128 @@
     height: 24px;
 }
 
+/* Add media query for mobile devices */
+@media (max-width: 768px) {
+    .tooltip .tooltiptext {
+        display: none; /* Hide tooltips on mobile */
+    }
+}
+/* Content wrapper to ensure everything is visible above the footer */
+.content-wrapper {
+    padding-bottom: 90px; /* Slightly more than footer height */
+}
+
+/* Media queries for responsive design */
+@media (max-width: 991px) {
+    .container {
+        padding: 15px 10px;
+        padding-bottom: 90px;
+    }
+    
+    .table-container {
+        flex-basis: 45%;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px 5px;
+        padding-bottom: 90px;
+    }
+    
+    .table-container {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+    
+    .popup {
+        width: 90%;
+        height: 80vh;
+    }
+    
+    th, td {
+        padding: 6px 8px;
+    }
+    
+    .dropdown-content {
+        width: 90%;
+        left: 5%;
+        transform: none;
+    }
+    
+    body {
+        padding-bottom: 90px; /* Increase bottom padding for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 17px;
+        padding-bottom: 90px;
+    }
+    
+    a {
+        font-size: 17px;
+    }
+    
+    th {
+        font-size: 17px;
+        padding: 8px 6px;
+    }
+    
+    .search-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    #searchWord {
+        width: 100%;
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+    
+    .search-button {
+        width: 100%;
+    }
+    
+    .clear-button {
+        right: 10px;
+    }
+}
+
+/* Adjustments for different zoom levels */
+@media screen and (min-width: 1400px) {
+    .container {
+        max-width: 1600px;
+    }
+    
+    .table-container {
+        max-width: 380px;
+    }
+}
+
+@media screen and (min-width: 1800px) {
+    .container {
+        max-width: 1800px;
+    }
+    
+    .table-container {
+        max-width: 420px;
+    }
+    
+    body {
+        font-size: 18px;
+    }
+    
+    a {
+        font-size: 18px;
+    }
+    
+    th {
+        font-size: 18px;
+    }
+}
+
 </style>
 </head>
 <body>
@@ -380,7 +456,7 @@
     <table>
         <thead>
             <tr>
-                <th><a href="https://www.uscis.gov/">USCIS</a></th>
+                <th><a href="https://www.uscis.gov/" class="secondary">USCIS</a></th>
             </tr>
         </thead>
         <tbody>
@@ -545,10 +621,25 @@
     <table>
         <thead>
             <tr>
-                <th>CBP, ICE, Immigration Court</th>
+                <th>CBP, ICE, Court, Other Agencies</th>
             </tr>
         </thead>
         <tbody>
+            <tr>
+                <td class="dropdown">
+                    <div class="arrow-down"></div>
+                    <span onclick="toggleDropdown(this)">‎ ‎ ‎ ‎ IRS, SS, State, Other</span>
+                    <div class="dropdown-content">
+                        <a href="https://www.irs.gov/individuals/get-transcript">IRS Tax Record</a>
+                        <a href="https://www.ssa.gov/">Social Security Home</a>
+                        <a href="https://www.sss.gov/verify/">Selective Service Check</a>
+                        <a href="https://oktap.tax.ok.gov/OkTAP/Web">Oklahoma Tax</a>
+                        <a href="https://www2.tulsacounty.org/treasurer/">Tulsa County</a>
+                        <a href="https://www.sos.ok.gov/">OK Secretary of State</a>
+                        <a href="https://www.oscn.net/dockets/search.aspx#all">OK Court Case Search</a>
+                    </div>
+                </td>
+            </tr>
             <tr>
                 <td><a href="https://www.cbp.gov/">CBP Home</a></td>
             </tr>
@@ -571,28 +662,16 @@
                 <td><a href="https://respondentaccess.eoir.justice.gov/en/forms/eoir33ic/">EOIR Court Address Change</a></td>
             </tr>
 
+        <!-- diviver
             <tr>
                 <td style="text-align: center; padding: 10px 0;">
                     <hr style="border: none; border-top: 2px solid #595959; width: 95%; margin: 0 auto;">
                 </td>
             </tr>
+        -->
 
-            <tr>
-                <td class="dropdown">
-                    <div class="arrow-down"></div>
-                    <span onclick="toggleDropdown(this)">‎ ‎ ‎ ‎ IRS, SS, Other Agencies</span>
-                    <div class="dropdown-content">
-                        <a href="https://www.irs.gov/individuals/get-transcript">IRS Tax Record</a>
-                        <a href="https://www.ssa.gov/">Social Security Home</a>
-                        <a href="https://www.sss.gov/verify/">Selective Service Check</a>
-                        <a href="https://oktap.tax.ok.gov/OkTAP/Web">Oklahoma Tax</a>
-                        <a href="https://www2.tulsacounty.org/treasurer/">Tulsa County</a>
-                        <a href="https://www.sos.ok.gov/">OK Secretary of State</a>
-                        <a href="https://www.oscn.net/dockets/search.aspx#all">OK Court Case Search</a>
-                    </div>
-                </td>
-            </tr>
             <!-- Add more rows as needed -->
+
         </tbody>
     </table>
 </div>
@@ -606,21 +685,6 @@
         </thead>
 
         <tbody>
-
-            <tr>
-                <td>
-                    <div class="search-container">
-                        <div style="position: relative; width: 190px;">
-                            <input type="text" id="searchWord" placeholder="Search" spellcheck="false" oninput="toggleClearButton()">
-                            <button class="clear-button" onclick="clearSearch()">&#x2715;</button>
-                        </div>
-                        <button class="search-button" onclick="search()" style="display: inline-flex; align-items: center;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 512 512">
-                            <rect width="512" height="512" fill="none" />
-                            <path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34M208 336c-70.7 0-128-57.2-128-128c0-70.7 57.2-128 128-128c70.7 0 128 57.2 128 128c0 70.7-57.2 128-128 128" />
-                        </svg></button>
-                    </div>
-                </td>
-            </tr>
             <tr>
                 <td class="dropdown">
                     <div class="arrow-down"></div>
@@ -638,46 +702,45 @@
                 </td>
             </tr>
             <tr>
-                <td><a href="https://masterlinks.isgtulsa.com/contact-info-copy.html" style="display: inline-flex; align-items: center;" onclick="openPopup('example1')">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 22V8c0-2.828 0-4.243-.879-5.121C12.243 2 10.828 2 8 2s-4.243 0-5.121.879C2 3.757 2 5.172 2 8v8c0 2.828 0 4.243.879 5.121C3.757 22 5.172 22 8 22zM6.5 11h-1m5 0h-1m-3-4h-1m1 8h-1m5-8h-1m1 8h-1m9 0h-1m1-4h-1m.5-3h-4v14h4c1.886 0 2.828 0 3.414-.586S22 19.886 22 18v-6c0-1.886 0-2.828-.586-3.414S19.886 8 18 8" color="currentColor"/></svg>‎ Office Info / Contact</a>
+                <td><a href="https://masterlinks.isgtulsa.com/contact-info-copy.html" onclick="openPopup('example1')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" style="vertical-align: middle;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 22V8c0-2.828 0-4.243-.879-5.121C12.243 2 10.828 2 8 2s-4.243 0-5.121.879C2 3.757 2 5.172 2 8v8c0 2.828 0 4.243.879 5.121C3.757 22 5.172 22 8 22zM6.5 11h-1m5 0h-1m-3-4h-1m1 8h-1m5-8h-1m1 8h-1m9 0h-1m1-4h-1m.5-3h-4v14h4c1.886 0 2.828 0 3.414-.586S22 19.886 22 18v-6c0-1.886 0-2.828-.586-3.414S19.886 8 18 8" color="currentColor"/></svg>‎ Office Info / Contact</a>
                 </td>
             </tr>
 
             <tr>
-                <td><a href="https://masterlinks.isgtulsa.com/inv.html" style="display: inline-flex; align-items: center;" onclick="openInNewWindow('https://masterlinks.isgtulsa.com/inv.html'); return false;"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" color="currentColor"><path d="M12.002 9.007c-1.105 0-2 .672-2 1.5c0 .829.895 1.5 2 1.5s2 .672 2 1.5c0 .829-.896 1.5-2 1.5m0-6c.87 0 1.612.417 1.886 1m-1.886-1v-1m0 7c-.87 0-1.612-.417-1.886-1m1.886 1v1"/><path d="M13 2.507h-1c-4.478 0-6.718 0-8.109 1.391S2.5 7.528 2.5 12.008c0 4.477 0 6.717 1.391 8.108s3.63 1.391 8.109 1.391c4.478 0 6.718 0 8.109-1.391s1.391-3.63 1.391-8.109v-1"/><path d="M21.488 2.493L17.313 6.67m-.825-3.656l.119 3.091c0 .729.435 1.183 1.227 1.24l3.124.147"/></g></svg>‎ Invoice</a></td>
+                <td><a href="https://masterlinks.isgtulsa.com/inv.html" onclick="openInNewWindow('https://masterlinks.isgtulsa.com/inv.html'); return false;"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" style="vertical-align: middle;"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" color="currentColor"><path d="M12.002 9.007c-1.105 0-2 .672-2 1.5c0 .829.895 1.5 2 1.5s2 .672 2 1.5c0 .829-.896 1.5-2 1.5m0-6c.87 0 1.612.417 1.886 1m-1.886-1v-1m0 7c-.87 0-1.612-.417-1.886-1m1.886 1v1"/><path d="M13 2.507h-1c-4.478 0-6.718 0-8.109 1.391S2.5 7.528 2.5 12.008c0 4.477 0 6.717 1.391 8.108s3.63 1.391 8.109 1.391c4.478 0 6.718 0 8.109-1.391s1.391-3.63 1.391-8.109v-1"/><path d="M21.488 2.493L17.313 6.67m-.825-3.656l.119 3.091c0 .729.435 1.183 1.227 1.24l3.124.147"/></g></svg>‎ Invoice</a></td>
             </tr>
 
             <tr>
-                <td><a href="https://masterlinks.isgtulsa.com/ac-ps.html" style="display: inline-flex; align-items: center;" onclick="openPopup('example2')"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" color="currentColor"><path d="M14.491 15.5h.009m-5 0h.009m-5.241 3.345c.225 1.67 1.608 2.979 3.292 3.056c1.416.065 2.855.099 4.44.099s3.024-.034 4.44-.1c1.684-.076 3.067-1.385 3.292-3.055c.147-1.09.268-2.207.268-3.345s-.121-2.255-.268-3.345c-.225-1.67-1.608-2.979-3.292-3.056A95 95 0 0 0 12 9c-1.585 0-3.024.034-4.44.1c-1.684.076-3.067 1.385-3.292 3.055C4.12 13.245 4 14.362 4 15.5s.121 2.255.268 3.345"/><path d="M7.5 9V6.5a4.5 4.5 0 0 1 9 0V9"/></g></svg>‎ Password Generate</a></td>
+                <td><a href="https://masterlinks.isgtulsa.com/ac-ps.html" onclick="openPopup('example2')"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" style="vertical-align: middle;"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" color="currentColor"><path d="M14.491 15.5h.009m-5 0h.009m-5.241 3.345c.225 1.67 1.608 2.979 3.292 3.056c1.416.065 2.855.099 4.44.099s3.024-.034 4.44-.1c1.684-.076 3.067-1.385 3.292-3.055c.147-1.09.268-2.207.268-3.345s-.121-2.255-.268-3.345c-.225-1.67-1.608-2.979-3.292-3.056A95 95 0 0 0 12 9c-1.585 0-3.024.034-4.44.1c-1.684.076-3.067 1.385-3.292 3.055C4.12 13.245 4 14.362 4 15.5s.121 2.255.268 3.345"/><path d="M7.5 9V6.5a4.5 4.5 0 0 1 9 0V9"/></g></svg>‎ Password Generate</a></td>
             </tr>
             <tr>
-                <td><a href="https://masterlinks.isgtulsa.com/image-compress.html" style="display: inline-flex; align-items: center;"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" color="currentColor"><circle cx="7.5" cy="7.5" r="1.5"/><path d="M2.5 12c0-4.478 0-6.718 1.391-8.109S7.521 2.5 12 2.5c4.478 0 6.718 0 8.109 1.391S21.5 7.521 21.5 12c0 4.478 0 6.718-1.391 8.109S16.479 21.5 12 21.5c-4.478 0-6.718 0-8.109-1.391S2.5 16.479 2.5 12"/><path d="M5 21c4.372-5.225 9.274-12.116 16.498-7.458"/></g></svg>‎ Image Compress</a></td>
+                <td><a href="https://masterlinks.isgtulsa.com/image-compress.html"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" style="vertical-align: middle;"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" color="currentColor"><circle cx="7.5" cy="7.5" r="1.5"/><path d="M2.5 12c0-4.478 0-6.718 1.391-8.109S7.521 2.5 12 2.5c4.478 0 6.718 0 8.109 1.391S21.5 7.521 21.5 12c0 4.478 0 6.718-1.391 8.109S16.479 21.5 12 21.5c-4.478 0-6.718 0-8.109-1.391S2.5 16.479 2.5 12"/><path d="M5 21c4.372-5.225 9.274-12.116 16.498-7.458"/></g></svg>‎ Image Compress</a></td>
             </tr>
             <tr>
-                <td><a href="https://masterlinks.isgtulsa.com/print-filter.html" style="display: inline-flex; align-items: center;"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" color="currentColor"><path d="M7.075 3.884c3.212.95 6.638.95 9.85 0c2.592-.767 3.888-1.15 4.482-.675C22 3.685 22 4.908 22 7.353v9.294c0 2.445 0 3.668-.593 4.144c-.594.476-1.89.092-4.482-.675a17.36 17.36 0 0 0-9.85 0c-2.592.767-3.888 1.15-4.482.675C2 20.315 2 19.092 2 16.647V7.353c0-2.445 0-3.668.593-4.144c.594-.476 1.89-.092 4.482.675"/><path d="M7 20c3.947-4.157 8.382-9.67 15-5.536M9 8.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0"/></g></svg>‎ Print Image Filter</a></td>
+                <td><a href="https://masterlinks.isgtulsa.com/print-filter.html"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" style="vertical-align: middle;"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" color="currentColor"><path d="M7.075 3.884c3.212.95 6.638.95 9.85 0c2.592-.767 3.888-1.15 4.482-.675C22 3.685 22 4.908 22 7.353v9.294c0 2.445 0 3.668-.593 4.144c-.594.476-1.89.092-4.482-.675a17.36 17.36 0 0 0-9.85 0c-2.592.767-3.888 1.15-4.482.675C2 20.315 2 19.092 2 16.647V7.353c0-2.445 0-3.668.593-4.144c.594-.476 1.89-.092 4.482.675"/><path d="M7 20c3.947-4.157 8.382-9.67 15-5.536M9 8.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0"/></g></svg>‎ Print Image Filter</a></td>
             </tr>
             <tr>
-                <td><a href="https://masterlinks.isgtulsa.com/add-substract-date.html" style="display: inline-flex; align-items: center;"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 13h5m-8 0h.009M13 17H8m8 0h-.009M18 2v2M6 2v2m-3.5 8.243c0-4.357 0-6.536 1.252-7.89C5.004 3 7.02 3 11.05 3h1.9c4.03 0 6.046 0 7.298 1.354C21.5 5.707 21.5 7.886 21.5 12.244v.513c0 4.357 0 6.536-1.252 7.89C18.996 22 16.98 22 12.95 22h-1.9c-4.03 0-6.046 0-7.298-1.354C2.5 19.293 2.5 17.114 2.5 12.756zM3 8h18" color="currentColor"/></svg>‎ Add or Subtract From Date</a></td>
+                <td><a href="https://masterlinks.isgtulsa.com/add-substract-date.html"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" style="vertical-align: middle;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 13h5m-8 0h.009M13 17H8m8 0h-.009M18 2v2M6 2v2m-3.5 8.243c0-4.357 0-6.536 1.252-7.89C5.004 3 7.02 3 11.05 3h1.9c4.03 0 6.046 0 7.298 1.354C21.5 5.707 21.5 7.886 21.5 12.244v.513c0 4.357 0 6.536-1.252 7.89C18.996 22 16.98 22 12.95 22h-1.9c-4.03 0-6.046 0-7.298-1.354C2.5 19.293 2.5 17.114 2.5 12.756zM3 8h18" color="currentColor"/></svg>‎ Add or Subtract From Date</a></td>
             </tr>
             <tr>
-                <td><a href="https://masterlinks.isgtulsa.com/date-period-duration.html" style="display: inline-flex; align-items: center;"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.376 3q-.322.12-.631.261m12.973 13.04q.153-.332.282-.676m-2.501 3.74q.258-.24.497-.499m-3.727 2.506q.291-.11.573-.237m-3.686.859q-.346.012-.694 0m-3.675-.854q.272.123.551.228m-3.665-2.447q.204.217.423.422m-2.463-3.678q.113.296.243.583m-.871-3.743a10 10 0 0 1 0-.626m.62-3.142q.111-.293.24-.577m1.791-2.68q.217-.232.449-.449M13.5 12a1.5 1.5 0 1 1-1.5-1.5m1.5 1.5a1.5 1.5 0 0 0-1.5-1.5m1.5 1.5H16m-4-1.5V6m10 6c0-5.523-4.477-10-10-10" color="currentColor"/></svg>‎ Date to Date Period Duration</a></td>
+                <td><a href="https://masterlinks.isgtulsa.com/date-period-duration.html" style="display: inline-flex; align-items: center;"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" style="vertical-align: middle;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.376 3q-.322.12-.631.261m12.973 13.04q.153-.332.282-.676m-2.501 3.74q.258-.24.497-.499m-3.727 2.506q.291-.11.573-.237m-3.686.859q-.346.012-.694 0m-3.675-.854q.272.123.551.228m-3.665-2.447q.204.217.423.422m-2.463-3.678q.113.296.243.583m-.871-3.743a10 10 0 0 1 0-.626m.62-3.142q.111-.293.24-.577m1.791-2.68q.217-.232.449-.449M13.5 12a1.5 1.5 0 1 1-1.5-1.5m1.5 1.5a1.5 1.5 0 0 0-1.5-1.5m1.5 1.5H16m-4-1.5V6m10 6c0-5.523-4.477-10-10-10" color="currentColor"/></svg>‎ Date to Date Period Duration</a></td>
             </tr>
             <tr>
-                <td><a href="https://masterlinks.isgtulsa.com/address-history.html" onclick="openInNewWindow('https://masterlinks.isgtulsa.com/address-history.html'); return false;"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" color="currentColor"><path d="M14.5 9a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0m3.722 8c1.395 1.988 2.062 3.047 1.665 3.9q-.06.128-.14.247c-.575.853-2.06.853-5.03.853H9.283c-2.97 0-4.454 0-5.029-.853a2 2 0 0 1-.14-.247c-.397-.852.27-1.912 1.665-3.9"/><path d="M13.257 17.494a1.813 1.813 0 0 1-2.514 0c-3.089-2.993-7.228-6.336-5.21-11.19C6.626 3.679 9.246 2 12 2s5.375 1.68 6.467 4.304c2.016 4.847-2.113 8.207-5.21 11.19"/></g></svg>‎ Addresses Quick Entry</a></td>
+                <td><a href="https://masterlinks.isgtulsa.com/address-history.html" onclick="openInNewWindow('https://masterlinks.isgtulsa.com/address-history.html'); return false;"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" style="vertical-align: middle;"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" color="currentColor"><path d="M14.5 9a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0m3.722 8c1.395 1.988 2.062 3.047 1.665 3.9q-.06.128-.14.247c-.575.853-2.06.853-5.03.853H9.283c-2.97 0-4.454 0-5.029-.853a2 2 0 0 1-.14-.247c-.397-.852.27-1.912 1.665-3.9"/><path d="M13.257 17.494a1.813 1.813 0 0 1-2.514 0c-3.089-2.993-7.228-6.336-5.21-11.19C6.626 3.679 9.246 2 12 2s5.375 1.68 6.467 4.304c2.016 4.847-2.113 8.207-5.21 11.19"/></g></svg>‎ Addresses Quick Entry</a></td>
             </tr>
             <tr>
-                <td><a href="https://masterlinks.isgtulsa.com/employment-history.html" onclick="openInNewWindow('https://masterlinks.isgtulsa.com/employment-history.html'); return false;"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12v9m10-9v9M3 12h18M2.5 13.75c0-3.653 0-5.48 1.113-6.615S6.517 6 10.1 6h3.8c3.583 0 5.374 0 6.487 1.135S21.5 10.097 21.5 13.75s0 5.48-1.113 6.615S17.483 21.5 13.9 21.5h-3.8c-3.583 0-5.374 0-6.487-1.135S2.5 17.403 2.5 13.75M16.5 6l-.1-.31c-.494-1.54-.742-2.31-1.331-2.75c-.59-.44-1.372-.44-2.937-.44h-.264c-1.565 0-2.348 0-2.937.44c-.59.44-.837 1.21-1.332 2.75L7.5 6" color="currentColor"/></svg>‎ Employment Quick Entry</a></td>
+                <td><a href="https://masterlinks.isgtulsa.com/employment-history.html" onclick="openInNewWindow('https://masterlinks.isgtulsa.com/employment-history.html'); return false;"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" style="vertical-align: middle;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12v9m10-9v9M3 12h18M2.5 13.75c0-3.653 0-5.48 1.113-6.615S6.517 6 10.1 6h3.8c3.583 0 5.374 0 6.487 1.135S21.5 10.097 21.5 13.75s0 5.48-1.113 6.615S17.483 21.5 13.9 21.5h-3.8c-3.583 0-5.374 0-6.487-1.135S2.5 17.403 2.5 13.75M16.5 6l-.1-.31c-.494-1.54-.742-2.31-1.331-2.75c-.59-.44-1.372-.44-2.937-.44h-.264c-1.565 0-2.348 0-2.937.44c-.59.44-.837 1.21-1.332 2.75L7.5 6" color="currentColor"/></svg>‎ Employment Quick Entry</a></td>
             </tr>
             <tr>
-                <td><a href="https://www.unitconverters.net/" style="display: inline-flex; align-items: center;"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" color="currentColor"><path d="M5 9.979C5 11.095 6.79 12 9 12V9.979c0-.994 0-1.492-.397-1.795c-.398-.303-.792-.19-1.58.037C5.815 8.57 5 9.226 5 9.98"/><path d="M16 8.5c0 1.933-3.134 3.5-7 3.5s-7-1.567-7-3.5S5.134 5 9 5s7 1.567 7 3.5"/><path d="M2 9v6.667C2 17.507 5.134 19 9 19h11c.943 0 1.414 0 1.707-.293S22 17.943 22 17v-3c0-.943 0-1.414-.293-1.707S20.943 12 20 12H9m9 7v-2m-4 2v-2m-4 2v-2m-4 1.5v-2"/></g></svg>‎ Unit Converter Height Weight</a></td>
+                <td><a href="https://www.unitconverters.net/"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" style="vertical-align: middle;"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" color="currentColor"><path d="M5 9.979C5 11.095 6.79 12 9 12V9.979c0-.994 0-1.492-.397-1.795c-.398-.303-.792-.19-1.58.037C5.815 8.57 5 9.226 5 9.98"/><path d="M16 8.5c0 1.933-3.134 3.5-7 3.5s-7-1.567-7-3.5S5.134 5 9 5s7 1.567 7 3.5"/><path d="M2 9v6.667C2 17.507 5.134 19 9 19h11c.943 0 1.414 0 1.707-.293S22 17.943 22 17v-3c0-.943 0-1.414-.293-1.707S20.943 12 20 12H9m9 7v-2m-4 2v-2m-4 2v-2m-4 1.5v-2"/></g></svg>‎ Unit Converter Height Weight</a></td>
             </tr>
             <tr>
-                <td><a href="https://masterlinks.isgtulsa.com/60-40-ratio.html" style="display: inline-flex; align-items: center;"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12h18m-6.5-6.5a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0m0 13a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0" color="currentColor"/></svg>‎ 60/40 Ratio</a></td>
+                <td><a href="https://masterlinks.isgtulsa.com/60-40-ratio.html"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" style="vertical-align: middle;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12h18m-6.5-6.5a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0m0 13a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0" color="currentColor"/></svg>‎ 60/40 Ratio</a></td>
             </tr>
             <tr>
-                <td><a href="https://masterlinks.isgtulsa.com/percentage-calc.html" style="display: inline-flex; align-items: center;"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" color="currentColor"><path d="M2.5 12c0-4.478 0-6.718 1.391-8.109S7.521 2.5 12 2.5c4.478 0 6.718 0 8.109 1.391S21.5 7.521 21.5 12c0 4.478 0 6.718-1.391 8.109S16.479 21.5 12 21.5c-4.478 0-6.718 0-8.109-1.391S2.5 16.479 2.5 12"/><path d="m8 16l8-8m-6 1a1 1 0 1 1-2 0a1 1 0 0 1 2 0m6 5.828a1 1 0 1 1-2 0a1 1 0 0 1 2 0"/></g></svg>‎ Percentage Calculator</a></td>
+                <td><a href="https://masterlinks.isgtulsa.com/percentage-calc.html"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" style="vertical-align: middle;"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" color="currentColor"><path d="M2.5 12c0-4.478 0-6.718 1.391-8.109S7.521 2.5 12 2.5c4.478 0 6.718 0 8.109 1.391S21.5 7.521 21.5 12c0 4.478 0 6.718-1.391 8.109S16.479 21.5 12 21.5c-4.478 0-6.718 0-8.109-1.391S2.5 16.479 2.5 12"/><path d="m8 16l8-8m-6 1a1 1 0 1 1-2 0a1 1 0 0 1 2 0m6 5.828a1 1 0 1 1-2 0a1 1 0 0 1 2 0"/></g></svg>‎ Percentage Calculator</a></td>
             </tr>
-
 
         </tbody>
     </table>
@@ -753,61 +816,28 @@
         document.getElementById('popupContent').style.display = 'none';
     }
 </script>
+
 <script>
     function openInNewWindow(url) {
       window.open(url, "_blank", "width=970,height=800");
     }
-    </script>
 
-<script>
-    function toggleClearButton() {
-        const searchInput = document.getElementById('searchWord');
-        const clearButton = document.querySelector('.clear-button');
-
-        // Show the clear button only if there's text in the input field
-        if (searchInput.value) {
-            clearButton.style.display = 'block';
-        } else {
-            clearButton.style.display = 'none';
-        }
-    }
-
-    function clearSearch() {
-        const searchInput = document.getElementById('searchWord');
-        searchInput.value = '';
-        toggleClearButton(); // Hide the clear button after clearing the input
-        searchInput.focus(); // Optional: refocus the input field
-    }
-
-    function search() {
-    const word = document.getElementById('searchWord').value;
-    if (word) {
-        // Get the screen width and height
-        const screenWidth = window.screen.availWidth;
-        const screenHeight = window.screen.availHeight;
-
-        // Calculate the width and height of each window as half of the screen
-        const windowWidth = Math.floor(screenWidth / 2);
-        const windowHeight = screenHeight; // Full height of the screen
-
-        // Define the positions for each window to open in left or right half
-        const positions = [
-            { left: 0, top: 0 },  // Left half of the screen
-            { left: windowWidth, top: 0 }  // Right half of the screen
-        ];
-
-        // URLs to open
-        const googleDriveUrl = `https://drive.google.com/drive/u/0/search?q=${encodeURIComponent(word)}`;
-        const gmailUrl = `https://mail.google.com/mail/u/0/#search/${encodeURIComponent(word)}`;
-
-        // Open each URL in a separate window, each occupying half of the screen
-        window.open(googleDriveUrl, '_blank', `width=${windowWidth},height=${windowHeight},left=${positions[0].left},top=${positions[0].top}`);
-        window.open(gmailUrl, '_blank', `width=${windowWidth},height=${windowHeight},left=${positions[1].left},top=${positions[1].top}`);
-    } else {
-        alert("Please enter a word to search.");
-    }
-}
-
+    document.addEventListener('DOMContentLoaded', function() {
+    // Get all tooltip elements
+    const tooltips = document.querySelectorAll('.tooltip');
+    
+    // Add event listeners to each tooltip
+    tooltips.forEach(tooltip => {
+        const tooltiptext = tooltip.querySelector('.tooltiptext');
+        
+        tooltip.addEventListener('mouseenter', function() {
+            const rect = this.getBoundingClientRect();
+            // Position the tooltip above the icon
+            tooltiptext.style.bottom = (window.innerHeight - rect.top + 10) + 'px';
+            tooltiptext.style.left = (rect.left + rect.width / 2) + 'px';
+        });
+    });
+});
 
 </script>
 
