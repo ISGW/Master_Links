@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add or Subtract From a Date</title>
+    <title>Add to or Subtract From a Date</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -50,6 +50,7 @@
             border-radius: 4px;
             font-size: 16px;
             width: 180px;
+            font-weight: bold;
         }
         .date-input-container {
             position: relative;
@@ -59,7 +60,8 @@
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            background-color: white;
+            background-color: #cfffdccf;
+            font-weight: bold;
         }
         label {
             font-weight: bold;
@@ -82,31 +84,30 @@
             padding: 15px;
             background-color: #cfffdccf;
             border-radius: 4px;
+            display: none; /* Initially hidden */
         }
         .divider {
-            border-top: 1px dotted #ccc;
+            border-top: 1px dotted #2E6F40;
             margin: 10px 0;
         }
-
-
     </style>
 </head>
 <body>
     <div class="calculator">
-        <h1>Date Calculator: Add or Subtract From a Date</h1>
+        <h1>Add to or Subtract From a Date</h1>
         <br>
         <div class="input-group">
             <div class="date-inputs">
                 <label>Date:</label>
                 <div class="date-input-container">
-                    <input type="date" id="startDate" value="2025-02-27">
+                    <input type="date" id="startDate" placeholder="mm/dd/yyyy">
                 </div>
             </div>
             
             <div class="duration-inputs">
                 <label>Add/Subtract:</label>
                 <select id="operation">
-                    <option value="add">Add</option>
+                    <option value="add">(+) Add</option>
                     <option value="subtract" selected>(−) Subtract</option>
                 </select>
                 
@@ -127,12 +128,12 @@
         <button id="calculate">Calculate Date</button>
         
         <div class="result" id="resultArea">
-            <div id="fromDate">From Thursday, February 27, 2025</div>
-            <div id="operation-display">Subtracted 6 years, 2 months</div>
+            <div id="fromDate"></div>
+            <div id="operation-display"></div>
             
             <div class="divider"></div>
             
-            <div id="resultDate"><strong>Result:</strong> Thursday, December 27, 2018</div>
+            <div id="resultDate"></div>
         </div>
     </div>
 
@@ -148,6 +149,7 @@
             const fromDateDisplay = document.getElementById('fromDate');
             const operationDisplay = document.getElementById('operation-display');
             const resultDateDisplay = document.getElementById('resultDate');
+            const resultArea = document.getElementById('resultArea');
             
             // Format date as "Day, Month DD, YYYY"
             function formatDate(date) {
@@ -193,6 +195,13 @@
             function calculateNewDate() {
                 // Get input values
                 const startDateStr = startDateInput.value; // Format: YYYY-MM-DD
+                
+                // Check if date is entered
+                if (!startDateStr) {
+                    alert("Please enter a date");
+                    return;
+                }
+                
                 const operation = operationSelect.value;
                 const years = parseInt(yearsInput.value) || 0;
                 const months = parseInt(monthsInput.value) || 0;
@@ -225,13 +234,15 @@
                 operationDisplay.textContent = `${operationText} ${formatDuration(years, months, weeks, days)}`;
                 
                 resultDateDisplay.innerHTML = `<strong>Result:</strong> ${formatDate(resultDate)}`;
+                
+                // Show result area
+                resultArea.style.display = 'block';
             }
             
             // Set up event listeners
             calculateButton.addEventListener('click', calculateNewDate);
             
-            // Initialize with default calculation
-            calculateNewDate();
+            // No initial calculation - result area starts hidden
         });
     </script>
 </body>
