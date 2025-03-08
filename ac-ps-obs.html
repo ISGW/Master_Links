@@ -21,7 +21,7 @@
     .container {
         max-width: 500px;
         margin: 0 auto;
-        padding: 0px;
+        padding: 20px;
         border: 1px solid #92929200;
         border-radius: 5px;
         display: flex;
@@ -50,7 +50,7 @@
 
     button {
         width: 25%;
-        min-width:fit-content;
+        min-width:150px;
         padding: 10px 20px;
         background-color: #8abcbb;
         font-size: 17px;
@@ -117,7 +117,7 @@
 </style>
 </head>
 <body>
-    <h1>‎ </h1>
+    
 <div class="container">
 
     <div id="copy-message"><svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M12 21a9 9 0 1 0 0-18a9 9 0 0 0 0 18m-.232-5.36l5-6l-1.536-1.28l-4.3 5.159l-2.225-2.226l-1.414 1.414l3 3l.774.774z" clip-rule="evenodd"/></svg></div>
@@ -126,7 +126,7 @@
     <button id="permanent-copy" onclick="copyPermanentText()">Copy ↑</button>
     <label for="length">Length:</label>
     <input type="number" id="length" min="6" max="40" value="12">
-    <button onclick="generatePassword()">Generate ⚙</button>
+    <button onclick="generatePassword()">Generate <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="vertical-align: middle;" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-key-round"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"/></svg></button>
     <br>
     <br>
     <div id="generated-password"></div>
@@ -179,7 +179,7 @@
         copyMessage.style.display = 'block';
         setTimeout(function() {
             copyMessage.style.display = 'none';
-        }, 200); // Hide message after 3 seconds
+        }, 300); // Hide message after 3 seconds
     }
 
     function hideCopyMessage() {
