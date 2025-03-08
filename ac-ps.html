@@ -16,7 +16,7 @@
     h1{
         color: #929292;
         font-size: 20px;
-        padding-top: 40px;
+        padding-top: 20px;
         padding-bottom: 50px;
     }
 
@@ -106,14 +106,13 @@
 <div class="container">
     <h1><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock-keyhole"><circle cx="12" cy="16" r="1"/><rect x="3" y="10" width="18" height="12" rx="2"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/></svg></h1>
 
-    
     <label for="length">Length:</label>
     <input type="number" id="length" min="6" max="40" value="12">
-    <button onclick="generatePassword()">Generate ⚙</button>
+    <button onclick="generatePassword()">Generate</button>
     <br>
     <div id="generated-password"></div>
     <div>__________________</div>
-    <button id="copy-button" onclick="copyToClipboard()">Copy ↑</button>
+    <button id="copy-button" onclick="copyToClipboard()">Copy</button>
     <div id="copy-message">Copied to clipboard ✔</div>
 </div>
 
