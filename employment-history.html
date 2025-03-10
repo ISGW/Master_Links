@@ -237,6 +237,23 @@
     display: none;
   }
 
+  .url-card {
+    margin-top: 20px;
+    padding: 16px;
+    background-color: var(--primary-lightest);
+    border-radius: var(--radius);
+    display: none;
+  }
+
+  .url-field {
+    font-size: 14px;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid var(--primary-light);
+    border-radius: var(--radius);
+  }
+
   /* Gap warning styles */
   .gap-warning {
     background-color: var(--alert-light);
@@ -339,10 +356,22 @@
 
         <div class="button-group">
           <button type="submit">Add Employment</button>
-          <button type="button" class="secondary" onclick="generateMarkdown()">Copy as Text</button>
+          <button type="button" class="secondary" onclick="generateMarkdown()"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg></button>
           <button type="button" class="secondary" onclick="printContent()"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-printer"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button>
+          <button type="button" class="secondary" onclick="saveToURL()">Generate Save Link</button>
         </div>
       </form>
+    </div>
+
+    <!-- URL Share Card -->
+    <div id="urlCard" class="card url-card no-print">
+      <h3>Save your data with this link</h3>
+      <p>Copy this URL to save your employment history. You can bookmark it or share it to continue where you left off.</p>
+      <input type="text" id="saveUrl" class="url-field" readonly>
+      <div class="button-group">
+        <button onclick="copyUrl()">Copy Link</button>
+        <button class="secondary" onclick="document.getElementById('urlCard').style.display = 'none'">Close</button>
+      </div>
     </div>
 
     <div class="table-container">
@@ -366,9 +395,16 @@
   <div id="toast" class="toast">Text copied to clipboard!</div>
 
   <script>
+    // Main data structure to store employment records
+    let employmentData = {
+      name: '',
+      entries: []
+    };
+
     // Add event listener for name input
     document.getElementById('name').addEventListener('input', function() {
       document.getElementById('employmentName').textContent = this.value;
+      employmentData.name = this.value;
     });
     
     function addEmployment(event) {
@@ -422,6 +458,15 @@
       };
       cell6.appendChild(editButton);
 
+      // Add data to our main data structure
+      employmentData.entries.push({
+        employer: employer,
+        employerAddress: employerAddress,
+        position: position,
+        dateEntry: dateEntryValue,
+        dateLeft: dateLeftValue
+      });
+
       // Sort the rows by date of entry in descending order
       sortRowsByDate();
       
@@ -456,6 +501,10 @@
       document.getElementById('position').value = position;
       document.getElementById('dateEntry').value = dateEntryStr;
       document.getElementById('dateLeft').value = dateLeftStr;
+
+      // Get the index of the row to remove it from our data structure
+      const rowIndex = row.rowIndex - 1; // Adjust for header row
+      employmentData.entries.splice(rowIndex, 1);
 
       row.remove(); // Remove the row being edited
       
@@ -511,6 +560,11 @@
         } else {
           row.classList.remove('olderEmployment');
         }
+      });
+
+      // Also sort the data structure to match
+      employmentData.entries.sort((a, b) => {
+        return new Date(b.dateEntry) - new Date(a.dateEntry);
       });
     }
     
@@ -599,6 +653,105 @@
       window.print();
     }	
 
+    // Function to save data to URL
+    function saveToURL() {
+      // Get the current URL without the hash
+      const baseUrl = window.location.href.split('#')[0];
+      
+      // Convert data to JSON and encode it for the URL
+      const jsonData = JSON.stringify(employmentData);
+      const encodedData = encodeURIComponent(jsonData);
+      
+      // Create the save URL with the encoded data in the hash
+      const saveUrl = baseUrl + '#data=' + encodedData;
+      
+      // Display the URL to the user
+      document.getElementById('saveUrl').value = saveUrl;
+      document.getElementById('urlCard').style.display = 'block';
+    }
+
+    // Function to copy the generated URL
+    function copyUrl() {
+      const urlField = document.getElementById('saveUrl');
+      urlField.select();
+      document.execCommand('copy');
+      showToast('Save link copied to clipboard!');
+    }
+
+    // Function to load data from URL hash on page load
+    function loadFromURL() {
+      if (window.location.hash) {
+        try {
+          // Extract the data from the hash
+          const hashParam = window.location.hash.substring(1); // Remove the #
+          
+          if (hashParam.startsWith('data=')) {
+            const encodedData = hashParam.substring(5); // Remove the 'data='
+            const jsonData = decodeURIComponent(encodedData);
+            const loadedData = JSON.parse(jsonData);
+            
+            // Load the name
+            if (loadedData.name) {
+              document.getElementById('name').value = loadedData.name;
+              document.getElementById('employmentName').textContent = loadedData.name;
+            }
+            
+            // Load all employment entries
+            if (loadedData.entries && Array.isArray(loadedData.entries)) {
+              employmentData = loadedData;
+              
+              loadedData.entries.forEach(entry => {
+                const employmentList = document.getElementById('employmentList');
+                
+                // Create a new row
+                const newRow = employmentList.insertRow();
+                
+                // Insert cells with data
+                const cell1 = newRow.insertCell(0);
+                cell1.textContent = entry.employer;
+                
+                const cell2 = newRow.insertCell(1);
+                cell2.textContent = entry.employerAddress;
+                
+                const cell3 = newRow.insertCell(2);
+                cell3.textContent = entry.position;
+                
+                const cell4 = newRow.insertCell(3);
+                cell4.textContent = formatDate(entry.dateEntry);
+                
+                const cell5 = newRow.insertCell(4);
+                cell5.textContent = formatDate(entry.dateLeft);
+                
+                // Store the actual date objects for sorting and gap calculation
+                newRow.dataset.entryDate = entry.dateEntry;
+                newRow.dataset.leftDate = entry.dateLeft;
+                
+                // Create an "Edit" button in the last cell
+                const cell6 = newRow.insertCell(5);
+                cell6.classList.add('no-print');
+                const editButton = document.createElement('button');
+                editButton.textContent = 'Edit';
+                editButton.classList.add('edit-button');
+                editButton.onclick = function() {
+                  editEmployment(newRow);
+                };
+                cell6.appendChild(editButton);
+              });
+              
+              // Sort the rows and check for gaps
+              sortRowsByDate();
+              checkEmploymentGaps();
+              
+              showToast('Employment data loaded successfully!');
+            }
+          }
+        } catch (error) {
+          console.error('Error loading data from URL:', error);
+          showToast('Error loading data from URL');
+        }
+      }
+    }
+
     // Confirm before page refresh/close
     window.addEventListener('beforeunload', function(event) {
       const employmentList = document.getElementById('employmentList');
@@ -607,6 +760,9 @@
         event.returnValue = '';
       }
     });
+
+    // Load data from URL when the page loads
+    window.addEventListener('DOMContentLoaded', loadFromURL);
   </script>
 </body>
 </html>
