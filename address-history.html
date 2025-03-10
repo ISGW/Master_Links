@@ -264,6 +264,24 @@
     border-bottom: none;
   }
 
+  /* URL Share Card */
+  .url-card {
+    margin-top: 20px;
+    padding: 16px;
+    background-color: var(--primary-lightest);
+    border-radius: var(--radius);
+    display: none;
+  }
+
+  .url-field {
+    font-size: 14px;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid var(--primary-light);
+    border-radius: var(--radius);
+  }
+
   @media print {
     .no-print {
       display: none;
@@ -320,10 +338,22 @@
 
         <div class="button-group">
           <button type="submit">Add Address</button>
-          <button type="button" class="secondary" onclick="copyMarkdown()">Copy as Text</button>
+          <button type="button" class="secondary" onclick="copyMarkdown()"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg></button>
           <button type="button" class="secondary" onclick="printContent()"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-printer"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button>
+          <button type="button" class="secondary" onclick="saveToURL()">Generate Save Link</button>
         </div>
       </form>
+    </div>
+
+    <!-- URL Share Card -->
+    <div id="urlCard" class="card url-card no-print">
+      <h3>Save your data with this link</h3>
+      <p>Copy this URL to save your address history. You can bookmark it or share it to continue where you left off.</p>
+      <input type="text" id="saveUrl" class="url-field" readonly>
+      <div class="button-group">
+        <button onclick="copyUrl()">Copy Link</button>
+        <button class="secondary" onclick="document.getElementById('urlCard').style.display = 'none'">Close</button>
+      </div>
     </div>
 
     <div class="table-container">
@@ -345,17 +375,28 @@
   <div id="toast" class="toast">Markdown copied to clipboard!</div>
 
   <script>
+    // Main data structure to store address records
+    let addressData = {
+      name: '',
+      entries: []
+    };
+
     // Add event listener for name input
     document.getElementById('name').addEventListener('input', function() {
       document.getElementById('addressName').textContent = this.value;
+      addressData.name = this.value;
     });
     
     function addAddress(event) {
       event.preventDefault();
 
       const address = document.getElementById('address').value;
-      const moveInDate = formatDate(document.getElementById('moveInDate').value);
-      const moveOutDate = formatDate(document.getElementById('moveOutDate').value);
+      const moveInDateValue = document.getElementById('moveInDate').value;
+      const moveOutDateValue = document.getElementById('moveOutDate').value;
+      
+      // Format dates for display
+      const moveInDate = formatDate(moveInDateValue);
+      const moveOutDate = formatDate(moveOutDateValue);
 
       const addressList = document.getElementById('addressList');
 
@@ -369,6 +410,10 @@
 
       const cell3 = newRow.insertCell(2);
       cell3.textContent = moveOutDate;
+      
+      // Store the actual date values for sorting and gap calculation
+      newRow.dataset.moveInDate = moveInDateValue;
+      newRow.dataset.moveOutDate = moveOutDateValue;
 
       const cell4 = newRow.insertCell(3);
       cell4.classList.add('no-print');
@@ -379,6 +424,13 @@
         editAddress(newRow);
       };
       cell4.appendChild(editButton);
+      
+      // Add data to our main data structure
+      addressData.entries.push({
+        address: address,
+        moveInDate: moveInDateValue,
+        moveOutDate: moveOutDateValue
+      });
 
       sortRowsByDate();
       checkForGaps();
@@ -399,32 +451,18 @@
       const cells = row.cells;
       const address = cells[0].textContent;
       
-      // Parse the date strings to valid date objects
-      const moveInDateStr = cells[1].textContent;
-      const moveOutDateStr = cells[2].textContent;
+      // Use the stored date values for editing
+      const moveInDateStr = row.dataset.moveInDate;
+      const moveOutDateStr = row.dataset.moveOutDate;
       
-      // Set the address input value
+      // Set form values
       document.getElementById('address').value = address;
+      document.getElementById('moveInDate').value = moveInDateStr;
+      document.getElementById('moveOutDate').value = moveOutDateStr;
       
-      // Parse dates in MM/DD/YYYY format
-      const parseDate = (dateStr) => {
-        const parts = dateStr.split('/');
-        return new Date(parts[2], parts[0] - 1, parts[1]);
-      };
-      
-      // Format dates for the input fields (YYYY-MM-DD)
-      const formatDateForInput = (date) => {
-        const year = date.getFullYear();
-        const month = (date.getMonth() + 1).toString().padStart(2, '0');
-        const day = date.getDate().toString().padStart(2, '0');
-        return `${year}-${month}-${day}`;
-      };
-      
-      const moveInDate = parseDate(moveInDateStr);
-      const moveOutDate = parseDate(moveOutDateStr);
-      
-      document.getElementById('moveInDate').value = formatDateForInput(moveInDate);
-      document.getElementById('moveOutDate').value = formatDateForInput(moveOutDate);
+      // Get the index of the row to remove it from our data structure
+      const rowIndex = row.rowIndex - 1; // Adjust for header row
+      addressData.entries.splice(rowIndex, 1);
 
       row.remove();
       checkForGaps();
@@ -455,19 +493,21 @@
 
     function sortRowsByDate() {
       const addressList = document.getElementById('addressList');
-      const rows = Array.from(addressList.querySelectorAll('tr'));
+      const rows = Array.from(addressList.rows);
 
       rows.sort((a, b) => {
-        const dateA = new Date(a.cells[1].textContent);
-        const dateB = new Date(b.cells[1].textContent);
+        const dateA = new Date(a.dataset.moveInDate);
+        const dateB = new Date(b.dataset.moveInDate);
         return dateB - dateA;
       });
 
+      // Clear the table
       addressList.innerHTML = '';
 
+      // Insert sorted rows back into the table
       rows.forEach(row => {
         addressList.appendChild(row);
-        const moveInDate = new Date(row.cells[1].textContent);
+        const moveInDate = new Date(row.dataset.moveInDate);
         const currentDate = new Date();
         const fiveYearsAgo = new Date();
         fiveYearsAgo.setFullYear(currentDate.getFullYear() - 5);
@@ -476,6 +516,11 @@
         } else {
           row.classList.remove('olderAddress');
         }
+      });
+      
+      // Also sort the data structure to match
+      addressData.entries.sort((a, b) => {
+        return new Date(b.moveInDate) - new Date(a.moveInDate);
       });
     }
 
@@ -495,8 +540,8 @@
       
       // Sort rows chronologically for gap detection
       const sortedRows = [...rows].sort((a, b) => {
-        const dateA = parseDate(a.cells[1].textContent);
-        const dateB = parseDate(b.cells[1].textContent);
+        const dateA = new Date(a.dataset.moveInDate);
+        const dateB = new Date(b.dataset.moveInDate);
         return dateA - dateB;
       });
       
@@ -504,8 +549,8 @@
       
       // Check for gaps between consecutive addresses
       for (let i = 0; i < sortedRows.length - 1; i++) {
-        const currentMoveOutDate = parseDate(sortedRows[i].cells[2].textContent);
-        const nextMoveInDate = parseDate(sortedRows[i+1].cells[1].textContent);
+        const currentMoveOutDate = new Date(sortedRows[i].dataset.moveOutDate);
+        const nextMoveInDate = new Date(sortedRows[i+1].dataset.moveInDate);
         
         // Add one day to move-out date for comparison
         const dayAfterMoveOut = new Date(currentMoveOutDate);
@@ -523,8 +568,8 @@
           const gapItem = document.createElement('div');
           gapItem.classList.add('gap-item');
           
-          const formattedMoveOutDate = formatDateForDisplay(currentMoveOutDate);
-          const formattedMoveInDate = formatDateForDisplay(nextMoveInDate);
+          const formattedMoveOutDate = formatDate(sortedRows[i].dataset.moveOutDate);
+          const formattedMoveInDate = formatDate(sortedRows[i+1].dataset.moveInDate);
           
           gapItem.innerHTML = `
             <strong>${formattedMoveOutDate} to ${formattedMoveInDate}</strong>
@@ -542,18 +587,6 @@
         gapWarning.classList.remove('show');
       }
     }
-    
-    function parseDate(dateStr) {
-      const parts = dateStr.split('/');
-      return new Date(parts[2], parts[0] - 1, parts[1]);
-    }
-    
-    function formatDateForDisplay(date) {
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
-      const day = date.getDate().toString().padStart(2, '0');
-      const year = date.getFullYear();
-      return `${month}/${day}/${year}`;
-    }
 
     function showToast(message) {
       const toast = document.getElementById('toast');
@@ -565,12 +598,102 @@
       }, 3000);
     }
 
-    // Initialize sorting
-    sortRowsByDate();
+    // Function to save data to URL
+    function saveToURL() {
+      // Get the current URL without the hash
+      const baseUrl = window.location.href.split('#')[0];
+      
+      // Convert data to JSON and encode it for the URL
+      const jsonData = JSON.stringify(addressData);
+      const encodedData = encodeURIComponent(jsonData);
+      
+      // Create the save URL with the encoded data in the hash
+      const saveUrl = baseUrl + '#data=' + encodedData;
+      
+      // Display the URL to the user
+      document.getElementById('saveUrl').value = saveUrl;
+      document.getElementById('urlCard').style.display = 'block';
+    }
+
+    // Function to copy the generated URL
+    function copyUrl() {
+      const urlField = document.getElementById('saveUrl');
+      urlField.select();
+      document.execCommand('copy');
+      showToast('Save link copied to clipboard!');
+    }
+
+    // Function to load data from URL hash on page load
+    function loadFromURL() {
+      if (window.location.hash) {
+        try {
+          // Extract the data from the hash
+          const hashParam = window.location.hash.substring(1); // Remove the #
+          
+          if (hashParam.startsWith('data=')) {
+            const encodedData = hashParam.substring(5); // Remove the 'data='
+            const jsonData = decodeURIComponent(encodedData);
+            const loadedData = JSON.parse(jsonData);
+            
+            // Load the name
+            if (loadedData.name) {
+              document.getElementById('name').value = loadedData.name;
+              document.getElementById('addressName').textContent = loadedData.name;
+            }
+            
+            // Load all address entries
+            if (loadedData.entries && Array.isArray(loadedData.entries)) {
+              addressData = loadedData;
+              
+              loadedData.entries.forEach(entry => {
+                const addressList = document.getElementById('addressList');
+                
+                // Create a new row
+                const newRow = addressList.insertRow();
+                
+                // Insert cells with data
+                const cell1 = newRow.insertCell(0);
+                cell1.textContent = entry.address;
+                
+                const cell2 = newRow.insertCell(1);
+                cell2.textContent = formatDate(entry.moveInDate);
+                
+                const cell3 = newRow.insertCell(2);
+                cell3.textContent = formatDate(entry.moveOutDate);
+                
+                // Store the actual date values for sorting and gap calculation
+                newRow.dataset.moveInDate = entry.moveInDate;
+                newRow.dataset.moveOutDate = entry.moveOutDate;
+                
+                // Create an "Edit" button in the last cell
+                const cell4 = newRow.insertCell(3);
+                cell4.classList.add('no-print');
+                const editButton = document.createElement('button');
+                editButton.textContent = 'Edit';
+                editButton.classList.add('edit-button');
+                editButton.onclick = function() {
+                  editAddress(newRow);
+                };
+                cell4.appendChild(editButton);
+              });
+              
+              // Sort the rows and check for gaps
+              sortRowsByDate();
+              checkForGaps();
+              
+              showToast('Address data loaded successfully!');
+            }
+          }
+        } catch (error) {
+          console.error('Error loading data from URL:', error);
+          showToast('Error loading data from URL');
+        }
+      }
+    }
 
     function printContent() {
       window.print();
-    }	
+    }
 
     // Confirm before page refresh/close
     window.addEventListener('beforeunload', function(event) {
@@ -580,6 +703,9 @@
         event.returnValue = '';
       }
     });
+    
+    // Load data from URL when the page loads
+    window.addEventListener('DOMContentLoaded', loadFromURL);
   </script>
 </body>
 </html>
