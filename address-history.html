@@ -296,6 +296,34 @@
       padding: 0;
     }
   }
+  
+  /* Styles for the rendered HTML table that will be copied */
+  #htmlOutput {
+    position: absolute;
+    left: -9999px;
+  }
+  
+  .copy-table {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: Arial, sans-serif;
+  }
+  
+  .copy-table th {
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .copy-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .copy-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
 </style>
 </head>
 <body>
@@ -338,7 +366,7 @@
 
         <div class="button-group">
           <button type="submit">Add Address</button>
-          <button type="button" class="secondary" onclick="copyMarkdown()"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg></button>
+          <button type="button" class="secondary" onclick="copyHTML()"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg></button>
           <button type="button" class="secondary" onclick="printContent()"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-printer"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button>
           <button type="button" class="secondary" onclick="saveToURL()">Generate Save Link</button>
         </div>
@@ -348,7 +376,7 @@
     <!-- URL Share Card -->
     <div id="urlCard" class="card url-card no-print">
       <h3>Save your data with this link</h3>
-      <p>Copy this URL to save your address history. You can bookmark it or share it to continue where you left off.</p>
+      <p>You can bookmark it or share it to continue where you left off.</p>
       <input type="text" id="saveUrl" class="url-field" readonly>
       <div class="button-group">
         <button onclick="copyUrl()">Copy Link</button>
@@ -371,8 +399,8 @@
     </div>
   </div>
 
-  <div id="markdownOutput" class="hidden"></div>
-  <div id="toast" class="toast">Markdown copied to clipboard!</div>
+  <div id="htmlOutput" class="hidden"></div>
+  <div id="toast" class="toast">HTML copied to clipboard!</div>
 
   <script>
     // Main data structure to store address records
@@ -440,7 +468,9 @@
     }
 
     function formatDate(dateString) {
+      if (!dateString) return "Missing"; // Return "Missing" if dateString is empty or undefined
       const date = new Date(dateString + 'T00:00:00');
+      if (isNaN(date.getTime())) return "Missing"; // Return "Missing" if date is invalid
       const month = (date.getMonth() + 1).toString().padStart(2, '0');
       const day = date.getDate().toString().padStart(2, '0');
       const year = date.getFullYear();
@@ -457,8 +487,8 @@
       
       // Set form values
       document.getElementById('address').value = address;
-      document.getElementById('moveInDate').value = moveInDateStr;
-      document.getElementById('moveOutDate').value = moveOutDateStr;
+      document.getElementById('moveInDate').value = moveInDateStr || '';
+      document.getElementById('moveOutDate').value = moveOutDateStr || '';
       
       // Get the index of the row to remove it from our data structure
       const rowIndex = row.rowIndex - 1; // Adjust for header row
@@ -469,26 +499,73 @@
       showToast('Address loaded for editing');
     }
 
-    function copyMarkdown() {
+    function copyHTML() {
       const addressTable = document.getElementById('addressTable');
       const rows = addressTable.querySelectorAll('tbody tr');
-      let markdown = `| Address | Move-in Date | Move-out Date |\n`;
-      markdown += `|---------|--------------|---------------|\n`;
-
+      
+      // Create a temporary div element to hold the rich text table
+      const htmlOutput = document.getElementById('htmlOutput');
+      htmlOutput.innerHTML = '';
+      
+      // Create a copy-friendly table
+      const table = document.createElement('table');
+      table.className = 'copy-table';
+      
+      // Create table header
+      const thead = document.createElement('thead');
+      const headerRow = document.createElement('tr');
+      
+      const headers = ['Address', 'Move-in Date', 'Move-out Date'];
+      headers.forEach(headerText => {
+        const th = document.createElement('th');
+        th.textContent = headerText;
+        headerRow.appendChild(th);
+      });
+      
+      thead.appendChild(headerRow);
+      table.appendChild(thead);
+      
+      // Create table body
+      const tbody = document.createElement('tbody');
+      
       rows.forEach(row => {
-        const cells = Array.from(row.querySelectorAll('td')).slice(0, 3).map(cell => cell.textContent.trim());
-        markdown += `| ${cells[0]} | ${cells[1]} | ${cells[2]} |\n`;
+        const tr = document.createElement('tr');
+        const cells = Array.from(row.querySelectorAll('td')).slice(0, 3);
+        
+        cells.forEach(cell => {
+          const td = document.createElement('td');
+          td.textContent = cell.textContent.trim();
+          tr.appendChild(td);
+        });
+        
+        tbody.appendChild(tr);
       });
-
-      const markdownOutput = document.getElementById('markdownOutput');
-      markdownOutput.textContent = markdown;
-
-      navigator.clipboard.writeText(markdown).then(() => {
-        showToast('Address table copied to clipboard!');
-      }).catch(err => {
-        console.error('Failed to copy text: ', err);
+      
+      table.appendChild(tbody);
+      htmlOutput.appendChild(table);
+      
+      // Make the table visible but off-screen
+      htmlOutput.classList.remove('hidden');
+      
+      // Select the table content
+      const range = document.createRange();
+      range.selectNode(table);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      
+      // Execute copy command - this will copy the rendered HTML format
+      try {
+        document.execCommand('copy');
+        showToast('Table copied in rich text format!');
+      } catch (err) {
+        console.error('Failed to copy: ', err);
         showToast('Failed to copy. Try again.');
-      });
+      }
+      
+      // Clean up
+      selection.removeAllRanges();
+      htmlOutput.classList.add('hidden');
     }
 
     function sortRowsByDate() {
@@ -496,8 +573,8 @@
       const rows = Array.from(addressList.rows);
 
       rows.sort((a, b) => {
-        const dateA = new Date(a.dataset.moveInDate);
-        const dateB = new Date(b.dataset.moveInDate);
+        const dateA = new Date(a.dataset.moveInDate || '9999-12-31'); // Use future date if missing
+        const dateB = new Date(b.dataset.moveInDate || '9999-12-31');
         return dateB - dateA;
       });
 
@@ -507,11 +584,11 @@
       // Insert sorted rows back into the table
       rows.forEach(row => {
         addressList.appendChild(row);
-        const moveInDate = new Date(row.dataset.moveInDate);
+        const moveInDate = new Date(row.dataset.moveInDate || '9999-12-31');
         const currentDate = new Date();
         const fiveYearsAgo = new Date();
         fiveYearsAgo.setFullYear(currentDate.getFullYear() - 5);
-        if (moveInDate < fiveYearsAgo) {
+        if (moveInDate < fiveYearsAgo && row.dataset.moveInDate) {
           row.classList.add('olderAddress');
         } else {
           row.classList.remove('olderAddress');
@@ -520,7 +597,9 @@
       
       // Also sort the data structure to match
       addressData.entries.sort((a, b) => {
-        return new Date(b.moveInDate) - new Date(a.moveInDate);
+        const dateA = new Date(a.moveInDate || '9999-12-31');
+        const dateB = new Date(b.moveInDate || '9999-12-31');
+        return dateB - dateA;
       });
     }
 
@@ -540,8 +619,8 @@
       
       // Sort rows chronologically for gap detection
       const sortedRows = [...rows].sort((a, b) => {
-        const dateA = new Date(a.dataset.moveInDate);
-        const dateB = new Date(b.dataset.moveInDate);
+        const dateA = new Date(a.dataset.moveInDate || '0000-01-01');
+        const dateB = new Date(b.dataset.moveInDate || '0000-01-01');
         return dateA - dateB;
       });
       
@@ -549,8 +628,11 @@
       
       // Check for gaps between consecutive addresses
       for (let i = 0; i < sortedRows.length - 1; i++) {
-        const currentMoveOutDate = new Date(sortedRows[i].dataset.moveOutDate);
-        const nextMoveInDate = new Date(sortedRows[i+1].dataset.moveInDate);
+        const currentMoveOutDate = new Date(sortedRows[i].dataset.moveOutDate || '0000-01-01');
+        const nextMoveInDate = new Date(sortedRows[i+1].dataset.moveInDate || '9999-12-31');
+        
+        // Skip gap check if either date is missing
+        if (!sortedRows[i].dataset.moveOutDate || !sortedRows[i+1].dataset.moveInDate) continue;
         
         // Add one day to move-out date for comparison
         const dayAfterMoveOut = new Date(currentMoveOutDate);
@@ -707,5 +789,5 @@
     // Load data from URL when the page loads
     window.addEventListener('DOMContentLoaded', loadFromURL);
   </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'91e7fa3eec23ed83',t:'MTc0MTY2Mzg3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
