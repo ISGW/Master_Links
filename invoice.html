@@ -120,8 +120,12 @@
 
     .print-btn {
       background-color: var(--primary-color);
-      margin-top: 30px;
+      margin-top: 10px;
       display: inline-block;
+      width: 50px;
+      align-self: center;
+      min-width: 80px;
+      text-align: center;
     }
 
     .print-btn:hover {
@@ -425,9 +429,14 @@
     <div id="status-badge" class="status-badge due">DUE</div>
   </div>
 
-  <!-- Updated button to trigger both print and PDF download -->
-  <button class="btn print-btn" onclick="printAndDownload()">Print & Download</button>
+  <!-- Updated button to trigger both print and PDF download 
+  <button class="btn print-btn" onclick="printAndDownload()"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-printer"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-down-to-line"><path d="M12 17V3"/><path d="m6 11 6 6 6-6"/><path d="M19 21H5"/></svg></button>
+  -->
 
+</div>
+
+<div 
+button class="btn print-btn" onclick="printAndDownload()"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-printer"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-down-to-line"><path d="M12 17V3"/><path d="m6 11 6 6 6-6"/><path d="M19 21H5"/></svg></button>
 </div>
 
 <div class="footer">
@@ -558,9 +567,10 @@
       heightLeft -= pageHeight;
     }
 
-    // Download the PDF with the invoice number as the filename
-    const invoiceNumber = document.getElementById("invoice-number").textContent;
-    doc.save(`invoice-${invoiceNumber}.pdf`);
+// Download the PDF with both customer name and invoice number in the filename
+const invoiceNumber = document.getElementById("invoice-number").textContent;
+const customerName = document.getElementById("customer-name").value;
+doc.save(`invoice-${customerName}-${invoiceNumber}.pdf`);
 
     // Trigger the print dialog after a slight delay
     setTimeout(() => {
