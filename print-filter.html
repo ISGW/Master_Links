@@ -552,8 +552,8 @@
         // Download processed image
         downloadBtn.addEventListener('click', () => {
             const link = document.createElement('a');
-            link.download = 'printer-friendly-image.png';
-            link.href = canvas.toDataURL('image/png');
+            link.download = 'printer-friendly-image.jpeg';
+            link.href = canvas.toDataURL('image/jpeg');
             link.click();
         });
         
