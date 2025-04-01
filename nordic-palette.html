@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nordic Color Palette Swatches</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+    
+    body {
+      background-color: #f5f7fa;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 1000px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    
+    header {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    
+    h1 {
+      color: #2e3440;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    
+    p {
+      color: #4c566a;
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .palette-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .palette-section {
+      margin-bottom: 2.5rem;
+    }
+    
+    .section-title {
+      margin-bottom: 1rem;
+      color: #3b4252;
+      font-weight: 600;
+      font-size: 1.2rem;
+      border-bottom: 2px solid #e5e9f0;
+      padding-bottom: 0.5rem;
+    }
+    
+    .color-swatch {
+      background-color: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .color-swatch:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .color-preview {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .color-info {
+      padding: 1rem;
+      background-color: white;
+    }
+    
+    .color-hex {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2e3440;
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .copy-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #5e81ac;
+      display: flex;
+      align-items: center;
+      padding: 5px;
+      transition: color 0.2s ease;
+    }
+    
+    .copy-button:hover {
+      color: #81a1c1;
+    }
+    
+    .copy-message {
+      font-size: 0.8rem;
+      color: #a3be8c;
+      margin-top: 0.5rem;
+      text-align: center;
+      height: 1rem;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    
+    footer {
+      margin-top: auto;
+      padding: 2rem 0;
+      text-align: center;
+      color: #4c566a;
+      font-size: 0.9rem;
+    }
+    
+    /* Light/dark text detection */
+    .light-text {
+      color: white;
+    }
+    
+    .dark-text {
+      color: #2e3440;
+    }
+    
+    @media (max-width: 600px) {
+      .palette-container {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 1rem;
+      }
+      
+      .color-preview {
+        height: 120px;
+      }
+      
+      body {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Nordic Color Palette</h1>
+      <p></p>
+    </header>
+    
+    <div class="palette-section">
+      <h2 class="section-title">Dark Shades</h2>
+      <div class="palette-container" id="dark-shades">
+        <!-- Colors will be added by JavaScript -->
+      </div>
+    </div>
+    
+    <div class="palette-section">
+      <h2 class="section-title">Light Shades</h2>
+      <div class="palette-container" id="light-shades">
+        <!-- Colors will be added by JavaScript -->
+      </div>
+    </div>
+    
+    <div class="palette-section">
+      <h2 class="section-title">Frost</h2>
+      <div class="palette-container" id="frost">
+        <!-- Colors will be added by JavaScript -->
+      </div>
+    </div>
+    
+    <div class="palette-section">
+      <h2 class="section-title">Aurora</h2>
+      <div class="palette-container" id="aurora">
+        <!-- Colors will be added by JavaScript -->
+      </div>
+    </div>
+  </div>
+  
+  <footer>
+    <p></p>
+  </footer>
+  
+  <script>
+    const colorGroups = {
+      "dark-shades": [
+        "#22272f",
+        "#2e3440",
+        "#3b4252",
+        "#434c5e",
+        "#4c566a"
+      ],
+      "light-shades": [
+        "#d8dee9",
+        "#e5e9f0", 
+        "#eceff4"
+      ],
+      "frost": [
+        "#8fbcbb",
+        "#88c0d0", 
+        "#81a1c1", 
+        "#5e81ac"
+      ],
+      "aurora": [
+        "#bf616a",
+        "#d08770", 
+        "#ebcb8b", 
+        "#a3be8c", 
+        "#b48ead"
+      ]
+    };
+    
+    function isColorLight(hexColor) {
+      // Convert hex to RGB
+      hexColor = hexColor.replace('#', '');
+      const r = parseInt(hexColor.substr(0, 2), 16);
+      const g = parseInt(hexColor.substr(2, 2), 16);
+      const b = parseInt(hexColor.substr(4, 2), 16);
+      
+      // Calculate luminance
+      const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+      return luminance > 0.5;
+    }
+    
+    // Create color swatches for each group
+    Object.entries(colorGroups).forEach(([groupId, colors]) => {
+      const container = document.getElementById(groupId);
+      
+      colors.forEach(color => {
+        const isLight = isColorLight(color);
+        const textClass = isLight ? 'dark-text' : 'light-text';
+        
+        const swatch = document.createElement('div');
+        swatch.className = 'color-swatch';
+        
+        swatch.innerHTML = `
+          <div class="color-preview" style="background-color: ${color}">
+            <span class="${textClass}"></span>
+          </div>
+          <div class="color-info">
+            <div class="color-hex">
+              <span>${color}</span>
+              <button class="copy-button" data-color="${color}" title="Copy hex code">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              </button>
+            </div>
+            <div class="copy-message" id="copy-message-${color.replace('#', '')}">Copied!</div>
+          </div>
+        `;
+        
+        container.appendChild(swatch);
+      });
+    });
+    
+    // Add copy functionality
+    document.querySelectorAll('.copy-button').forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        const colorValue = button.getAttribute('data-color');
+        navigator.clipboard.writeText(colorValue).then(() => {
+          const messageId = `copy-message-${colorValue.replace('#', '')}`;
+          const message = document.getElementById(messageId);
+          message.style.opacity = '1';
+          
+          setTimeout(() => {
+            message.style.opacity = '0';
+          }, 1500);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
