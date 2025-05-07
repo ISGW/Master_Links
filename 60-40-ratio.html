@@ -16,60 +16,62 @@
         .calculator {
             background-color: white;
             border-radius: 10px;
-            padding: 30px;
+            padding: 20px; /* Reduced from 30px */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
+            margin-bottom: 20px; /* Reduced from 30px */
         }
         h1 {
             text-align: center;
             color: #68BA7F;
-            margin-bottom: 30px;
-            font-size: 28px;
+            margin-bottom: 20px; /* Reduced from 30px */
+            font-size: 20px; /* Reduced from 28px */
         }
         h2 {
             color: #253D2C;
             margin-top: 0;
-            padding-bottom: 10px;
+            padding-bottom: 8px; /* Reduced from 10px */
             border-bottom: 1px solid #eee;
+            font-size: 18px; /* Added to make h2 smaller */
         }
         .input-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px; /* Reduced from 20px */
         }
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 6px; /* Reduced from 8px */
             font-weight: 600;
         }
         input {
             width: 100%;
-            padding: 12px;
+            padding: 10px; /* Reduced from 12px */
             border: 1px solid #ddd;
             border-radius: 5px;
-            font-size: 16px;
+            font-size: 14px; /* Reduced from 16px */
             box-sizing: border-box;
         }
         button {
             background-color: #2E6F40;
             color: white;
             border: none;
-            padding: 12px 20px;
+            padding: 10px 15px; /* Reduced from 12px 20px */
             width: 100%;
-            font-size: 16px;
+            font-size: 14px; /* Reduced from 16px */
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
-            margin-top: 10px;
+            margin-top: 8px; /* Reduced from 10px */
         }
         button:hover {
             background-color: #253D2C;
         }
         .result {
-            margin-top: 20px;
-            padding: 15px;
+            margin-top: 15px; /* Reduced from 20px */
+            padding: 12px; /* Reduced from 15px */
             background-color: #CFFFDC;
             border-radius: 5px;
             text-align: center;
-            font-size: 18px;
+            font-size: 16px; /* Reduced from 18px */
+            font-weight: 600;
         }
     </style>
 </head>
@@ -104,6 +106,20 @@
         </div>
     </div>
 
+    <div class="calculator">
+        <h2></h2>
+        <div class="input-group">
+            <label for="inputTotal">Calculate Both Portions Enter Total Amount</label>
+            <input type="number" id="inputTotal" placeholder="Enter total amount" step="any">
+        </div>
+        
+        <button onclick="calculateFromTotal()">Calculate Both Portions</button>
+        
+        <div id="resultBoth" class="result">
+            <span id="outputBoth">Results will appear here</span>
+        </div>
+    </div>
+
     <script>
         function calculate6040() {
             // Get the value entered for the 60 portion
@@ -135,6 +151,24 @@
             
             // Display the result in the output span
             document.getElementById("output60").textContent = "The 60 portion is: " + amount60.toFixed(2);
+        }
+
+        function calculateFromTotal() {
+            // Get the total amount entered
+            var total = parseFloat(document.getElementById("inputTotal").value);
+            
+            if (isNaN(total)) {
+                document.getElementById("outputBoth").textContent = "Please enter a valid number";
+                return;
+            }
+            
+            // Calculate both portions based on the 60/40 ratio
+            var amount60 = total * 0.6;
+            var amount40 = total * 0.4;
+            
+            // Display the results in the output span
+            document.getElementById("outputBoth").textContent = 
+                "The 60 portion is: " + amount60.toFixed(2) + " | The 40 portion is: " + amount40.toFixed(2);
         }
     </script>
 </body>
