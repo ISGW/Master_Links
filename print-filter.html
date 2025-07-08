@@ -94,7 +94,7 @@
         top: 10px;
         left: 50%;
         transform: translateX(-50%);
-        background: rgba(255, 255, 255, 0.9);
+        background: white;
         border-radius: 6px;
         padding: 5px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.2);
@@ -105,7 +105,7 @@
             background: #383838;
             color: white;
             border: none;
-            padding: 8px 12px;
+            padding: 6px 8px;
             margin: 2px;
             border-radius: 4px;
             cursor: pointer;
@@ -118,10 +118,10 @@
         }
         
         .zoom-controls button:disabled {
-            background: #ccc;
+            background: transparent;
             cursor: not-allowed;
         }
-        
+    
         .original-image-section {
             padding: 20px;
             text-align: center;
@@ -420,8 +420,8 @@
             <div class="canvas-container" id="canvas-container">
                 <canvas id="processed-image"></canvas>
                 <div class="zoom-controls">
-                    <button id="expand-btn">Expand</button>
-                    <button id="fit-btn">Fit</button>
+                    <button id="expand-btn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-maximize2-icon lucide-maximize-2"><path d="M15 3h6v6"/><path d="m21 3-7 7"/><path d="m3 21 7-7"/><path d="M9 21H3v-6"/></svg></button>
+                    <button id="fit-btn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minimize2-icon lucide-minimize-2"><path d="m14 10 7-7"/><path d="M20 10h-6V4"/><path d="m3 21 7-7"/><path d="M4 14h6v6"/></svg></button>
                 </div>
             </div>
         </div>
@@ -604,7 +604,7 @@
             if (!originalCanvasWidth || !originalCanvasHeight) return;
             
             const containerMaxWidth = canvasContainer.parentElement.clientWidth - 40;
-            const containerMaxHeight = window.innerHeight * 0.6;
+            const containerMaxHeight = window.innerHeight;
             
             const scaleX = containerMaxWidth / originalCanvasWidth;
             const scaleY = containerMaxHeight / originalCanvasHeight;
