@@ -75,6 +75,13 @@
     }
   }
 
+  p{
+  color:#6c757d;
+  font-size:16px;
+  font-weight: 600;
+  margin-top: 9px;
+  }
+
   .form-group {
     margin-bottom: 16px;
   }
@@ -382,7 +389,7 @@
             <label for="position">Position</label>
             <input type="text" id="position" placeholder="Enter your job title">
           </div>
-          
+          <br>
           <div class="form-group">
             <label for="dateEntry">Date of Entry</label>
             <input type="date" id="dateEntry">
@@ -396,9 +403,13 @@
 
         <div class="button-group">
           <button type="submit">Add Employment</button>
-          <button type="button" class="secondary" onclick="copyHTML()"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg></button>
-          <button type="button" class="secondary" onclick="printContent()"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-printer"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button>
-          <button type="button" class="third" onclick="saveToURL()"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M19.355 18.538a68.967 68.959 0 0 0 1.858-2.954a.81.81 0 0 0-.062-.9c-.516-.685-1.504-2.075-2.042-3.362c-.553-1.321-.636-3.375-.64-4.377a1.7 1.7 0 0 0-.358-1.05l-3.198-4.064a4 4 0 0 1-.076.543c-.106.503-.307 1.004-.536 1.5c-.134.29-.29.6-.446.914l-.31.626c-.516 1.068-.997 2.227-1.132 3.59c-.124 1.26.046 2.73.815 4.481q.192.016.386.044a6.36 6.36 0 0 1 3.326 1.505c.916.79 1.744 1.922 2.415 3.5zM8.199 22.569q.11.019.22.02c.78.024 2.095.092 3.16.29c.87.16 2.593.64 4.01 1.055c1.083.316 2.198-.548 2.355-1.664c.114-.814.33-1.735.725-2.58l-.01.005c-.67-1.87-1.522-3.078-2.416-3.849a5.3 5.3 0 0 0-2.778-1.257c-1.54-.216-2.952.19-3.84.45c.532 2.218.368 4.829-1.425 7.531zM5.533 9.938q-.035.15-.098.29L2.82 16.059a1.6 1.6 0 0 0 .313 1.772l4.116 4.24c2.103-3.101 1.796-6.02.836-8.3c-.728-1.73-1.832-3.081-2.55-3.831zM9.32 14.01c.615-.183 1.606-.465 2.745-.534c-.683-1.725-.848-3.233-.716-4.577c.154-1.552.7-2.847 1.235-3.95q.17-.35.328-.664c.149-.297.288-.577.419-.86c.217-.47.379-.885.46-1.27c.08-.38.08-.72-.014-1.043c-.095-.325-.297-.675-.68-1.06a1.6 1.6 0 0 0-1.475.36l-4.95 4.452a1.6 1.6 0 0 0-.513.952l-.427 2.83c.672.59 2.328 2.316 3.335 4.711q.136.317.253.653"/></svg>Copy Link</button>
+                    <button type="button" class="secondary" onclick="printContent()"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-printer"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button>
+
+          <button type="button" class="third" onclick="copyLinkAndTable()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            Copy Link & Table
+          </button>
+          <p>copy link & table to save every session</p>
         </div>
       </form>
     </div>
@@ -432,7 +443,7 @@
   </div>
 
   <div id="htmlOutput" class="hidden"></div>
-  <div id="toast" class="toast">Table copied in rich text format!</div>
+  <div id="toast" class="toast">Link and table copied to clipboard!</div>
 
   <script>
     // Main data structure to store employment records
@@ -556,73 +567,52 @@
       showToast('Employment loaded for editing');
     }
 
-    function copyHTML() {
+    // Combined function to copy both link and table
+    function copyLinkAndTable() {
+      // First, generate the save URL
+      const baseUrl = window.location.href.split('#')[0];
+      const jsonData = JSON.stringify(employmentData);
+      const encodedData = encodeURIComponent(jsonData);
+      const saveUrl = baseUrl + '#data=' + encodedData;
+      
+      // Create markdown formatted link with name if available
+      let markdownLink;
+      if (employmentData.name && employmentData.name.trim() !== '') {
+        markdownLink = `[${employmentData.name} Employment History](${saveUrl})`;
+      } else {
+        markdownLink = `[Employment History](${saveUrl})`;
+      }
+      
+      // Generate the markdown table
       const employmentTable = document.getElementById('employmentTable');
       const rows = employmentTable.querySelectorAll('tbody tr');
       
-      // Create a temporary div element to hold the rich text table
-      const htmlOutput = document.getElementById('htmlOutput');
-      htmlOutput.innerHTML = '';
-      
-      // Create a copy-friendly table
-      const table = document.createElement('table');
-      table.className = 'copy-table';
+      let markdownTable = '\n\n'; // Add some spacing before the table
       
       // Create table header
-      const thead = document.createElement('thead');
-      const headerRow = document.createElement('tr');
+      markdownTable += '| Employer | Employer Address | Position | Date of Entry | Date Left |\n';
+      markdownTable += '|----------|------------------|----------|---------------|----------|\n';
       
-      const headers = ['Employer', 'Employer Address', 'Position', 'Date of Entry', 'Date Left'];
-      headers.forEach(headerText => {
-        const th = document.createElement('th');
-        th.textContent = headerText;
-        headerRow.appendChild(th);
-      });
-      
-      thead.appendChild(headerRow);
-      table.appendChild(thead);
-      
-      // Create table body
-      const tbody = document.createElement('tbody');
-      
+      // Add table rows
       rows.forEach(row => {
-        const tr = document.createElement('tr');
         const cells = Array.from(row.querySelectorAll('td')).slice(0, 5); // Exclude edit button
-        
-        cells.forEach(cell => {
-          const td = document.createElement('td');
-          td.textContent = cell.textContent.trim();
-          tr.appendChild(td);
-        });
-        
-        tbody.appendChild(tr);
+        const rowData = cells.map(cell => cell.textContent.trim()).join(' | ');
+        markdownTable += `| ${rowData} |\n`;
       });
       
-      table.appendChild(tbody);
-      htmlOutput.appendChild(table);
+      // Combine link and table
+      const combinedContent = markdownLink + markdownTable;
       
-      // Make the table visible but off-screen
-      htmlOutput.classList.remove('hidden');
+      // Copy to clipboard
+      const tempTextarea = document.createElement('textarea');
+      tempTextarea.value = combinedContent;
+      document.body.appendChild(tempTextarea);
+      tempTextarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextarea);
       
-      // Select the table content
-      const range = document.createRange();
-      range.selectNode(table);
-      const selection = window.getSelection();
-      selection.removeAllRanges();
-      selection.addRange(range);
-      
-      // Execute copy command - this will copy the rendered HTML format
-      try {
-        document.execCommand('copy');
-        showToast('Table copied in rich text format!');
-      } catch (err) {
-        console.error('Failed to copy: ', err);
-        showToast('Failed to copy. Try again.');
-      }
-      
-      // Clean up
-      selection.removeAllRanges();
-      htmlOutput.classList.add('hidden');
+      // Show toast notification
+      showToast('Link and table copied to clipboard!');
     }
 
     function sortRowsByDate() {
@@ -749,45 +739,7 @@
       window.print();
     }	
 
-// Function to save data to URL
-function saveToURL() {
-  // Get the current URL without the hash
-  const baseUrl = window.location.href.split('#')[0];
-  
-  // Convert data to JSON and encode it for the URL
-  const jsonData = JSON.stringify(employmentData);
-  const encodedData = encodeURIComponent(jsonData);
-  
-  // Create the save URL with the encoded data in the hash
-  const saveUrl = baseUrl + '#data=' + encodedData;
-  
-  // Create markdown formatted link with name if available
-  let markdownLink;
-  if (employmentData.name && employmentData.name.trim() !== '') {
-    // Use the name in the link text
-    markdownLink = `[${employmentData.name} Employment History](${saveUrl}) `;
-  } else {
-    // Use default text if no name is provided
-    markdownLink = `[Employment History](${saveUrl}) `;
-  }
-  
-  // Copy the markdown link to clipboard
-  const tempInput = document.createElement('textarea');
-  tempInput.value = markdownLink;
-  document.body.appendChild(tempInput);
-  tempInput.select();
-  document.execCommand('copy');
-  document.body.removeChild(tempInput);
-  
-  // Display the URL to the user
-  document.getElementById('saveUrl').value = saveUrl;
-  document.getElementById('urlCard').style.display = 'block';
-  
-  // Show toast notification
-  showToast('Markdown link copied to clipboard!');
-}
-
-    // Function to copy the generated URL
+    // Function to copy the generated URL (kept for the URL card functionality)
     function copyUrl() {
       const urlField = document.getElementById('saveUrl');
       urlField.select();
